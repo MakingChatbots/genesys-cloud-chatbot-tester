@@ -11,7 +11,7 @@ jest.setTimeout(20000); // 20s
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config({ path: '../../.env' });
 
-describe('Using jest to perform the test', () => {
+describe('Using vitest to perform the test', () => {
   let session: WebMessengerGuestSession;
 
   afterEach(() => session.close());

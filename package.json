@@ -27,8 +27,5 @@
   "engines": {
     "node": "~16.10.0"
   },
-  "jest": {
-    "preset": "./jest.json"
-  },
   "packageManager": "yarn@3.1.1"
 }

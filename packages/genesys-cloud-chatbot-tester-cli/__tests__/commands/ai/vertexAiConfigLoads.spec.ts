@@ -1,3 +1,4 @@
+import {describe,vi, beforeEach, test, expect} from 'vitest';
 import { readFileSync } from 'fs';
 import { Command } from 'commander';
 import { createCli } from '../../../src/createCli';
@@ -23,9 +24,9 @@ describe('Vertex AI config', () => {
 
   beforeEach(() => {
     mockGoogleAiChatCompletionClient = {
-      getProviderName: jest.fn().mockReturnValue('mock-google-vertex-ai'),
-      predict: jest.fn().mockResolvedValue({ role: 'customer', content: 'PASS' }),
-      preflightCheck: jest.fn().mockResolvedValue({ ok: true }),
+      getProviderName: vi.fn().mockReturnValue('mock-google-vertex-ai'),
+      predict: vi.fn().mockResolvedValue({ role: 'customer', content: 'PASS' }),
+      preflightCheck: vi.fn().mockResolvedValue({ ok: true }),
     };
     mockGoogleAiChatCompletionClientFactory = jest
       .fn()
@@ -35,7 +36,7 @@ describe('Vertex AI config', () => {
       errOut: [],
       stdOut: [],
     };
-    fsReadFileSync = jest.fn();
+    fsReadFileSync = vi.fn();
 
     processEnv = {};
 
@@ -61,15 +62,15 @@ describe('Vertex AI config', () => {
     cli = createCli(cliCommand, undefined, {
       command: scenarioTestCommand,
       fsReadFileSync,
-      fsAccessSync: jest.fn(),
-      webMessengerSessionFactory: jest.fn().mockReturnValue({ on: jest.fn(), close: jest.fn() }),
+      fsAccessSync: vi.fn(),
+      webMessengerSessionFactory: vi.fn().mockReturnValue({ on: vi.fn(), close: vi.fn() }),
       openAiCreateChatCompletionClient: () => {
         throw new Error('Not implemented');
       },
       googleAiCreateChatCompletionClient: mockGoogleAiChatCompletionClientFactory,
       conversationFactory: jest
         .fn()
-        .mockReturnValue({ waitForConversationToStart: jest.fn(), sendText: jest.fn() }),
+        .mockReturnValue({ waitForConversationToStart: vi.fn(), sendText: vi.fn() }),
       processEnv,
     });
   });

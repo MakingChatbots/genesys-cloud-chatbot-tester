@@ -1,3 +1,4 @@
+import {describe,vi, beforeEach, afterEach, test, expect} from 'vitest';
 import { accessSync, readFileSync } from 'fs';
 import { Command } from 'commander';
 import {
@@ -29,8 +30,8 @@ describe('Retry unordered message', () => {
   beforeEach(async () => {
     genesysServerFixture = new WebMessageServerFixture(await getPort());
 
-    fsAccessSync = jest.fn();
-    fsReadFileSync = jest.fn();
+    fsAccessSync = vi.fn();
+    fsReadFileSync = vi.fn();
 
     capturedOutput = {
       errOut: [],

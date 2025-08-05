@@ -1,3 +1,4 @@
+import {describe,vi, beforeEach, test, expect} from 'vitest';
 import { ScriptedTestCommandDependencies } from '../../../../src/commands/scriptedTest/createScriptedTestCommand';
 import { readFileSync } from 'fs';
 import { Command } from 'commander';
@@ -19,16 +20,16 @@ describe('Session Config', () => {
   let cli: Command;
 
   beforeEach(() => {
-    fsReadFileSync = jest.fn();
+    fsReadFileSync = vi.fn();
 
-    reorderedMessageDelayer = { delay: 0, add: jest.fn(), on: jest.fn() };
-    reorderedMessageDelayerFactory = jest.fn().mockReturnValue(reorderedMessageDelayer);
+    reorderedMessageDelayer = { delay: 0, add: vi.fn(), on: vi.fn() };
+    reorderedMessageDelayerFactory = vi.fn().mockReturnValue(reorderedMessageDelayer);
 
-    const webMessengerSession = { on: jest.fn(), close: jest.fn() };
-    webMessengerSessionFactory = jest.fn().mockReturnValue(webMessengerSession);
+    const webMessengerSession = { on: vi.fn(), close: vi.fn() };
+    webMessengerSessionFactory = vi.fn().mockReturnValue(webMessengerSession);
 
-    const conversation = { waitForConversationToStart: jest.fn(), sendText: jest.fn() };
-    conversationFactory = jest.fn().mockReturnValue(conversation);
+    const conversation = { waitForConversationToStart: vi.fn(), sendText: vi.fn() };
+    conversationFactory = vi.fn().mockReturnValue(conversation);
 
     const cliCommand = new Command().exitOverride(() => {
       throw new Error('CLI Command errored');
@@ -41,7 +42,7 @@ describe('Session Config', () => {
     cli = createCli(cliCommand, {
       command: scenarioTestCommand,
       fsReadFileSync,
-      fsAccessSync: jest.fn(),
+      fsAccessSync: vi.fn(),
       reorderedMessageDelayerFactory,
       webMessengerSessionFactory,
       conversationFactory,

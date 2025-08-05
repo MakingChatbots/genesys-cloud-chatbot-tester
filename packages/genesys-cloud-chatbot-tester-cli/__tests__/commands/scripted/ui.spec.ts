@@ -1,3 +1,4 @@
+import {describe,vi, beforeEach, test, expect} from 'vitest';
 import { accessSync, readFileSync } from 'fs';
 import { Command } from 'commander';
 import { Conversation, WebMessengerSession } from '@makingchatbots/genesys-cloud-chatbot-tester';
@@ -19,11 +20,11 @@ describe('Test script YAML loaded', () => {
   let cli: Command;
 
   beforeEach(() => {
-    fsAccessSync = jest.fn();
-    fsReadFileSync = jest.fn();
+    fsAccessSync = vi.fn();
+    fsReadFileSync = vi.fn();
 
-    webMessengerSession = { on: jest.fn(), close: jest.fn() };
-    conversation = { waitForConversationToStart: jest.fn(), sendText: jest.fn() };
+    webMessengerSession = { on: vi.fn(), close: vi.fn() };
+    conversation = { waitForConversationToStart: vi.fn(), sendText: vi.fn() };
 
     capturedOutput = {
       errOut: [],
@@ -52,8 +53,8 @@ describe('Test script YAML loaded', () => {
       command: scenarioTestCommand,
       fsReadFileSync,
       fsAccessSync,
-      webMessengerSessionFactory: jest.fn().mockReturnValue(webMessengerSession),
-      conversationFactory: jest.fn().mockReturnValue(conversation),
+      webMessengerSessionFactory: vi.fn().mockReturnValue(webMessengerSession),
+      conversationFactory: vi.fn().mockReturnValue(conversation),
     });
   });
 

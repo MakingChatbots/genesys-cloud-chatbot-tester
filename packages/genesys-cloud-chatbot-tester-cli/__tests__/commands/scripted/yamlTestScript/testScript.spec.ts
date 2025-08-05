@@ -1,3 +1,4 @@
+import {describe,vi, beforeEach, test, expect} from 'vitest';
 import { accessSync, readFileSync } from 'fs';
 import { Command } from 'commander';
 import { createCli } from '../../../../src/createCli';
@@ -9,8 +10,8 @@ describe('Test-script read from disk', () => {
   let cli: Command;
 
   beforeEach(() => {
-    fsReadFileSync = jest.fn();
-    fsAccessSync = jest.fn();
+    fsReadFileSync = vi.fn();
+    fsAccessSync = vi.fn();
 
     const cliCommand = new Command().exitOverride(() => {
       throw new Error('CLI Command errored');
