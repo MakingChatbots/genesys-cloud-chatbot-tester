@@ -1,72 +1,34 @@
+[**Genesys Web Messaging Tester**](../README.md) • **Docs**
+
+***
+
 [Genesys Web Messaging Tester](../README.md) / WebMessengerGuestSession
 
 # Class: WebMessengerGuestSession
 
-**`See`**
+## See
 
 https://developer.genesys.cloud/api/digital/webmessaging/websocketapi#configure-a-guest-session
 
-## Hierarchy
+## Extends
 
 - `EventEmitter`
 
-  ↳ **`WebMessengerGuestSession`**
-
-## Table of contents
-
-### Constructors
-
-- [constructor](WebMessengerGuestSession.md#constructor)
-
-### Properties
-
-- [wsFactory](WebMessengerGuestSession.md#wsfactory)
-- [captureRejectionSymbol](WebMessengerGuestSession.md#capturerejectionsymbol)
-- [captureRejections](WebMessengerGuestSession.md#capturerejections)
-- [defaultMaxListeners](WebMessengerGuestSession.md#defaultmaxlisteners)
-- [errorMonitor](WebMessengerGuestSession.md#errormonitor)
-
-### Accessors
-
-- [messageDelayInMs](WebMessengerGuestSession.md#messagedelayinms)
-
-### Methods
-
-- [addListener](WebMessengerGuestSession.md#addlistener)
-- [close](WebMessengerGuestSession.md#close)
-- [emit](WebMessengerGuestSession.md#emit)
-- [eventNames](WebMessengerGuestSession.md#eventnames)
-- [getMaxListeners](WebMessengerGuestSession.md#getmaxlisteners)
-- [listenerCount](WebMessengerGuestSession.md#listenercount)
-- [listeners](WebMessengerGuestSession.md#listeners)
-- [off](WebMessengerGuestSession.md#off)
-- [on](WebMessengerGuestSession.md#on)
-- [once](WebMessengerGuestSession.md#once)
-- [prependListener](WebMessengerGuestSession.md#prependlistener)
-- [prependOnceListener](WebMessengerGuestSession.md#prependoncelistener)
-- [rawListeners](WebMessengerGuestSession.md#rawlisteners)
-- [removeAllListeners](WebMessengerGuestSession.md#removealllisteners)
-- [removeListener](WebMessengerGuestSession.md#removelistener)
-- [sendText](WebMessengerGuestSession.md#sendtext)
-- [setMaxListeners](WebMessengerGuestSession.md#setmaxlisteners)
-- [listenerCount](WebMessengerGuestSession.md#listenercount-1)
-- [on](WebMessengerGuestSession.md#on-1)
-- [once](WebMessengerGuestSession.md#once-1)
-
 ## Constructors
 
-### constructor
+### new WebMessengerGuestSession()
 
-• **new WebMessengerGuestSession**(`config`, `participantData?`, `messageDelayer?`, `wsFactory?`): [`WebMessengerGuestSession`](WebMessengerGuestSession.md)
+> **new WebMessengerGuestSession**(`config`, `participantData`, `messageDelayer`, `wsFactory`): [`WebMessengerGuestSession`](WebMessengerGuestSession.md)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `config` | [`SessionConfig`](../interfaces/SessionConfig.md) |
-| `participantData` | `Record`\<`string`, `string`\> |
-| `messageDelayer` | [`MessageDelayer`](../interfaces/MessageDelayer.md) |
-| `wsFactory` | (`url`: `string`, `options?`: `ClientOptions` \| `ClientRequestArgs`) => `WebSocket` |
+• **config**: [`SessionConfig`](../interfaces/SessionConfig.md)
+
+• **participantData**: `Record`\<`string`, `string`\> = `{}`
+
+• **messageDelayer**: [`MessageDelayer`](../interfaces/MessageDelayer.md) = `...`
+
+• **wsFactory** = `...`
 
 #### Returns
 
@@ -74,86 +36,81 @@ https://developer.genesys.cloud/api/digital/webmessaging/websocketapi#configure-
 
 #### Overrides
 
-EventEmitter.constructor
+`EventEmitter.constructor`
 
 #### Defined in
 
-[packages/genesys-web-messaging-tester/src/genesys/WebMessengerGuestSession.ts:51](https://github.com/ovotech/genesys-web-messaging-tester/blob/main/packages/genesys-web-messaging-tester/src/genesys/WebMessengerGuestSession.ts#L51)
+[packages/genesys-cloud-chatbot-tester/src/genesys/WebMessengerGuestSession.ts:51](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/genesys/WebMessengerGuestSession.ts#L51)
 
 ## Properties
 
-### wsFactory
+### wsFactory()
 
-• `Readonly` **wsFactory**: (`url`: `string`, `options?`: `ClientOptions` \| `ClientRequestArgs`) => `WebSocket`
+> `readonly` **wsFactory**: (`url`, `options`?) => `WebSocket`
 
-#### Type declaration
+#### Parameters
 
-▸ (`url`, `options?`): `WebSocket`
+• **url**: `string`
 
-##### Parameters
+• **options?**: `ClientOptions` \| `ClientRequestArgs`
 
-| Name | Type |
-| :------ | :------ |
-| `url` | `string` |
-| `options?` | `ClientOptions` \| `ClientRequestArgs` |
-
-##### Returns
+#### Returns
 
 `WebSocket`
 
 #### Defined in
 
-[packages/genesys-web-messaging-tester/src/genesys/WebMessengerGuestSession.ts:55](https://github.com/ovotech/genesys-web-messaging-tester/blob/main/packages/genesys-web-messaging-tester/src/genesys/WebMessengerGuestSession.ts#L55)
+[packages/genesys-cloud-chatbot-tester/src/genesys/WebMessengerGuestSession.ts:55](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/genesys/WebMessengerGuestSession.ts#L55)
 
-___
+***
 
 ### captureRejectionSymbol
 
-▪ `Static` `Readonly` **captureRejectionSymbol**: typeof [`captureRejectionSymbol`](WebMessengerGuestSession.md#capturerejectionsymbol)
+> `readonly` `static` **captureRejectionSymbol**: *typeof* [`captureRejectionSymbol`](WebMessengerGuestSession.md#capturerejectionsymbol)
 
 #### Inherited from
 
-EventEmitter.captureRejectionSymbol
+`EventEmitter.captureRejectionSymbol`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:38
+node\_modules/@types/node/events.d.ts:38
 
-___
+***
 
 ### captureRejections
 
-▪ `Static` **captureRejections**: `boolean`
+> `static` **captureRejections**: `boolean`
 
 Sets or gets the default captureRejection value for all emitters.
 
 #### Inherited from
 
-EventEmitter.captureRejections
+`EventEmitter.captureRejections`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:44
+node\_modules/@types/node/events.d.ts:44
 
-___
+***
 
 ### defaultMaxListeners
 
-▪ `Static` **defaultMaxListeners**: `number`
+> `static` **defaultMaxListeners**: `number`
 
 #### Inherited from
 
-EventEmitter.defaultMaxListeners
+`EventEmitter.defaultMaxListeners`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:45
+node\_modules/@types/node/events.d.ts:45
 
-___
+***
 
 ### errorMonitor
 
-▪ `Static` `Readonly` **errorMonitor**: typeof [`errorMonitor`](WebMessengerGuestSession.md#errormonitor)
+> `readonly` `static` **errorMonitor**: *typeof* [`errorMonitor`](WebMessengerGuestSession.md#errormonitor)
 
 This symbol shall be used to install a listener for only monitoring `'error'`
 events. Listeners installed using this symbol are called before the regular
@@ -165,17 +122,17 @@ regular `'error'` listener is installed.
 
 #### Inherited from
 
-EventEmitter.errorMonitor
+`EventEmitter.errorMonitor`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:37
+node\_modules/@types/node/events.d.ts:37
 
 ## Accessors
 
 ### messageDelayInMs
 
-• `get` **messageDelayInMs**(): `number`
+> `get` **messageDelayInMs**(): `number`
 
 #### Returns
 
@@ -183,20 +140,19 @@ node_modules/@types/node/events.d.ts:37
 
 #### Defined in
 
-[packages/genesys-web-messaging-tester/src/genesys/WebMessengerGuestSession.ts:71](https://github.com/ovotech/genesys-web-messaging-tester/blob/main/packages/genesys-web-messaging-tester/src/genesys/WebMessengerGuestSession.ts#L71)
+[packages/genesys-cloud-chatbot-tester/src/genesys/WebMessengerGuestSession.ts:71](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/genesys/WebMessengerGuestSession.ts#L71)
 
 ## Methods
 
-### addListener
+### addListener()
 
-▸ **addListener**(`event`, `listener`): `this`
+> **addListener**(`event`, `listener`): `this`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
-| `listener` | (...`args`: `any`[]) => `void` |
+• **event**: `string` \| `symbol`
+
+• **listener**
 
 #### Returns
 
@@ -204,17 +160,17 @@ node_modules/@types/node/events.d.ts:37
 
 #### Inherited from
 
-EventEmitter.addListener
+`EventEmitter.addListener`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:57
+node\_modules/@types/node/events.d.ts:57
 
-___
+***
 
-### close
+### close()
 
-▸ **close**(): `void`
+> **close**(): `void`
 
 #### Returns
 
@@ -222,20 +178,19 @@ ___
 
 #### Defined in
 
-[packages/genesys-web-messaging-tester/src/genesys/WebMessengerGuestSession.ts:147](https://github.com/ovotech/genesys-web-messaging-tester/blob/main/packages/genesys-web-messaging-tester/src/genesys/WebMessengerGuestSession.ts#L147)
+[packages/genesys-cloud-chatbot-tester/src/genesys/WebMessengerGuestSession.ts:147](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/genesys/WebMessengerGuestSession.ts#L147)
 
-___
+***
 
-### emit
+### emit()
 
-▸ **emit**(`event`, `...args`): `boolean`
+> **emit**(`event`, ...`args`): `boolean`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
-| `...args` | `any`[] |
+• **event**: `string` \| `symbol`
+
+• ...**args**: `any`[]
 
 #### Returns
 
@@ -243,17 +198,17 @@ ___
 
 #### Inherited from
 
-EventEmitter.emit
+`EventEmitter.emit`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:67
+node\_modules/@types/node/events.d.ts:67
 
-___
+***
 
-### eventNames
+### eventNames()
 
-▸ **eventNames**(): (`string` \| `symbol`)[]
+> **eventNames**(): (`string` \| `symbol`)[]
 
 #### Returns
 
@@ -261,17 +216,17 @@ ___
 
 #### Inherited from
 
-EventEmitter.eventNames
+`EventEmitter.eventNames`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:72
+node\_modules/@types/node/events.d.ts:72
 
-___
+***
 
-### getMaxListeners
+### getMaxListeners()
 
-▸ **getMaxListeners**(): `number`
+> **getMaxListeners**(): `number`
 
 #### Returns
 
@@ -279,23 +234,21 @@ ___
 
 #### Inherited from
 
-EventEmitter.getMaxListeners
+`EventEmitter.getMaxListeners`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:64
+node\_modules/@types/node/events.d.ts:64
 
-___
+***
 
-### listenerCount
+### listenerCount()
 
-▸ **listenerCount**(`event`): `number`
+> **listenerCount**(`event`): `number`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
+• **event**: `string` \| `symbol`
 
 #### Returns
 
@@ -303,23 +256,21 @@ ___
 
 #### Inherited from
 
-EventEmitter.listenerCount
+`EventEmitter.listenerCount`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:68
+node\_modules/@types/node/events.d.ts:68
 
-___
+***
 
-### listeners
+### listeners()
 
-▸ **listeners**(`event`): `Function`[]
+> **listeners**(`event`): `Function`[]
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
+• **event**: `string` \| `symbol`
 
 #### Returns
 
@@ -327,24 +278,23 @@ ___
 
 #### Inherited from
 
-EventEmitter.listeners
+`EventEmitter.listeners`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:65
+node\_modules/@types/node/events.d.ts:65
 
-___
+***
 
-### off
+### off()
 
-▸ **off**(`event`, `listener`): `this`
+> **off**(`event`, `listener`): `this`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
-| `listener` | (...`args`: `any`[]) => `void` |
+• **event**: `string` \| `symbol`
+
+• **listener**
 
 #### Returns
 
@@ -352,24 +302,23 @@ ___
 
 #### Inherited from
 
-EventEmitter.off
+`EventEmitter.off`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:61
+node\_modules/@types/node/events.d.ts:61
 
-___
+***
 
-### on
+### on()
 
-▸ **on**(`event`, `listener`): `this`
+> **on**(`event`, `listener`): `this`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
-| `listener` | (...`args`: `any`[]) => `void` |
+• **event**: `string` \| `symbol`
+
+• **listener**
 
 #### Returns
 
@@ -377,24 +326,23 @@ ___
 
 #### Inherited from
 
-EventEmitter.on
+`EventEmitter.on`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:58
+node\_modules/@types/node/events.d.ts:58
 
-___
+***
 
-### once
+### once()
 
-▸ **once**(`event`, `listener`): `this`
+> **once**(`event`, `listener`): `this`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
-| `listener` | (...`args`: `any`[]) => `void` |
+• **event**: `string` \| `symbol`
+
+• **listener**
 
 #### Returns
 
@@ -402,24 +350,23 @@ ___
 
 #### Inherited from
 
-EventEmitter.once
+`EventEmitter.once`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:59
+node\_modules/@types/node/events.d.ts:59
 
-___
+***
 
-### prependListener
+### prependListener()
 
-▸ **prependListener**(`event`, `listener`): `this`
+> **prependListener**(`event`, `listener`): `this`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
-| `listener` | (...`args`: `any`[]) => `void` |
+• **event**: `string` \| `symbol`
+
+• **listener**
 
 #### Returns
 
@@ -427,24 +374,23 @@ ___
 
 #### Inherited from
 
-EventEmitter.prependListener
+`EventEmitter.prependListener`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:70
+node\_modules/@types/node/events.d.ts:70
 
-___
+***
 
-### prependOnceListener
+### prependOnceListener()
 
-▸ **prependOnceListener**(`event`, `listener`): `this`
+> **prependOnceListener**(`event`, `listener`): `this`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
-| `listener` | (...`args`: `any`[]) => `void` |
+• **event**: `string` \| `symbol`
+
+• **listener**
 
 #### Returns
 
@@ -452,23 +398,21 @@ ___
 
 #### Inherited from
 
-EventEmitter.prependOnceListener
+`EventEmitter.prependOnceListener`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:71
+node\_modules/@types/node/events.d.ts:71
 
-___
+***
 
-### rawListeners
+### rawListeners()
 
-▸ **rawListeners**(`event`): `Function`[]
+> **rawListeners**(`event`): `Function`[]
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
+• **event**: `string` \| `symbol`
 
 #### Returns
 
@@ -476,23 +420,21 @@ ___
 
 #### Inherited from
 
-EventEmitter.rawListeners
+`EventEmitter.rawListeners`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:66
+node\_modules/@types/node/events.d.ts:66
 
-___
+***
 
-### removeAllListeners
+### removeAllListeners()
 
-▸ **removeAllListeners**(`event?`): `this`
+> **removeAllListeners**(`event`?): `this`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event?` | `string` \| `symbol` |
+• **event?**: `string` \| `symbol`
 
 #### Returns
 
@@ -500,24 +442,23 @@ ___
 
 #### Inherited from
 
-EventEmitter.removeAllListeners
+`EventEmitter.removeAllListeners`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:62
+node\_modules/@types/node/events.d.ts:62
 
-___
+***
 
-### removeListener
+### removeListener()
 
-▸ **removeListener**(`event`, `listener`): `this`
+> **removeListener**(`event`, `listener`): `this`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
-| `listener` | (...`args`: `any`[]) => `void` |
+• **event**: `string` \| `symbol`
+
+• **listener**
 
 #### Returns
 
@@ -525,23 +466,21 @@ ___
 
 #### Inherited from
 
-EventEmitter.removeListener
+`EventEmitter.removeListener`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:60
+node\_modules/@types/node/events.d.ts:60
 
-___
+***
 
-### sendText
+### sendText()
 
-▸ **sendText**(`message`): `void`
+> **sendText**(`message`): `void`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `message` | `string` |
+• **message**: `string`
 
 #### Returns
 
@@ -549,19 +488,17 @@ ___
 
 #### Defined in
 
-[packages/genesys-web-messaging-tester/src/genesys/WebMessengerGuestSession.ts:124](https://github.com/ovotech/genesys-web-messaging-tester/blob/main/packages/genesys-web-messaging-tester/src/genesys/WebMessengerGuestSession.ts#L124)
+[packages/genesys-cloud-chatbot-tester/src/genesys/WebMessengerGuestSession.ts:124](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/genesys/WebMessengerGuestSession.ts#L124)
 
-___
+***
 
-### setMaxListeners
+### setMaxListeners()
 
-▸ **setMaxListeners**(`n`): `this`
+> **setMaxListeners**(`n`): `this`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `n` | `number` |
+• **n**: `number`
 
 #### Returns
 
@@ -569,53 +506,51 @@ ___
 
 #### Inherited from
 
-EventEmitter.setMaxListeners
+`EventEmitter.setMaxListeners`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:63
+node\_modules/@types/node/events.d.ts:63
 
-___
+***
 
-### listenerCount
+### ~~listenerCount()~~
 
-▸ **listenerCount**(`emitter`, `event`): `number`
+> `static` **listenerCount**(`emitter`, `event`): `number`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `emitter` | `EventEmitter` |
-| `event` | `string` \| `symbol` |
+• **emitter**: `EventEmitter`
+
+• **event**: `string` \| `symbol`
 
 #### Returns
 
 `number`
 
-**`Deprecated`**
+#### Deprecated
 
 since v4.0.0
 
 #### Inherited from
 
-EventEmitter.listenerCount
+`EventEmitter.listenerCount`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:26
+node\_modules/@types/node/events.d.ts:26
 
-___
+***
 
-### on
+### on()
 
-▸ **on**(`emitter`, `event`): `AsyncIterableIterator`\<`any`\>
+> `static` **on**(`emitter`, `event`): `AsyncIterableIterator`\<`any`\>
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `emitter` | `EventEmitter` |
-| `event` | `string` |
+• **emitter**: `EventEmitter`
+
+• **event**: `string`
 
 #### Returns
 
@@ -623,54 +558,56 @@ ___
 
 #### Inherited from
 
-EventEmitter.on
+`EventEmitter.on`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:23
+node\_modules/@types/node/events.d.ts:23
 
-___
+***
 
-### once
+### once()
 
-▸ **once**(`emitter`, `event`): `Promise`\<`any`[]\>
+#### once(emitter, event)
 
-#### Parameters
+> `static` **once**(`emitter`, `event`): `Promise`\<`any`[]\>
 
-| Name | Type |
-| :------ | :------ |
-| `emitter` | `NodeEventTarget` |
-| `event` | `string` \| `symbol` |
+##### Parameters
 
-#### Returns
+• **emitter**: `NodeEventTarget`
+
+• **event**: `string` \| `symbol`
+
+##### Returns
 
 `Promise`\<`any`[]\>
 
-#### Inherited from
+##### Inherited from
 
-EventEmitter.once
+`EventEmitter.once`
 
-#### Defined in
+##### Defined in
 
-node_modules/@types/node/events.d.ts:21
+node\_modules/@types/node/events.d.ts:21
 
-▸ **once**(`emitter`, `event`): `Promise`\<`any`[]\>
+#### once(emitter, event)
 
-#### Parameters
+> `static` **once**(`emitter`, `event`): `Promise`\<`any`[]\>
 
-| Name | Type |
-| :------ | :------ |
-| `emitter` | `DOMEventTarget` |
-| `event` | `string` |
+##### Parameters
 
-#### Returns
+• **emitter**: `DOMEventTarget`
+
+• **event**: `string`
+
+##### Returns
 
 `Promise`\<`any`[]\>
 
-#### Inherited from
+##### Inherited from
 
-EventEmitter.once
+`EventEmitter.once`
 
-#### Defined in
+##### Defined in
 
-node_modules/@types/node/events.d.ts:22
+node\_modules/@types/node/events.d.ts:22

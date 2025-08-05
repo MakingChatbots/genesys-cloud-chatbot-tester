@@ -1,3 +1,7 @@
+[**Genesys Web Messaging Tester**](../README.md) • **Docs**
+
+***
+
 [Genesys Web Messaging Tester](../README.md) / MessageDelayer
 
 # Interface: MessageDelayer
@@ -6,46 +10,15 @@ Provides the ability to delay messages for the purpose of re-ordering them.
 This is useful for reordering messages that are received out of order, presumably
 due to it  being async and not guaranteeing order.
 
-## Hierarchy
+## Extends
 
 - `EventEmitter`
-
-  ↳ **`MessageDelayer`**
-
-## Implemented by
-
-- [`ReorderedMessageDelayer`](../classes/ReorderedMessageDelayer.md)
-
-## Table of contents
-
-### Accessors
-
-- [delay](MessageDelayer.md#delay)
-
-### Methods
-
-- [add](MessageDelayer.md#add)
-- [addListener](MessageDelayer.md#addlistener)
-- [emit](MessageDelayer.md#emit)
-- [eventNames](MessageDelayer.md#eventnames)
-- [getMaxListeners](MessageDelayer.md#getmaxlisteners)
-- [listenerCount](MessageDelayer.md#listenercount)
-- [listeners](MessageDelayer.md#listeners)
-- [off](MessageDelayer.md#off)
-- [on](MessageDelayer.md#on)
-- [once](MessageDelayer.md#once)
-- [prependListener](MessageDelayer.md#prependlistener)
-- [prependOnceListener](MessageDelayer.md#prependoncelistener)
-- [rawListeners](MessageDelayer.md#rawlisteners)
-- [removeAllListeners](MessageDelayer.md#removealllisteners)
-- [removeListener](MessageDelayer.md#removelistener)
-- [setMaxListeners](MessageDelayer.md#setmaxlisteners)
 
 ## Accessors
 
 ### delay
 
-• `get` **delay**(): `number`
+> `get` **delay**(): `number`
 
 #### Returns
 
@@ -53,20 +26,19 @@ due to it  being async and not guaranteeing order.
 
 #### Defined in
 
-[packages/genesys-web-messaging-tester/src/genesys/message-delayer/MessageDelayer.ts:10](https://github.com/ovotech/genesys-web-messaging-tester/blob/main/packages/genesys-web-messaging-tester/src/genesys/message-delayer/MessageDelayer.ts#L10)
+[packages/genesys-cloud-chatbot-tester/src/genesys/message-delayer/MessageDelayer.ts:10](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/genesys/message-delayer/MessageDelayer.ts#L10)
 
 ## Methods
 
-### add
+### add()
 
-▸ **add**(`message`, `whenReceived`): `void`
+> **add**(`message`, `whenReceived`): `void`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `message` | [`Response`](../README.md#response)\<`unknown`\> |
-| `whenReceived` | `Date` |
+• **message**: [`Response`](../type-aliases/Response.md)\<`unknown`\>
+
+• **whenReceived**: `Date`
 
 #### Returns
 
@@ -74,20 +46,19 @@ due to it  being async and not guaranteeing order.
 
 #### Defined in
 
-[packages/genesys-web-messaging-tester/src/genesys/message-delayer/MessageDelayer.ts:11](https://github.com/ovotech/genesys-web-messaging-tester/blob/main/packages/genesys-web-messaging-tester/src/genesys/message-delayer/MessageDelayer.ts#L11)
+[packages/genesys-cloud-chatbot-tester/src/genesys/message-delayer/MessageDelayer.ts:11](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/genesys/message-delayer/MessageDelayer.ts#L11)
 
-___
+***
 
-### addListener
+### addListener()
 
-▸ **addListener**(`event`, `listener`): `this`
+> **addListener**(`event`, `listener`): `this`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
-| `listener` | (...`args`: `any`[]) => `void` |
+• **event**: `string` \| `symbol`
+
+• **listener**
 
 #### Returns
 
@@ -95,24 +66,23 @@ ___
 
 #### Inherited from
 
-EventEmitter.addListener
+`EventEmitter.addListener`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:57
+node\_modules/@types/node/events.d.ts:57
 
-___
+***
 
-### emit
+### emit()
 
-▸ **emit**(`event`, `...args`): `boolean`
+> **emit**(`event`, ...`args`): `boolean`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
-| `...args` | `any`[] |
+• **event**: `string` \| `symbol`
+
+• ...**args**: `any`[]
 
 #### Returns
 
@@ -120,17 +90,17 @@ ___
 
 #### Inherited from
 
-EventEmitter.emit
+`EventEmitter.emit`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:67
+node\_modules/@types/node/events.d.ts:67
 
-___
+***
 
-### eventNames
+### eventNames()
 
-▸ **eventNames**(): (`string` \| `symbol`)[]
+> **eventNames**(): (`string` \| `symbol`)[]
 
 #### Returns
 
@@ -138,17 +108,17 @@ ___
 
 #### Inherited from
 
-EventEmitter.eventNames
+`EventEmitter.eventNames`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:72
+node\_modules/@types/node/events.d.ts:72
 
-___
+***
 
-### getMaxListeners
+### getMaxListeners()
 
-▸ **getMaxListeners**(): `number`
+> **getMaxListeners**(): `number`
 
 #### Returns
 
@@ -156,23 +126,21 @@ ___
 
 #### Inherited from
 
-EventEmitter.getMaxListeners
+`EventEmitter.getMaxListeners`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:64
+node\_modules/@types/node/events.d.ts:64
 
-___
+***
 
-### listenerCount
+### listenerCount()
 
-▸ **listenerCount**(`event`): `number`
+> **listenerCount**(`event`): `number`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
+• **event**: `string` \| `symbol`
 
 #### Returns
 
@@ -180,23 +148,21 @@ ___
 
 #### Inherited from
 
-EventEmitter.listenerCount
+`EventEmitter.listenerCount`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:68
+node\_modules/@types/node/events.d.ts:68
 
-___
+***
 
-### listeners
+### listeners()
 
-▸ **listeners**(`event`): `Function`[]
+> **listeners**(`event`): `Function`[]
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
+• **event**: `string` \| `symbol`
 
 #### Returns
 
@@ -204,24 +170,23 @@ ___
 
 #### Inherited from
 
-EventEmitter.listeners
+`EventEmitter.listeners`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:65
+node\_modules/@types/node/events.d.ts:65
 
-___
+***
 
-### off
+### off()
 
-▸ **off**(`event`, `listener`): `this`
+> **off**(`event`, `listener`): `this`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
-| `listener` | (...`args`: `any`[]) => `void` |
+• **event**: `string` \| `symbol`
+
+• **listener**
 
 #### Returns
 
@@ -229,24 +194,23 @@ ___
 
 #### Inherited from
 
-EventEmitter.off
+`EventEmitter.off`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:61
+node\_modules/@types/node/events.d.ts:61
 
-___
+***
 
-### on
+### on()
 
-▸ **on**(`event`, `listener`): `this`
+> **on**(`event`, `listener`): `this`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
-| `listener` | (...`args`: `any`[]) => `void` |
+• **event**: `string` \| `symbol`
+
+• **listener**
 
 #### Returns
 
@@ -254,24 +218,23 @@ ___
 
 #### Inherited from
 
-EventEmitter.on
+`EventEmitter.on`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:58
+node\_modules/@types/node/events.d.ts:58
 
-___
+***
 
-### once
+### once()
 
-▸ **once**(`event`, `listener`): `this`
+> **once**(`event`, `listener`): `this`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
-| `listener` | (...`args`: `any`[]) => `void` |
+• **event**: `string` \| `symbol`
+
+• **listener**
 
 #### Returns
 
@@ -279,24 +242,23 @@ ___
 
 #### Inherited from
 
-EventEmitter.once
+`EventEmitter.once`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:59
+node\_modules/@types/node/events.d.ts:59
 
-___
+***
 
-### prependListener
+### prependListener()
 
-▸ **prependListener**(`event`, `listener`): `this`
+> **prependListener**(`event`, `listener`): `this`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
-| `listener` | (...`args`: `any`[]) => `void` |
+• **event**: `string` \| `symbol`
+
+• **listener**
 
 #### Returns
 
@@ -304,24 +266,23 @@ ___
 
 #### Inherited from
 
-EventEmitter.prependListener
+`EventEmitter.prependListener`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:70
+node\_modules/@types/node/events.d.ts:70
 
-___
+***
 
-### prependOnceListener
+### prependOnceListener()
 
-▸ **prependOnceListener**(`event`, `listener`): `this`
+> **prependOnceListener**(`event`, `listener`): `this`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
-| `listener` | (...`args`: `any`[]) => `void` |
+• **event**: `string` \| `symbol`
+
+• **listener**
 
 #### Returns
 
@@ -329,23 +290,21 @@ ___
 
 #### Inherited from
 
-EventEmitter.prependOnceListener
+`EventEmitter.prependOnceListener`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:71
+node\_modules/@types/node/events.d.ts:71
 
-___
+***
 
-### rawListeners
+### rawListeners()
 
-▸ **rawListeners**(`event`): `Function`[]
+> **rawListeners**(`event`): `Function`[]
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
+• **event**: `string` \| `symbol`
 
 #### Returns
 
@@ -353,23 +312,21 @@ ___
 
 #### Inherited from
 
-EventEmitter.rawListeners
+`EventEmitter.rawListeners`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:66
+node\_modules/@types/node/events.d.ts:66
 
-___
+***
 
-### removeAllListeners
+### removeAllListeners()
 
-▸ **removeAllListeners**(`event?`): `this`
+> **removeAllListeners**(`event`?): `this`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event?` | `string` \| `symbol` |
+• **event?**: `string` \| `symbol`
 
 #### Returns
 
@@ -377,24 +334,23 @@ ___
 
 #### Inherited from
 
-EventEmitter.removeAllListeners
+`EventEmitter.removeAllListeners`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:62
+node\_modules/@types/node/events.d.ts:62
 
-___
+***
 
-### removeListener
+### removeListener()
 
-▸ **removeListener**(`event`, `listener`): `this`
+> **removeListener**(`event`, `listener`): `this`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
-| `listener` | (...`args`: `any`[]) => `void` |
+• **event**: `string` \| `symbol`
+
+• **listener**
 
 #### Returns
 
@@ -402,23 +358,21 @@ ___
 
 #### Inherited from
 
-EventEmitter.removeListener
+`EventEmitter.removeListener`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:60
+node\_modules/@types/node/events.d.ts:60
 
-___
+***
 
-### setMaxListeners
+### setMaxListeners()
 
-▸ **setMaxListeners**(`n`): `this`
+> **setMaxListeners**(`n`): `this`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `n` | `number` |
+• **n**: `number`
 
 #### Returns
 
@@ -426,8 +380,8 @@ ___
 
 #### Inherited from
 
-EventEmitter.setMaxListeners
+`EventEmitter.setMaxListeners`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:63
+node\_modules/@types/node/events.d.ts:63

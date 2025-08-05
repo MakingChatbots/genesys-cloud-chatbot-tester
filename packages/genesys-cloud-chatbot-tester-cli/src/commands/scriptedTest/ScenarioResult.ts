@@ -1,0 +1,26 @@
+import { TestScriptScenario } from './testScript/parseTestScript';
+import {
+  TimeoutWaitingForResponseError,
+  TranscribedMessage,
+} from '@makingchatbots/genesys-cloud-chatbot-tester';
+import { createConversationIdGetter } from '../../genesysPlatform/messageIdToConversationIdFactory';
+
+export interface ScenarioResult {
+  wasRetriedDueToUnorderedMessageFailure: boolean;
+  scenario: TestScriptScenario;
+  transcription: TranscribedMessage[];
+  conversationId:
+    | {
+        associateId: false;
+      }
+    | { associateId: true; conversationIdGetter: ReturnType<typeof createConversationIdGetter> };
+}
+
+export interface ScenarioError extends ScenarioResult {
+  reasonForError: Error | TimeoutWaitingForResponseError;
+  hasPassed: false;
+}
+
+export interface ScenarioSuccess extends ScenarioResult {
+  hasPassed: true;
+}

@@ -3,7 +3,7 @@ import {
   Conversation,
   WebMessengerGuestSession,
   SessionTranscriber,
-} from '@ovotech/genesys-web-messaging-tester';
+} from '@makingchatbots/genesys-cloud-chatbot-tester';
 
 // Set realistic timeout value for a Web Messenger conversation
 jest.setTimeout(20000); // 20s

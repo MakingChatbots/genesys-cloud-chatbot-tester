@@ -1,41 +1,37 @@
+[**Genesys Web Messaging Tester**](../README.md) • **Docs**
+
+***
+
 [Genesys Web Messaging Tester](../README.md) / SessionConfig
 
 # Interface: SessionConfig
-
-## Table of contents
-
-### Properties
-
-- [deploymentId](SessionConfig.md#deploymentid)
-- [origin](SessionConfig.md#origin)
-- [region](SessionConfig.md#region)
 
 ## Properties
 
 ### deploymentId
 
-• `Readonly` **deploymentId**: `string`
+> `readonly` **deploymentId**: `string`
 
 #### Defined in
 
-[packages/genesys-web-messaging-tester/src/genesys/WebMessengerGuestSession.ts:29](https://github.com/ovotech/genesys-web-messaging-tester/blob/main/packages/genesys-web-messaging-tester/src/genesys/WebMessengerGuestSession.ts#L29)
+[packages/genesys-cloud-chatbot-tester/src/genesys/WebMessengerGuestSession.ts:29](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/genesys/WebMessengerGuestSession.ts#L29)
 
-___
+***
 
-### origin
+### origin?
 
-• `Optional` `Readonly` **origin**: `string`
+> `readonly` `optional` **origin**: `string`
 
 #### Defined in
 
-[packages/genesys-web-messaging-tester/src/genesys/WebMessengerGuestSession.ts:31](https://github.com/ovotech/genesys-web-messaging-tester/blob/main/packages/genesys-web-messaging-tester/src/genesys/WebMessengerGuestSession.ts#L31)
+[packages/genesys-cloud-chatbot-tester/src/genesys/WebMessengerGuestSession.ts:31](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/genesys/WebMessengerGuestSession.ts#L31)
 
-___
+***
 
 ### region
 
-• `Readonly` **region**: `string`
+> `readonly` **region**: `string`
 
 #### Defined in
 
-[packages/genesys-web-messaging-tester/src/genesys/WebMessengerGuestSession.ts:30](https://github.com/ovotech/genesys-web-messaging-tester/blob/main/packages/genesys-web-messaging-tester/src/genesys/WebMessengerGuestSession.ts#L30)
+[packages/genesys-cloud-chatbot-tester/src/genesys/WebMessengerGuestSession.ts:30](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/genesys/WebMessengerGuestSession.ts#L30)

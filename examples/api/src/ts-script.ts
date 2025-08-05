@@ -3,7 +3,7 @@ import {
   Conversation,
   WebMessengerGuestSession,
   SessionTranscriber,
-} from '@ovotech/genesys-web-messaging-tester';
+} from '@makingchatbots/genesys-cloud-chatbot-tester';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config({ path: '../../.env' });

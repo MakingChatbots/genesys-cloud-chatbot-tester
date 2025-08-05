@@ -1,9 +1,9 @@
 #sh
 
-npm install -g ../../packages/genesys-web-messaging-tester-cli
+npm install -g ../../packages/genesys-cloud-chatbot-tester-cli
 
 function cleanup {
-  npm uninstall -g ../../packages/genesys-web-messaging-tester-cli
+  npm uninstall -g ../../packages/genesys-cloud-chatbot-tester-cli
 }
 trap cleanup EXIT
 

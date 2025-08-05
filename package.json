@@ -1,10 +1,10 @@
 {
-  "name": "@ovotech/genesys-web-messaging-tester-root",
+  "name": "@makingchatbots/genesys-cloud-chatbot-tester-root",
   "version": "1.0.0",
   "private": true,
   "license": "Apache-2.0",
-  "repository": "git@github.com:ovotech/genesys-web-messaging-tester.git",
-  "homepage": "https://github.com/ovotech/genesys-web-messaging-tester/tree/main#readme",
+  "repository": "git@github.com:makingchatbots/genesys-cloud-chatbot-tester.git",
+  "homepage": "https://github.com/makingchatbots/genesys-cloud-chatbot-tester/tree/main#readme",
   "author": "Lucas Woodward",
   "workspaces": [
     "packages/*",
@@ -14,8 +14,8 @@
     "test": "yarn workspaces foreach --verbose --exclude '@examples/*' run test",
     "lint": "yarn workspaces foreach --verbose run lint",
     "build": "yarn workspaces foreach --verbose run build",
-    "build:docs": "yarn build:readme && cp README.md packages/genesys-web-messaging-tester-cli/README.md && typedoc && yarn workspaces foreach --verbose run build:readme",
-    "build:readme": "yarn build-readme ./README.md https://github.com/ovotech/genesys-web-messaging-tester/tree/main",
+    "build:docs": "yarn build:readme && cp README.md packages/genesys-cloud-chatbot-tester-cli/README.md && typedoc && yarn workspaces foreach --verbose run build:readme",
+    "build:readme": "yarn build-readme ./README.md https://github.com/makingchatbots/genesys-cloud-chatbot-tester/tree/main",
     "publish": "yarn workspaces foreach --no-private --verbose npm publish --tolerate-republish --access public"
   },
   "devDependencies": {

@@ -1,3 +1,7 @@
+[**Genesys Web Messaging Tester**](../README.md) • **Docs**
+
+***
+
 [Genesys Web Messaging Tester](../README.md) / Conversation
 
 # Class: Conversation
@@ -24,39 +28,19 @@ const reply = await convo.waitForResponse();
 console.log(reply);
 ```
 
-## Table of contents
-
-### Constructors
-
-- [constructor](Conversation.md#constructor)
-
-### Accessors
-
-- [isDisconnected](Conversation.md#isdisconnected)
-
-### Methods
-
-- [sendText](Conversation.md#sendtext)
-- [waitForConversationToClose](Conversation.md#waitforconversationtoclose)
-- [waitForConversationToStart](Conversation.md#waitforconversationtostart)
-- [waitForResponseText](Conversation.md#waitforresponsetext)
-- [waitForResponseWithTextContaining](Conversation.md#waitforresponsewithtextcontaining)
-- [waitForResponseWithTextMatchingPattern](Conversation.md#waitforresponsewithtextmatchingpattern)
-- [waitForResponses](Conversation.md#waitforresponses)
-
 ## Constructors
 
-### constructor
+### new Conversation()
 
-• **new Conversation**(`messengerSession`, `timeoutSet?`, `timeoutClear?`): [`Conversation`](Conversation.md)
+> **new Conversation**(`messengerSession`, `timeoutSet`, `timeoutClear`): [`Conversation`](Conversation.md)
 
 #### Parameters
 
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `messengerSession` | [`WebMessengerSession`](../interfaces/WebMessengerSession.md) | `undefined` |
-| `timeoutSet` | typeof `setTimeout` | `setTimeout` |
-| `timeoutClear` | (`timeoutId`: `undefined` \| `string` \| `number` \| `Timeout`) => `void` | `clearTimeout` |
+• **messengerSession**: [`WebMessengerSession`](../interfaces/WebMessengerSession.md)
+
+• **timeoutSet**: *typeof* `setTimeout` = `setTimeout`
+
+• **timeoutClear** = `clearTimeout`
 
 #### Returns
 
@@ -64,13 +48,13 @@ console.log(reply);
 
 #### Defined in
 
-[packages/genesys-web-messaging-tester/src/Conversation.ts:142](https://github.com/ovotech/genesys-web-messaging-tester/blob/main/packages/genesys-web-messaging-tester/src/Conversation.ts#L142)
+[packages/genesys-cloud-chatbot-tester/src/Conversation.ts:142](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L142)
 
 ## Accessors
 
 ### isDisconnected
 
-• `get` **isDisconnected**(): `boolean`
+> `get` **isDisconnected**(): `boolean`
 
 Returns whether the conversation has been disconnected
 
@@ -80,22 +64,28 @@ Returns whether the conversation has been disconnected
 
 #### Defined in
 
-[packages/genesys-web-messaging-tester/src/Conversation.ts:203](https://github.com/ovotech/genesys-web-messaging-tester/blob/main/packages/genesys-web-messaging-tester/src/Conversation.ts#L203)
+[packages/genesys-cloud-chatbot-tester/src/Conversation.ts:203](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L203)
 
 ## Methods
 
-### sendText
+### sendText()
 
-▸ **sendText**(`text`, `delayInMs?`): `Promise`\<`void`\>
+> **sendText**(`text`, `delayInMs`): `Promise`\<`void`\>
 
 Sends text to the conversation
 
 #### Parameters
 
-| Name | Type | Default value | Description |
-| :------ | :------ | :------ | :------ |
-| `text` | `string` | `undefined` | Text containing at least one character |
-| `delayInMs` | `number` | `2000` | Delay in milliseconds between calling this method and the text being sent. Without a delay some messages are sent so quickly after the original message that Genesys Cloud doesn't acknowledge them. A delay of 0 will result in the text being sent immediately. |
+• **text**: `string`
+
+Text containing at least one character
+
+• **delayInMs**: `number` = `2000`
+
+Delay in milliseconds between calling this method and the text being sent.
+                 Without a delay some messages are sent so quickly after the original message
+                 that Genesys Cloud doesn't acknowledge them.
+                 A delay of 0 will result in the text being sent immediately.
 
 #### Returns
 
@@ -103,19 +93,17 @@ Sends text to the conversation
 
 #### Defined in
 
-[packages/genesys-web-messaging-tester/src/Conversation.ts:234](https://github.com/ovotech/genesys-web-messaging-tester/blob/main/packages/genesys-web-messaging-tester/src/Conversation.ts#L234)
+[packages/genesys-cloud-chatbot-tester/src/Conversation.ts:234](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L234)
 
-___
+***
 
-### waitForConversationToClose
+### waitForConversationToClose()
 
-▸ **waitForConversationToClose**(`timeoutInMs?`): `Promise`\<`void`\>
+> **waitForConversationToClose**(`timeoutInMs`): `Promise`\<`void`\>
 
 #### Parameters
 
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `timeoutInMs` | `number` | `2000` |
+• **timeoutInMs**: `number` = `2000`
 
 #### Returns
 
@@ -123,13 +111,13 @@ ___
 
 #### Defined in
 
-[packages/genesys-web-messaging-tester/src/Conversation.ts:168](https://github.com/ovotech/genesys-web-messaging-tester/blob/main/packages/genesys-web-messaging-tester/src/Conversation.ts#L168)
+[packages/genesys-cloud-chatbot-tester/src/Conversation.ts:168](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L168)
 
-___
+***
 
-### waitForConversationToStart
+### waitForConversationToStart()
 
-▸ **waitForConversationToStart**(): `Promise`\<[`Conversation`](Conversation.md)\>
+> **waitForConversationToStart**(): `Promise`\<[`Conversation`](Conversation.md)\>
 
 Resolves when the conversation has started.
 
@@ -142,13 +130,13 @@ background. This method allows you to wait for this process to finish.
 
 #### Defined in
 
-[packages/genesys-web-messaging-tester/src/Conversation.ts:213](https://github.com/ovotech/genesys-web-messaging-tester/blob/main/packages/genesys-web-messaging-tester/src/Conversation.ts#L213)
+[packages/genesys-cloud-chatbot-tester/src/Conversation.ts:213](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L213)
 
-___
+***
 
-### waitForResponseText
+### waitForResponseText()
 
-▸ **waitForResponseText**(): `Promise`\<`string`\>
+> **waitForResponseText**(): `Promise`\<`string`\>
 
 Resolves on the next response from the other participant in the conversation that contains text.
 
@@ -160,13 +148,13 @@ If you want to wait for a specific message use [waitForResponseWithTextContainin
 
 #### Defined in
 
-[packages/genesys-web-messaging-tester/src/Conversation.ts:260](https://github.com/ovotech/genesys-web-messaging-tester/blob/main/packages/genesys-web-messaging-tester/src/Conversation.ts#L260)
+[packages/genesys-cloud-chatbot-tester/src/Conversation.ts:260](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L260)
 
-___
+***
 
-### waitForResponseWithTextContaining
+### waitForResponseWithTextContaining()
 
-▸ **waitForResponseWithTextContaining**(`text`, `«destructured»?`): `Promise`\<`string`\>
+> **waitForResponseWithTextContaining**(`text`, `__namedParameters`): `Promise`\<`string`\>
 
 Resolves when a response is received that contains a specific piece of text.
 If no response is received that contains the text within the timeout period
@@ -179,12 +167,13 @@ use [waitForResponseText](Conversation.md#waitforresponsetext).
 
 #### Parameters
 
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `text` | `string` | `undefined` |
-| `«destructured»` | `Object` | `{}` |
-| › `caseInsensitive?` | `boolean` | `true` |
-| › `timeoutInSeconds?` | `number` | `10` |
+• **text**: `string`
+
+• **\_\_namedParameters** = `{}`
+
+• **\_\_namedParameters.caseInsensitive?**: `boolean` = `true`
+
+• **\_\_namedParameters.timeoutInSeconds?**: `number` = `10`
 
 #### Returns
 
@@ -192,13 +181,13 @@ use [waitForResponseText](Conversation.md#waitforresponsetext).
 
 #### Defined in
 
-[packages/genesys-web-messaging-tester/src/Conversation.ts:318](https://github.com/ovotech/genesys-web-messaging-tester/blob/main/packages/genesys-web-messaging-tester/src/Conversation.ts#L318)
+[packages/genesys-cloud-chatbot-tester/src/Conversation.ts:318](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L318)
 
-___
+***
 
-### waitForResponseWithTextMatchingPattern
+### waitForResponseWithTextMatchingPattern()
 
-▸ **waitForResponseWithTextMatchingPattern**(`pattern`, `«destructured»?`): `Promise`\<`string`\>
+> **waitForResponseWithTextMatchingPattern**(`pattern`, `__namedParameters`): `Promise`\<`string`\>
 
 Resolves when a response is received that matches a regular expression.
 If no response is received that matches the pattern within the timeout period
@@ -209,11 +198,11 @@ use [waitForResponseText](Conversation.md#waitforresponsetext).
 
 #### Parameters
 
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `pattern` | `string` \| `RegExp` | `undefined` |
-| `«destructured»` | `Object` | `{}` |
-| › `timeoutInSeconds?` | `number` | `10` |
+• **pattern**: `string` \| `RegExp`
+
+• **\_\_namedParameters** = `{}`
+
+• **\_\_namedParameters.timeoutInSeconds?**: `number` = `10`
 
 #### Returns
 
@@ -221,21 +210,19 @@ use [waitForResponseText](Conversation.md#waitforresponsetext).
 
 #### Defined in
 
-[packages/genesys-web-messaging-tester/src/Conversation.ts:349](https://github.com/ovotech/genesys-web-messaging-tester/blob/main/packages/genesys-web-messaging-tester/src/Conversation.ts#L349)
+[packages/genesys-cloud-chatbot-tester/src/Conversation.ts:349](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L349)
 
-___
+***
 
-### waitForResponses
+### waitForResponses()
 
-▸ **waitForResponses**(`timeToWaitAfterLastMessageInMs?`): `Promise`\<`string`[]\>
+> **waitForResponses**(`timeToWaitAfterLastMessageInMs`): `Promise`\<`string`[]\>
 
 Wait for all responses until there is a predefined amount of 'silence'.
 
 #### Parameters
 
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `timeToWaitAfterLastMessageInMs` | `number` | `2000` |
+• **timeToWaitAfterLastMessageInMs**: `number` = `2000`
 
 #### Returns
 
@@ -243,4 +230,4 @@ Wait for all responses until there is a predefined amount of 'silence'.
 
 #### Defined in
 
-[packages/genesys-web-messaging-tester/src/Conversation.ts:276](https://github.com/ovotech/genesys-web-messaging-tester/blob/main/packages/genesys-web-messaging-tester/src/Conversation.ts#L276)
+[packages/genesys-cloud-chatbot-tester/src/Conversation.ts:276](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L276)

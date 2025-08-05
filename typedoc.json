@@ -4,7 +4,7 @@
   "out": "docs/api",
   "excludeInternal": true,
   "entryPoints": [
-    "packages/genesys-web-messaging-tester/src/index.ts"
+    "packages/genesys-cloud-chatbot-tester/src/index.ts"
   ],
   "plugin": [
     "typedoc-plugin-markdown"

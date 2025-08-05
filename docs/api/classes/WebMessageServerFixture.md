@@ -1,33 +1,20 @@
+[**Genesys Web Messaging Tester**](../README.md) • **Docs**
+
+***
+
 [Genesys Web Messaging Tester](../README.md) / WebMessageServerFixture
 
 # Class: WebMessageServerFixture
 
-## Table of contents
-
-### Constructors
-
-- [constructor](WebMessageServerFixture.md#constructor)
-
-### Properties
-
-- [port](WebMessageServerFixture.md#port)
-
-### Methods
-
-- [close](WebMessageServerFixture.md#close)
-- [waitForConnection](WebMessageServerFixture.md#waitforconnection)
-
 ## Constructors
 
-### constructor
+### new WebMessageServerFixture()
 
-• **new WebMessageServerFixture**(`port`): [`WebMessageServerFixture`](WebMessageServerFixture.md)
+> **new WebMessageServerFixture**(`port`): [`WebMessageServerFixture`](WebMessageServerFixture.md)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `port` | `number` |
+• **port**: `number`
 
 #### Returns
 
@@ -35,23 +22,23 @@
 
 #### Defined in
 
-[packages/genesys-web-messaging-tester/src/testFixtures/WebMessageServerFixture.ts:8](https://github.com/ovotech/genesys-web-messaging-tester/blob/main/packages/genesys-web-messaging-tester/src/testFixtures/WebMessageServerFixture.ts#L8)
+[packages/genesys-cloud-chatbot-tester/src/testFixtures/WebMessageServerFixture.ts:8](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/testFixtures/WebMessageServerFixture.ts#L8)
 
 ## Properties
 
 ### port
 
-• `Readonly` **port**: `number`
+> `readonly` **port**: `number`
 
 #### Defined in
 
-[packages/genesys-web-messaging-tester/src/testFixtures/WebMessageServerFixture.ts:8](https://github.com/ovotech/genesys-web-messaging-tester/blob/main/packages/genesys-web-messaging-tester/src/testFixtures/WebMessageServerFixture.ts#L8)
+[packages/genesys-cloud-chatbot-tester/src/testFixtures/WebMessageServerFixture.ts:8](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/testFixtures/WebMessageServerFixture.ts#L8)
 
 ## Methods
 
-### close
+### close()
 
-▸ **close**(): `void`
+> **close**(): `void`
 
 #### Returns
 
@@ -59,13 +46,13 @@
 
 #### Defined in
 
-[packages/genesys-web-messaging-tester/src/testFixtures/WebMessageServerFixture.ts:23](https://github.com/ovotech/genesys-web-messaging-tester/blob/main/packages/genesys-web-messaging-tester/src/testFixtures/WebMessageServerFixture.ts#L23)
+[packages/genesys-cloud-chatbot-tester/src/testFixtures/WebMessageServerFixture.ts:23](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/testFixtures/WebMessageServerFixture.ts#L23)
 
-___
+***
 
-### waitForConnection
+### waitForConnection()
 
-▸ **waitForConnection**(): `Promise`\<[`WebMessageServerConnectionFixture`](WebMessageServerConnectionFixture.md)\>
+> **waitForConnection**(): `Promise`\<[`WebMessageServerConnectionFixture`](WebMessageServerConnectionFixture.md)\>
 
 #### Returns
 
@@ -73,4 +60,4 @@ ___
 
 #### Defined in
 
-[packages/genesys-web-messaging-tester/src/testFixtures/WebMessageServerFixture.ts:17](https://github.com/ovotech/genesys-web-messaging-tester/blob/main/packages/genesys-web-messaging-tester/src/testFixtures/WebMessageServerFixture.ts#L17)
+[packages/genesys-cloud-chatbot-tester/src/testFixtures/WebMessageServerFixture.ts:17](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/testFixtures/WebMessageServerFixture.ts#L17)

@@ -1,50 +1,28 @@
+[**Genesys Web Messaging Tester**](../README.md) • **Docs**
+
+***
+
 [Genesys Web Messaging Tester](../README.md) / TimeoutWaitingForResponseError
 
 # Class: TimeoutWaitingForResponseError
 
-## Hierarchy
+## Extends
 
 - `Error`
 
-  ↳ **`TimeoutWaitingForResponseError`**
-
-## Table of contents
-
-### Constructors
-
-- [constructor](TimeoutWaitingForResponseError.md#constructor)
-
-### Properties
-
-- [message](TimeoutWaitingForResponseError.md#message)
-- [name](TimeoutWaitingForResponseError.md#name)
-- [stack](TimeoutWaitingForResponseError.md#stack)
-- [prepareStackTrace](TimeoutWaitingForResponseError.md#preparestacktrace)
-- [stackTraceLimit](TimeoutWaitingForResponseError.md#stacktracelimit)
-
-### Accessors
-
-- [expectedResponse](TimeoutWaitingForResponseError.md#expectedresponse)
-- [responsesReceived](TimeoutWaitingForResponseError.md#responsesreceived)
-- [timeoutInMs](TimeoutWaitingForResponseError.md#timeoutinms)
-
-### Methods
-
-- [captureStackTrace](TimeoutWaitingForResponseError.md#capturestacktrace)
-
 ## Constructors
 
-### constructor
+### new TimeoutWaitingForResponseError()
 
-• **new TimeoutWaitingForResponseError**(`_timeoutInMs`, `_expectedResponse`, `_responsesReceived?`): [`TimeoutWaitingForResponseError`](TimeoutWaitingForResponseError.md)
+> **new TimeoutWaitingForResponseError**(`_timeoutInMs`, `_expectedResponse`, `_responsesReceived`): [`TimeoutWaitingForResponseError`](TimeoutWaitingForResponseError.md)
 
 #### Parameters
 
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `_timeoutInMs` | `number` | `undefined` |
-| `_expectedResponse` | `string` | `undefined` |
-| `_responsesReceived` | readonly (`StructuredMessageTextBody` \| `StructuredMessageStructuredBody`)[] | `[]` |
+• **\_timeoutInMs**: `number`
+
+• **\_expectedResponse**: `string`
+
+• **\_responsesReceived**: readonly (`StructuredMessageTextBody` \| `StructuredMessageStructuredBody`)[] = `[]`
 
 #### Returns
 
@@ -52,114 +30,103 @@
 
 #### Overrides
 
-Error.constructor
+`Error.constructor`
 
 #### Defined in
 
-[packages/genesys-web-messaging-tester/src/Conversation.ts:10](https://github.com/ovotech/genesys-web-messaging-tester/blob/main/packages/genesys-web-messaging-tester/src/Conversation.ts#L10)
+[packages/genesys-cloud-chatbot-tester/src/Conversation.ts:10](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L10)
 
 ## Properties
 
 ### message
 
-• **message**: `string`
+> **message**: `string`
 
 #### Inherited from
 
-Error.message
+`Error.message`
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1076
+node\_modules/typescript/lib/lib.es5.d.ts:1076
 
-___
+***
 
 ### name
 
-• **name**: `string`
+> **name**: `string`
 
 #### Inherited from
 
-Error.name
+`Error.name`
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1075
+node\_modules/typescript/lib/lib.es5.d.ts:1075
 
-___
+***
 
-### stack
+### stack?
 
-• `Optional` **stack**: `string`
+> `optional` **stack**: `string`
 
 #### Inherited from
 
-Error.stack
+`Error.stack`
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1077
+node\_modules/typescript/lib/lib.es5.d.ts:1077
 
-___
+***
 
-### prepareStackTrace
+### prepareStackTrace()?
 
-▪ `Static` `Optional` **prepareStackTrace**: (`err`: `Error`, `stackTraces`: `CallSite`[]) => `any`
-
-Optional override for formatting stack traces
-
-**`See`**
-
-https://v8.dev/docs/stack-trace-api#customizing-stack-traces
-
-#### Type declaration
-
-▸ (`err`, `stackTraces`): `any`
+> `static` `optional` **prepareStackTrace**: (`err`, `stackTraces`) => `any`
 
 Optional override for formatting stack traces
 
-##### Parameters
+#### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `err` | `Error` |
-| `stackTraces` | `CallSite`[] |
+• **err**: `Error`
 
-##### Returns
+• **stackTraces**: `CallSite`[]
+
+#### Returns
 
 `any`
 
-**`See`**
+#### See
 
 https://v8.dev/docs/stack-trace-api#customizing-stack-traces
 
 #### Inherited from
 
-Error.prepareStackTrace
+`Error.prepareStackTrace`
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:11
+node\_modules/@types/node/globals.d.ts:11
 
-___
+***
 
 ### stackTraceLimit
 
-▪ `Static` **stackTraceLimit**: `number`
+> `static` **stackTraceLimit**: `number`
 
 #### Inherited from
 
-Error.stackTraceLimit
+`Error.stackTraceLimit`
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:13
+node\_modules/@types/node/globals.d.ts:13
 
 ## Accessors
 
 ### expectedResponse
 
-• `get` **expectedResponse**(): `string`
+> `get` **expectedResponse**(): `string`
 
 #### Returns
 
@@ -167,13 +134,13 @@ node_modules/@types/node/globals.d.ts:13
 
 #### Defined in
 
-[packages/genesys-web-messaging-tester/src/Conversation.ts:43](https://github.com/ovotech/genesys-web-messaging-tester/blob/main/packages/genesys-web-messaging-tester/src/Conversation.ts#L43)
+[packages/genesys-cloud-chatbot-tester/src/Conversation.ts:43](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L43)
 
-___
+***
 
 ### responsesReceived
 
-• `get` **responsesReceived**(): readonly (`StructuredMessageTextBody` \| `StructuredMessageStructuredBody`)[]
+> `get` **responsesReceived**(): readonly (`StructuredMessageTextBody` \| `StructuredMessageStructuredBody`)[]
 
 #### Returns
 
@@ -181,13 +148,13 @@ readonly (`StructuredMessageTextBody` \| `StructuredMessageStructuredBody`)[]
 
 #### Defined in
 
-[packages/genesys-web-messaging-tester/src/Conversation.ts:47](https://github.com/ovotech/genesys-web-messaging-tester/blob/main/packages/genesys-web-messaging-tester/src/Conversation.ts#L47)
+[packages/genesys-cloud-chatbot-tester/src/Conversation.ts:47](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L47)
 
-___
+***
 
 ### timeoutInMs
 
-• `get` **timeoutInMs**(): `number`
+> `get` **timeoutInMs**(): `number`
 
 #### Returns
 
@@ -195,22 +162,21 @@ ___
 
 #### Defined in
 
-[packages/genesys-web-messaging-tester/src/Conversation.ts:53](https://github.com/ovotech/genesys-web-messaging-tester/blob/main/packages/genesys-web-messaging-tester/src/Conversation.ts#L53)
+[packages/genesys-cloud-chatbot-tester/src/Conversation.ts:53](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L53)
 
 ## Methods
 
-### captureStackTrace
+### captureStackTrace()
 
-▸ **captureStackTrace**(`targetObject`, `constructorOpt?`): `void`
+> `static` **captureStackTrace**(`targetObject`, `constructorOpt`?): `void`
 
 Create .stack property on a target object
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `targetObject` | `object` |
-| `constructorOpt?` | `Function` |
+• **targetObject**: `object`
+
+• **constructorOpt?**: `Function`
 
 #### Returns
 
@@ -218,8 +184,8 @@ Create .stack property on a target object
 
 #### Inherited from
 
-Error.captureStackTrace
+`Error.captureStackTrace`
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:4
+node\_modules/@types/node/globals.d.ts:4

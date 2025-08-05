@@ -1,3 +1,7 @@
+[**Genesys Web Messaging Tester**](../README.md) • **Docs**
+
+***
+
 [Genesys Web Messaging Tester](../README.md) / ReorderedMessageDelayer
 
 # Class: ReorderedMessageDelayer
@@ -9,70 +13,29 @@ timestamps.
 > channel and therefore no guarantee to ordering is provided.
 > Source: https://developer.genesys.cloud/commdigital/digital/webmessaging/websocketapi#messaging
 
-## Hierarchy
+## Extends
 
 - `EventEmitter`
-
-  ↳ **`ReorderedMessageDelayer`**
 
 ## Implements
 
 - [`MessageDelayer`](../interfaces/MessageDelayer.md)
 
-## Table of contents
-
-### Constructors
-
-- [constructor](ReorderedMessageDelayer.md#constructor)
-
-### Properties
-
-- [captureRejectionSymbol](ReorderedMessageDelayer.md#capturerejectionsymbol)
-- [captureRejections](ReorderedMessageDelayer.md#capturerejections)
-- [defaultMaxListeners](ReorderedMessageDelayer.md#defaultmaxlisteners)
-- [errorMonitor](ReorderedMessageDelayer.md#errormonitor)
-
-### Accessors
-
-- [delay](ReorderedMessageDelayer.md#delay)
-- [unorderdMessageDetected](ReorderedMessageDelayer.md#unorderdmessagedetected)
-
-### Methods
-
-- [add](ReorderedMessageDelayer.md#add)
-- [addListener](ReorderedMessageDelayer.md#addlistener)
-- [emit](ReorderedMessageDelayer.md#emit)
-- [eventNames](ReorderedMessageDelayer.md#eventnames)
-- [getMaxListeners](ReorderedMessageDelayer.md#getmaxlisteners)
-- [listenerCount](ReorderedMessageDelayer.md#listenercount)
-- [listeners](ReorderedMessageDelayer.md#listeners)
-- [off](ReorderedMessageDelayer.md#off)
-- [on](ReorderedMessageDelayer.md#on)
-- [once](ReorderedMessageDelayer.md#once)
-- [prependListener](ReorderedMessageDelayer.md#prependlistener)
-- [prependOnceListener](ReorderedMessageDelayer.md#prependoncelistener)
-- [rawListeners](ReorderedMessageDelayer.md#rawlisteners)
-- [removeAllListeners](ReorderedMessageDelayer.md#removealllisteners)
-- [removeListener](ReorderedMessageDelayer.md#removelistener)
-- [setMaxListeners](ReorderedMessageDelayer.md#setmaxlisteners)
-- [listenerCount](ReorderedMessageDelayer.md#listenercount-1)
-- [on](ReorderedMessageDelayer.md#on-1)
-- [once](ReorderedMessageDelayer.md#once-1)
-
 ## Constructors
 
-### constructor
+### new ReorderedMessageDelayer()
 
-• **new ReorderedMessageDelayer**(`delayBeforeEmittingInMs?`, `intervalInMs?`, `intervalSet?`, `intervalClear?`): [`ReorderedMessageDelayer`](ReorderedMessageDelayer.md)
+> **new ReorderedMessageDelayer**(`delayBeforeEmittingInMs`, `intervalInMs`, `intervalSet`, `intervalClear`): [`ReorderedMessageDelayer`](ReorderedMessageDelayer.md)
 
 #### Parameters
 
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `delayBeforeEmittingInMs` | `number` | `1000` |
-| `intervalInMs` | `number` | `1000` |
-| `intervalSet` | (`callback`: (...`args`: `any`[]) => `void`, `ms?`: `number`, ...`args`: `any`[]) => `NodeJS.Timeout` | `setInterval` |
-| `intervalClear` | (`intervalId`: `undefined` \| `string` \| `number` \| `Timeout`) => `void` | `clearInterval` |
+• **delayBeforeEmittingInMs**: `number` = `1000`
+
+• **intervalInMs**: `number` = `1000`
+
+• **intervalSet** = `setInterval`
+
+• **intervalClear** = `clearInterval`
 
 #### Returns
 
@@ -80,61 +43,61 @@ timestamps.
 
 #### Overrides
 
-EventEmitter.constructor
+`EventEmitter.constructor`
 
 #### Defined in
 
-[packages/genesys-web-messaging-tester/src/genesys/message-delayer/ReorderedMessageDelayer.ts:34](https://github.com/ovotech/genesys-web-messaging-tester/blob/main/packages/genesys-web-messaging-tester/src/genesys/message-delayer/ReorderedMessageDelayer.ts#L34)
+[packages/genesys-cloud-chatbot-tester/src/genesys/message-delayer/ReorderedMessageDelayer.ts:34](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/genesys/message-delayer/ReorderedMessageDelayer.ts#L34)
 
 ## Properties
 
 ### captureRejectionSymbol
 
-▪ `Static` `Readonly` **captureRejectionSymbol**: typeof [`captureRejectionSymbol`](WebMessengerGuestSession.md#capturerejectionsymbol)
+> `readonly` `static` **captureRejectionSymbol**: *typeof* [`captureRejectionSymbol`](WebMessengerGuestSession.md#capturerejectionsymbol)
 
 #### Inherited from
 
-EventEmitter.captureRejectionSymbol
+`EventEmitter.captureRejectionSymbol`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:38
+node\_modules/@types/node/events.d.ts:38
 
-___
+***
 
 ### captureRejections
 
-▪ `Static` **captureRejections**: `boolean`
+> `static` **captureRejections**: `boolean`
 
 Sets or gets the default captureRejection value for all emitters.
 
 #### Inherited from
 
-EventEmitter.captureRejections
+`EventEmitter.captureRejections`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:44
+node\_modules/@types/node/events.d.ts:44
 
-___
+***
 
 ### defaultMaxListeners
 
-▪ `Static` **defaultMaxListeners**: `number`
+> `static` **defaultMaxListeners**: `number`
 
 #### Inherited from
 
-EventEmitter.defaultMaxListeners
+`EventEmitter.defaultMaxListeners`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:45
+node\_modules/@types/node/events.d.ts:45
 
-___
+***
 
 ### errorMonitor
 
-▪ `Static` `Readonly` **errorMonitor**: typeof [`errorMonitor`](WebMessengerGuestSession.md#errormonitor)
+> `readonly` `static` **errorMonitor**: *typeof* [`errorMonitor`](WebMessengerGuestSession.md#errormonitor)
 
 This symbol shall be used to install a listener for only monitoring `'error'`
 events. Listeners installed using this symbol are called before the regular
@@ -146,17 +109,17 @@ regular `'error'` listener is installed.
 
 #### Inherited from
 
-EventEmitter.errorMonitor
+`EventEmitter.errorMonitor`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:37
+node\_modules/@types/node/events.d.ts:37
 
 ## Accessors
 
 ### delay
 
-• `get` **delay**(): `number`
+> `get` **delay**(): `number`
 
 #### Returns
 
@@ -164,17 +127,17 @@ node_modules/@types/node/events.d.ts:37
 
 #### Implementation of
 
-MessageDelayer.delay
+[`MessageDelayer`](../interfaces/MessageDelayer.md).[`delay`](../interfaces/MessageDelayer.md#delay)
 
 #### Defined in
 
-[packages/genesys-web-messaging-tester/src/genesys/message-delayer/ReorderedMessageDelayer.ts:142](https://github.com/ovotech/genesys-web-messaging-tester/blob/main/packages/genesys-web-messaging-tester/src/genesys/message-delayer/ReorderedMessageDelayer.ts#L142)
+[packages/genesys-cloud-chatbot-tester/src/genesys/message-delayer/ReorderedMessageDelayer.ts:142](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/genesys/message-delayer/ReorderedMessageDelayer.ts#L142)
 
-___
+***
 
 ### unorderdMessageDetected
 
-• `get` **unorderdMessageDetected**(): `boolean`
+> `get` **unorderdMessageDetected**(): `boolean`
 
 #### Returns
 
@@ -182,23 +145,22 @@ ___
 
 #### Defined in
 
-[packages/genesys-web-messaging-tester/src/genesys/message-delayer/ReorderedMessageDelayer.ts:69](https://github.com/ovotech/genesys-web-messaging-tester/blob/main/packages/genesys-web-messaging-tester/src/genesys/message-delayer/ReorderedMessageDelayer.ts#L69)
+[packages/genesys-cloud-chatbot-tester/src/genesys/message-delayer/ReorderedMessageDelayer.ts:69](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/genesys/message-delayer/ReorderedMessageDelayer.ts#L69)
 
 ## Methods
 
-### add
+### add()
 
-▸ **add**(`message`, `received`): `void`
+> **add**(`message`, `received`): `void`
 
 Add a message to the pool. Each message added reset a timer to wait for any other messages
 before releasing the oldest message.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `message` | [`Response`](../README.md#response)\<`unknown`\> |
-| `received` | `Date` |
+• **message**: [`Response`](../type-aliases/Response.md)\<`unknown`\>
+
+• **received**: `Date`
 
 #### Returns
 
@@ -206,24 +168,23 @@ before releasing the oldest message.
 
 #### Implementation of
 
-[MessageDelayer](../interfaces/MessageDelayer.md).[add](../interfaces/MessageDelayer.md#add)
+[`MessageDelayer`](../interfaces/MessageDelayer.md).[`add`](../interfaces/MessageDelayer.md#add)
 
 #### Defined in
 
-[packages/genesys-web-messaging-tester/src/genesys/message-delayer/ReorderedMessageDelayer.ts:77](https://github.com/ovotech/genesys-web-messaging-tester/blob/main/packages/genesys-web-messaging-tester/src/genesys/message-delayer/ReorderedMessageDelayer.ts#L77)
+[packages/genesys-cloud-chatbot-tester/src/genesys/message-delayer/ReorderedMessageDelayer.ts:77](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/genesys/message-delayer/ReorderedMessageDelayer.ts#L77)
 
-___
+***
 
-### addListener
+### addListener()
 
-▸ **addListener**(`event`, `listener`): `this`
+> **addListener**(`event`, `listener`): `this`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
-| `listener` | (...`args`: `any`[]) => `void` |
+• **event**: `string` \| `symbol`
+
+• **listener**
 
 #### Returns
 
@@ -231,28 +192,27 @@ ___
 
 #### Implementation of
 
-[MessageDelayer](../interfaces/MessageDelayer.md).[addListener](../interfaces/MessageDelayer.md#addlistener)
+[`MessageDelayer`](../interfaces/MessageDelayer.md).[`addListener`](../interfaces/MessageDelayer.md#addlistener)
 
 #### Inherited from
 
-EventEmitter.addListener
+`EventEmitter.addListener`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:57
+node\_modules/@types/node/events.d.ts:57
 
-___
+***
 
-### emit
+### emit()
 
-▸ **emit**(`event`, `...args`): `boolean`
+> **emit**(`event`, ...`args`): `boolean`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
-| `...args` | `any`[] |
+• **event**: `string` \| `symbol`
+
+• ...**args**: `any`[]
 
 #### Returns
 
@@ -260,21 +220,21 @@ ___
 
 #### Implementation of
 
-[MessageDelayer](../interfaces/MessageDelayer.md).[emit](../interfaces/MessageDelayer.md#emit)
+[`MessageDelayer`](../interfaces/MessageDelayer.md).[`emit`](../interfaces/MessageDelayer.md#emit)
 
 #### Inherited from
 
-EventEmitter.emit
+`EventEmitter.emit`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:67
+node\_modules/@types/node/events.d.ts:67
 
-___
+***
 
-### eventNames
+### eventNames()
 
-▸ **eventNames**(): (`string` \| `symbol`)[]
+> **eventNames**(): (`string` \| `symbol`)[]
 
 #### Returns
 
@@ -282,21 +242,21 @@ ___
 
 #### Implementation of
 
-[MessageDelayer](../interfaces/MessageDelayer.md).[eventNames](../interfaces/MessageDelayer.md#eventnames)
+[`MessageDelayer`](../interfaces/MessageDelayer.md).[`eventNames`](../interfaces/MessageDelayer.md#eventnames)
 
 #### Inherited from
 
-EventEmitter.eventNames
+`EventEmitter.eventNames`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:72
+node\_modules/@types/node/events.d.ts:72
 
-___
+***
 
-### getMaxListeners
+### getMaxListeners()
 
-▸ **getMaxListeners**(): `number`
+> **getMaxListeners**(): `number`
 
 #### Returns
 
@@ -304,27 +264,25 @@ ___
 
 #### Implementation of
 
-[MessageDelayer](../interfaces/MessageDelayer.md).[getMaxListeners](../interfaces/MessageDelayer.md#getmaxlisteners)
+[`MessageDelayer`](../interfaces/MessageDelayer.md).[`getMaxListeners`](../interfaces/MessageDelayer.md#getmaxlisteners)
 
 #### Inherited from
 
-EventEmitter.getMaxListeners
+`EventEmitter.getMaxListeners`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:64
+node\_modules/@types/node/events.d.ts:64
 
-___
+***
 
-### listenerCount
+### listenerCount()
 
-▸ **listenerCount**(`event`): `number`
+> **listenerCount**(`event`): `number`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
+• **event**: `string` \| `symbol`
 
 #### Returns
 
@@ -332,27 +290,25 @@ ___
 
 #### Implementation of
 
-[MessageDelayer](../interfaces/MessageDelayer.md).[listenerCount](../interfaces/MessageDelayer.md#listenercount)
+[`MessageDelayer`](../interfaces/MessageDelayer.md).[`listenerCount`](../interfaces/MessageDelayer.md#listenercount)
 
 #### Inherited from
 
-EventEmitter.listenerCount
+`EventEmitter.listenerCount`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:68
+node\_modules/@types/node/events.d.ts:68
 
-___
+***
 
-### listeners
+### listeners()
 
-▸ **listeners**(`event`): `Function`[]
+> **listeners**(`event`): `Function`[]
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
+• **event**: `string` \| `symbol`
 
 #### Returns
 
@@ -360,28 +316,27 @@ ___
 
 #### Implementation of
 
-[MessageDelayer](../interfaces/MessageDelayer.md).[listeners](../interfaces/MessageDelayer.md#listeners)
+[`MessageDelayer`](../interfaces/MessageDelayer.md).[`listeners`](../interfaces/MessageDelayer.md#listeners)
 
 #### Inherited from
 
-EventEmitter.listeners
+`EventEmitter.listeners`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:65
+node\_modules/@types/node/events.d.ts:65
 
-___
+***
 
-### off
+### off()
 
-▸ **off**(`event`, `listener`): `this`
+> **off**(`event`, `listener`): `this`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
-| `listener` | (...`args`: `any`[]) => `void` |
+• **event**: `string` \| `symbol`
+
+• **listener**
 
 #### Returns
 
@@ -389,28 +344,27 @@ ___
 
 #### Implementation of
 
-[MessageDelayer](../interfaces/MessageDelayer.md).[off](../interfaces/MessageDelayer.md#off)
+[`MessageDelayer`](../interfaces/MessageDelayer.md).[`off`](../interfaces/MessageDelayer.md#off)
 
 #### Inherited from
 
-EventEmitter.off
+`EventEmitter.off`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:61
+node\_modules/@types/node/events.d.ts:61
 
-___
+***
 
-### on
+### on()
 
-▸ **on**(`event`, `listener`): `this`
+> **on**(`event`, `listener`): `this`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
-| `listener` | (...`args`: `any`[]) => `void` |
+• **event**: `string` \| `symbol`
+
+• **listener**
 
 #### Returns
 
@@ -418,28 +372,27 @@ ___
 
 #### Implementation of
 
-[MessageDelayer](../interfaces/MessageDelayer.md).[on](../interfaces/MessageDelayer.md#on)
+[`MessageDelayer`](../interfaces/MessageDelayer.md).[`on`](../interfaces/MessageDelayer.md#on)
 
 #### Inherited from
 
-EventEmitter.on
+`EventEmitter.on`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:58
+node\_modules/@types/node/events.d.ts:58
 
-___
+***
 
-### once
+### once()
 
-▸ **once**(`event`, `listener`): `this`
+> **once**(`event`, `listener`): `this`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
-| `listener` | (...`args`: `any`[]) => `void` |
+• **event**: `string` \| `symbol`
+
+• **listener**
 
 #### Returns
 
@@ -447,28 +400,27 @@ ___
 
 #### Implementation of
 
-[MessageDelayer](../interfaces/MessageDelayer.md).[once](../interfaces/MessageDelayer.md#once)
+[`MessageDelayer`](../interfaces/MessageDelayer.md).[`once`](../interfaces/MessageDelayer.md#once)
 
 #### Inherited from
 
-EventEmitter.once
+`EventEmitter.once`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:59
+node\_modules/@types/node/events.d.ts:59
 
-___
+***
 
-### prependListener
+### prependListener()
 
-▸ **prependListener**(`event`, `listener`): `this`
+> **prependListener**(`event`, `listener`): `this`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
-| `listener` | (...`args`: `any`[]) => `void` |
+• **event**: `string` \| `symbol`
+
+• **listener**
 
 #### Returns
 
@@ -476,28 +428,27 @@ ___
 
 #### Implementation of
 
-[MessageDelayer](../interfaces/MessageDelayer.md).[prependListener](../interfaces/MessageDelayer.md#prependlistener)
+[`MessageDelayer`](../interfaces/MessageDelayer.md).[`prependListener`](../interfaces/MessageDelayer.md#prependlistener)
 
 #### Inherited from
 
-EventEmitter.prependListener
+`EventEmitter.prependListener`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:70
+node\_modules/@types/node/events.d.ts:70
 
-___
+***
 
-### prependOnceListener
+### prependOnceListener()
 
-▸ **prependOnceListener**(`event`, `listener`): `this`
+> **prependOnceListener**(`event`, `listener`): `this`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
-| `listener` | (...`args`: `any`[]) => `void` |
+• **event**: `string` \| `symbol`
+
+• **listener**
 
 #### Returns
 
@@ -505,27 +456,25 @@ ___
 
 #### Implementation of
 
-[MessageDelayer](../interfaces/MessageDelayer.md).[prependOnceListener](../interfaces/MessageDelayer.md#prependoncelistener)
+[`MessageDelayer`](../interfaces/MessageDelayer.md).[`prependOnceListener`](../interfaces/MessageDelayer.md#prependoncelistener)
 
 #### Inherited from
 
-EventEmitter.prependOnceListener
+`EventEmitter.prependOnceListener`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:71
+node\_modules/@types/node/events.d.ts:71
 
-___
+***
 
-### rawListeners
+### rawListeners()
 
-▸ **rawListeners**(`event`): `Function`[]
+> **rawListeners**(`event`): `Function`[]
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
+• **event**: `string` \| `symbol`
 
 #### Returns
 
@@ -533,27 +482,25 @@ ___
 
 #### Implementation of
 
-[MessageDelayer](../interfaces/MessageDelayer.md).[rawListeners](../interfaces/MessageDelayer.md#rawlisteners)
+[`MessageDelayer`](../interfaces/MessageDelayer.md).[`rawListeners`](../interfaces/MessageDelayer.md#rawlisteners)
 
 #### Inherited from
 
-EventEmitter.rawListeners
+`EventEmitter.rawListeners`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:66
+node\_modules/@types/node/events.d.ts:66
 
-___
+***
 
-### removeAllListeners
+### removeAllListeners()
 
-▸ **removeAllListeners**(`event?`): `this`
+> **removeAllListeners**(`event`?): `this`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event?` | `string` \| `symbol` |
+• **event?**: `string` \| `symbol`
 
 #### Returns
 
@@ -561,28 +508,27 @@ ___
 
 #### Implementation of
 
-[MessageDelayer](../interfaces/MessageDelayer.md).[removeAllListeners](../interfaces/MessageDelayer.md#removealllisteners)
+[`MessageDelayer`](../interfaces/MessageDelayer.md).[`removeAllListeners`](../interfaces/MessageDelayer.md#removealllisteners)
 
 #### Inherited from
 
-EventEmitter.removeAllListeners
+`EventEmitter.removeAllListeners`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:62
+node\_modules/@types/node/events.d.ts:62
 
-___
+***
 
-### removeListener
+### removeListener()
 
-▸ **removeListener**(`event`, `listener`): `this`
+> **removeListener**(`event`, `listener`): `this`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
-| `listener` | (...`args`: `any`[]) => `void` |
+• **event**: `string` \| `symbol`
+
+• **listener**
 
 #### Returns
 
@@ -590,27 +536,25 @@ ___
 
 #### Implementation of
 
-[MessageDelayer](../interfaces/MessageDelayer.md).[removeListener](../interfaces/MessageDelayer.md#removelistener)
+[`MessageDelayer`](../interfaces/MessageDelayer.md).[`removeListener`](../interfaces/MessageDelayer.md#removelistener)
 
 #### Inherited from
 
-EventEmitter.removeListener
+`EventEmitter.removeListener`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:60
+node\_modules/@types/node/events.d.ts:60
 
-___
+***
 
-### setMaxListeners
+### setMaxListeners()
 
-▸ **setMaxListeners**(`n`): `this`
+> **setMaxListeners**(`n`): `this`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `n` | `number` |
+• **n**: `number`
 
 #### Returns
 
@@ -618,57 +562,55 @@ ___
 
 #### Implementation of
 
-[MessageDelayer](../interfaces/MessageDelayer.md).[setMaxListeners](../interfaces/MessageDelayer.md#setmaxlisteners)
+[`MessageDelayer`](../interfaces/MessageDelayer.md).[`setMaxListeners`](../interfaces/MessageDelayer.md#setmaxlisteners)
 
 #### Inherited from
 
-EventEmitter.setMaxListeners
+`EventEmitter.setMaxListeners`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:63
+node\_modules/@types/node/events.d.ts:63
 
-___
+***
 
-### listenerCount
+### ~~listenerCount()~~
 
-▸ **listenerCount**(`emitter`, `event`): `number`
+> `static` **listenerCount**(`emitter`, `event`): `number`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `emitter` | `EventEmitter` |
-| `event` | `string` \| `symbol` |
+• **emitter**: `EventEmitter`
+
+• **event**: `string` \| `symbol`
 
 #### Returns
 
 `number`
 
-**`Deprecated`**
+#### Deprecated
 
 since v4.0.0
 
 #### Inherited from
 
-EventEmitter.listenerCount
+`EventEmitter.listenerCount`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:26
+node\_modules/@types/node/events.d.ts:26
 
-___
+***
 
-### on
+### on()
 
-▸ **on**(`emitter`, `event`): `AsyncIterableIterator`\<`any`\>
+> `static` **on**(`emitter`, `event`): `AsyncIterableIterator`\<`any`\>
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `emitter` | `EventEmitter` |
-| `event` | `string` |
+• **emitter**: `EventEmitter`
+
+• **event**: `string`
 
 #### Returns
 
@@ -676,54 +618,56 @@ ___
 
 #### Inherited from
 
-EventEmitter.on
+`EventEmitter.on`
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:23
+node\_modules/@types/node/events.d.ts:23
 
-___
+***
 
-### once
+### once()
 
-▸ **once**(`emitter`, `event`): `Promise`\<`any`[]\>
+#### once(emitter, event)
 
-#### Parameters
+> `static` **once**(`emitter`, `event`): `Promise`\<`any`[]\>
 
-| Name | Type |
-| :------ | :------ |
-| `emitter` | `NodeEventTarget` |
-| `event` | `string` \| `symbol` |
+##### Parameters
 
-#### Returns
+• **emitter**: `NodeEventTarget`
+
+• **event**: `string` \| `symbol`
+
+##### Returns
 
 `Promise`\<`any`[]\>
 
-#### Inherited from
+##### Inherited from
 
-EventEmitter.once
+`EventEmitter.once`
 
-#### Defined in
+##### Defined in
 
-node_modules/@types/node/events.d.ts:21
+node\_modules/@types/node/events.d.ts:21
 
-▸ **once**(`emitter`, `event`): `Promise`\<`any`[]\>
+#### once(emitter, event)
 
-#### Parameters
+> `static` **once**(`emitter`, `event`): `Promise`\<`any`[]\>
 
-| Name | Type |
-| :------ | :------ |
-| `emitter` | `DOMEventTarget` |
-| `event` | `string` |
+##### Parameters
 
-#### Returns
+• **emitter**: `DOMEventTarget`
+
+• **event**: `string`
+
+##### Returns
 
 `Promise`\<`any`[]\>
 
-#### Inherited from
+##### Inherited from
 
-EventEmitter.once
+`EventEmitter.once`
 
-#### Defined in
+##### Defined in
 
-node_modules/@types/node/events.d.ts:22
+node\_modules/@types/node/events.d.ts:22

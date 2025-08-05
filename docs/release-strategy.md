@@ -4,11 +4,11 @@ This is the process for publishing a change to the NPM registry:
 
 1. Make changes as part of PR
 2. Once merged into `main` create tags for whichever package(s) changed:
-   * `git tag genesys-web-messaging-tester-vX.X.X`
-   * `git tag genesys-web-messaging-tester-cli-vX.X.X`
+   * `git tag genesys-cloud-chatbot-tester-vX.X.X`
+   * `git tag genesys-cloud-chatbot-tester-cli-vX.X.X`
 3. Push the tags
-   * `git push origin genesys-web-messaging-tester-vX.X.X`
-   * `git push origin genesys-web-messaging-tester-cli-vX.X.X`
+   * `git push origin genesys-cloud-chatbot-tester-vX.X.X`
+   * `git push origin genesys-cloud-chatbot-tester-cli-vX.X.X`
 4. Using GitHub's UI create a Release based on the most recent tag
 
 _If a merged PR increased the version of both packages then create the two tags

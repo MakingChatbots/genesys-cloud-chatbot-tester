@@ -3,7 +3,7 @@
 require('dotenv').config({ path: '../../.env' });
 
 // << test-section
-const WebMsgTester = require('@ovotech/genesys-web-messaging-tester');
+const WebMsgTester = require('@makingchatbots/genesys-cloud-chatbot-tester');
 
 (async () => {
   const session = new WebMsgTester.WebMessengerGuestSession({
