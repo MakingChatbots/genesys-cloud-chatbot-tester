@@ -1,10 +1,10 @@
-import {describe,vi, beforeEach, test, expect} from 'vitest';
-import { accessSync, readFileSync } from 'fs';
+import { describe, vi, beforeEach, test, expect, MockedFunction, Mocked } from 'vitest';
+import { accessSync, readFileSync } from 'node:fs';
 import { Command } from 'commander';
-import { when } from 'jest-when';
 import { Conversation, WebMessengerSession } from '@makingchatbots/genesys-cloud-chatbot-tester';
 import stripAnsi from 'strip-ansi';
 import { createCli } from '../../../../../src/createCli';
+import { when } from 'vitest-when';
 
 describe('Test script YAML loaded', () => {
   const validScenarioFilePath = '/test/path/config.json';
@@ -13,11 +13,11 @@ describe('Test script YAML loaded', () => {
     errOut: string[];
   };
 
-  let fsReadFileSync: jest.MockedFunction<typeof readFileSync>;
-  let fsAccessSync: jest.MockedFunction<typeof accessSync>;
+  let fsReadFileSync: MockedFunction<typeof readFileSync>;
+  let fsAccessSync: MockedFunction<typeof accessSync>;
 
-  let webMessengerSession: jest.Mocked<Pick<WebMessengerSession, 'on' | 'close'>>;
-  let conversation: jest.Mocked<Pick<Conversation, 'waitForConversationToStart' | 'sendText'>>;
+  let webMessengerSession: Mocked<Pick<WebMessengerSession, 'on' | 'close'>>;
+  let conversation: Mocked<Pick<Conversation, 'waitForConversationToStart' | 'sendText'>>;
 
   let cli: Command;
 
@@ -50,7 +50,7 @@ describe('Test script YAML loaded', () => {
 
     cli = createCli(cliCommand, {
       command: scenarioTestCommand,
-      fsReadFileSync,
+      fsReadFileSync: fsReadFileSync as unknown as typeof import('node:fs').readFileSync,
       fsAccessSync,
       webMessengerSessionFactory: vi.fn().mockReturnValue(webMessengerSession),
       conversationFactory: vi.fn().mockReturnValue(conversation),
@@ -83,7 +83,7 @@ scenarios:
     - say: hi from scenario 2
 `;
 
-    when(fsReadFileSync).calledWith(validScenarioFilePath, 'utf8').mockReturnValue(yaml);
+    when(fsReadFileSync).calledWith(validScenarioFilePath, 'utf8').thenReturn(yaml);
 
     await cli.parseAsync([...['node', '/path/to/cli'], 'scripted', ...[validScenarioFilePath]]);
 

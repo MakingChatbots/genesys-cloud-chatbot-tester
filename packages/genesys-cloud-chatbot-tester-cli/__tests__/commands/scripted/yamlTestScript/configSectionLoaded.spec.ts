@@ -1,21 +1,21 @@
-import {describe,vi, beforeEach, test, expect} from 'vitest';
+import { describe, vi, beforeEach, test, expect, MockedFunction, Mocked } from 'vitest';
 import { ScriptedTestCommandDependencies } from '../../../../src/commands/scriptedTest/createScriptedTestCommand';
-import { readFileSync } from 'fs';
+import { readFileSync } from 'node:fs';
 import { Command } from 'commander';
 import { createCli } from '../../../../src/createCli';
 import { ReorderedMessageDelayer } from '@makingchatbots/genesys-cloud-chatbot-tester';
 
 describe('Session Config', () => {
-  let fsReadFileSync: jest.MockedFunction<typeof readFileSync>;
+  let fsReadFileSync: MockedFunction<typeof readFileSync>;
 
-  let reorderedMessageDelayer: jest.Mocked<Pick<ReorderedMessageDelayer, 'delay' | 'add' | 'on'>>;
-  let reorderedMessageDelayerFactory: jest.Mocked<
+  let reorderedMessageDelayer: Mocked<Pick<ReorderedMessageDelayer, 'delay' | 'add' | 'on'>>;
+  let reorderedMessageDelayerFactory: Mocked<
     ScriptedTestCommandDependencies['reorderedMessageDelayerFactory']
   >;
-  let webMessengerSessionFactory: jest.Mocked<
+  let webMessengerSessionFactory: Mocked<
     ScriptedTestCommandDependencies['webMessengerSessionFactory']
   >;
-  let conversationFactory: jest.Mocked<ScriptedTestCommandDependencies['conversationFactory']>;
+  let conversationFactory: Mocked<ScriptedTestCommandDependencies['conversationFactory']>;
 
   let cli: Command;
 
@@ -41,7 +41,7 @@ describe('Session Config', () => {
 
     cli = createCli(cliCommand, {
       command: scenarioTestCommand,
-      fsReadFileSync,
+      fsReadFileSync: fsReadFileSync as unknown as typeof import('node:fs').readFileSync,
       fsAccessSync: vi.fn(),
       reorderedMessageDelayerFactory,
       webMessengerSessionFactory,

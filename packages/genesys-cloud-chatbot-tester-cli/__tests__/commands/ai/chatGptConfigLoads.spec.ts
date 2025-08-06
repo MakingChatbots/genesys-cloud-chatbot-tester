@@ -1,13 +1,13 @@
-import { describe, vi, beforeEach, test, expect, MockedFunction } from 'vitest';
-import { readFileSync } from 'fs';
+import { describe, vi, beforeEach, test, expect, Mocked, MockedFunction } from 'vitest';
 import { Command } from 'commander';
 import { createCli } from '../../../src/createCli';
 import { ChatCompletionClient } from '../../../src/commands/aiTest/chatCompletionClients/chatCompletionClient';
+import { readFileSync } from 'node:fs';
 
 describe('ChatGPT config', () => {
   let fsReadFileSync: MockedFunction<typeof readFileSync>;
 
-  let mockOpenAiChatCompletionClient: jest.Mocked<ChatCompletionClient>;
+  let mockOpenAiChatCompletionClient: Mocked<ChatCompletionClient>;
 
   let cli: Command;
   let capturedOutput: {
@@ -44,7 +44,7 @@ describe('ChatGPT config', () => {
 
     cli = createCli(cliCommand, undefined, {
       command: scenarioTestCommand,
-      fsReadFileSync,
+      fsReadFileSync: fsReadFileSync as unknown as typeof import('node:fs').readFileSync,
       fsAccessSync: vi.fn(),
       fsWriteFileSync: vi.fn(),
       webMessengerSessionFactory: vi.fn().mockReturnValue({ on: vi.fn(), close: vi.fn() }),
@@ -52,7 +52,7 @@ describe('ChatGPT config', () => {
       googleAiCreateChatCompletionClient: () => {
         throw new Error('Not implemented');
       },
-      conversationFactory: jest
+      conversationFactory: vi
         .fn()
         .mockReturnValue({ waitForConversationToStart: vi.fn(), sendText: vi.fn() }),
       processEnv: { OPENAI_API_KEY: 'test' },
@@ -75,13 +75,14 @@ scenarios:
         pass: ["PASS"]
         fail: ["FAIL"]
 `);
+
     mockOpenAiChatCompletionClient = {
       getProviderName: vi.fn().mockReturnValue('mock-chatgpt'),
       predict: vi.fn().mockResolvedValue({ role: 'customer', content: 'PASS' }),
       preflightCheck: vi.fn().mockResolvedValue({ ok: true }),
     };
 
-    await cli.parseAsync([...['node', '/path/to/cli'], 'ai', ...['/test/path']]);
+    await cli.parseAsync(['node', '/path/to/cli', 'ai', '/test/path']);
 
     expect(mockOpenAiChatCompletionClient.preflightCheck).toHaveBeenCalled();
     expect(mockOpenAiChatCompletionClient.predict).toHaveBeenCalled();

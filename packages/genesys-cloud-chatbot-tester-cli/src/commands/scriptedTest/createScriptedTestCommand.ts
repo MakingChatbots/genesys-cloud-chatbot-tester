@@ -2,7 +2,7 @@ import ci from 'ci-info';
 import { Listr } from 'listr2';
 import * as commander from 'commander';
 import { Command } from 'commander';
-import { accessSync, readFileSync } from 'fs';
+import { accessSync, readFileSync } from 'node:fs';
 import { readableFileValidator } from '../../fileSystem/readableFileValidator';
 import { createYamlFileReader } from '../../fileSystem/yamlFileReader';
 import { extractScenarios } from './testScript/parseTestScript';

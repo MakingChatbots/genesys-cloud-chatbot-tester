@@ -1,4 +1,4 @@
-import fs, { accessSync } from 'fs';
+import fs, { accessSync } from 'node:fs';
 import commander from 'commander';
 
 export function readableFileValidator(fsAccessSync: typeof accessSync) {

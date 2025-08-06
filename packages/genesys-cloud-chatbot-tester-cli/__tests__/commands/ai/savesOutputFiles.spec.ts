@@ -1,5 +1,4 @@
-import {describe,vi, beforeEach, test, expect} from 'vitest';
-import { readFileSync } from 'fs';
+import { beforeEach, describe, expect, type Mock, MockedFunction, test, vi } from 'vitest';
 import { Command } from 'commander';
 import { createCli } from '../../../src/createCli';
 import { writeFileSync } from 'node:fs';
@@ -21,8 +20,10 @@ scenarios:
 `;
 
 describe('AI saving output', () => {
-  let fsReadFileSync: jest.MockedFunction<typeof readFileSync>;
-  let fsWriteFileSync: jest.MockedFunction<typeof writeFileSync>;
+  let fsReadFileSync: Mock<
+    (path: string, options: { encoding: BufferEncoding; flag?: string }) => string
+  >;
+  let fsWriteFileSync: MockedFunction<typeof writeFileSync>;
 
   let cli: Command;
   let capturedOutput: {
@@ -36,7 +37,10 @@ describe('AI saving output', () => {
       stdOut: [],
     };
 
-    fsReadFileSync = vi.fn().mockReturnValue(yamlFileContents);
+    // Assign mock with explicit args/return type
+    fsReadFileSync = vi.fn<
+      (path: string, options: { encoding: BufferEncoding; flag?: string }) => string
+    >(() => yamlFileContents);
     fsWriteFileSync = vi.fn();
 
     const cliCommand = new Command().exitOverride(() => {
@@ -61,7 +65,7 @@ describe('AI saving output', () => {
     cli = createCli(cliCommand, undefined, {
       command: scenarioTestCommand,
       fsAccessSync: vi.fn(),
-      fsReadFileSync,
+      fsReadFileSync: fsReadFileSync as unknown as typeof import('node:fs').readFileSync,
       fsWriteFileSync,
       webMessengerSessionFactory: vi.fn().mockReturnValue({ on: vi.fn(), close: vi.fn() }),
       openAiCreateChatCompletionClient: () => ({
@@ -70,7 +74,7 @@ describe('AI saving output', () => {
         preflightCheck: vi.fn().mockResolvedValue({ ok: true }),
       }),
       googleAiCreateChatCompletionClient: vi.fn(),
-      conversationFactory: jest
+      conversationFactory: vi
         .fn()
         .mockReturnValue({ waitForConversationToStart: vi.fn(), sendText: vi.fn() }),
       processEnv: { OPENAI_API_KEY: 'test' },

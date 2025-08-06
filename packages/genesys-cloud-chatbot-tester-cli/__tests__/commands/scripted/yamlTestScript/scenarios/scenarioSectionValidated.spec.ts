@@ -1,5 +1,5 @@
-import {describe,vi, beforeEach, test, expect} from 'vitest';
-import { readFileSync } from 'fs';
+import { describe, vi, beforeEach, test, expect, MockedFunction } from 'vitest';
+import { readFileSync } from 'node:fs';
 import { Command } from 'commander';
 import stripAnsi from 'strip-ansi';
 import { createCli } from '../../../../../src/createCli';
@@ -9,7 +9,7 @@ describe('Scenario Section Validated', () => {
     errOut: string[];
   };
 
-  let fsReadFileSync: jest.MockedFunction<typeof readFileSync>;
+  let fsReadFileSync: MockedFunction<typeof readFileSync>;
 
   let cli: Command;
 
@@ -41,7 +41,7 @@ describe('Scenario Section Validated', () => {
 
     cli = createCli(cliCommand, {
       command: scenarioTestCommand,
-      fsReadFileSync,
+      fsReadFileSync: fsReadFileSync as unknown as typeof import('node:fs').readFileSync,
       fsAccessSync: vi.fn(),
       webMessengerSessionFactory: vi.fn().mockReturnValue(webMessengerSession),
       conversationFactory: vi.fn().mockReturnValue(conversation),

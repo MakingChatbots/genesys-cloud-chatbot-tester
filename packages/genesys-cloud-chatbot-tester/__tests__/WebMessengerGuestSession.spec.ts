@@ -1,4 +1,4 @@
-import {describe,vi, beforeEach, afterEach, test, expect} from 'vitest';
+import { describe, vi, beforeEach, afterEach, test, expect } from 'vitest';
 import { StructuredMessage, WebMessageServerFixture, WebMessengerGuestSession } from '../src';
 import WebSocket from 'ws';
 import getPort from 'get-port';
