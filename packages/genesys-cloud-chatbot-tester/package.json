@@ -20,8 +20,14 @@
     "build": "rm -rf ./lib && tsc -p tsconfig.json",
     "build:readme": "cd ../.. && yarn build-readme ./packages/genesys-cloud-chatbot-tester/README.md https://github.com/makingchatbots/genesys-cloud-chatbot-tester/tree/main",
     "test": "vitest __tests__/",
-    "lint": "eslint -c ../../.eslintrc.json  {src,__tests__}/**/*.ts && yarn check:style",
-    "check:style": "prettier {src,__tests__} --check"
+    "lint": "eslint . {src,__tests__}/**/*.ts",
+    "format": "prettier --write .",
+    "prettier:check": "prettier --check src/**/*.ts *.md tests/**/*.ts --no-error-on-unmatched-pattern",
+    "prettier:fix": "prettier --write src/**/*.ts *.md tests/**/*.ts --ignore-unknown --no-error-on-unmatched-pattern",
+    "lint:check": "eslint --cache --ext .ts ./src",
+    "lint:fix": "eslint --cache --fix --ext .ts ./src",
+    "check": "npm run lint:check && npm run prettier:check",
+    "fix": "npm run lint:fix && npm run prettier:fix"
   },
   "dependencies": {
     "debug": "^4.3.3",

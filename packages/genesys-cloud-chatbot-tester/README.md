@@ -26,7 +26,9 @@ await convo.waitForResponseContaining('Please enter your account number');
 
 await convo.sendText('123');
 
-await convo.waitForResponseContaining('Your account number is too short. It is the 6 digit number on your bills');
+await convo.waitForResponseContaining(
+  'Your account number is too short. It is the 6 digit number on your bills',
+);
 ```
 
 ## Getting Started
@@ -81,8 +83,8 @@ node examples/api/src/js-script.js
 
 If you have any questions then please feel free to:
 
-* Raise an issue on this [project's GitHub repository](https://github.com/makingchatbots/genesys-cloud-chatbot-tester)
-* [Drop me a message](https://www.linkedin.com/in/lucas-woodward-the-dev/)
+- Raise an issue on this [project's GitHub repository](https://github.com/makingchatbots/genesys-cloud-chatbot-tester)
+- [Drop me a message](https://www.linkedin.com/in/lucas-woodward-the-dev/)
 
 ## Debugging
 
