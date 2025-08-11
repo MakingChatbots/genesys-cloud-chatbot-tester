@@ -1,20 +1,18 @@
-{
-    "env": {
-        "commonjs": true,
-        "es2021": true,
-        "node": true
+import { defineConfig } from 'eslint/config';
+
+export default defineConfig([
+  {
+    env: {
+      commonjs: true,
+      es2021: true,
+      node: true,
     },
-    "extends": [
-        "eslint:recommended",
-        "plugin:@typescript-eslint/recommended"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaVersion": "latest"
+    extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
+    parser: '@typescript-eslint/parser',
+    parserOptions: {
+      ecmaVersion: 'latest',
     },
-    "plugins": [
-        "@typescript-eslint"
-    ],
-    "rules": {
-    }
-}
+    plugins: ['@typescript-eslint'],
+    rules: {},
+  },
+]);
