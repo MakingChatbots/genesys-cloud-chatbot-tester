@@ -25,7 +25,7 @@
     "typescript": "^5.3.3"
   },
   "engines": {
-    "node": "~16.10.0"
+    "node": ">=18"
   },
   "packageManager": "yarn@3.1.1"
 }
