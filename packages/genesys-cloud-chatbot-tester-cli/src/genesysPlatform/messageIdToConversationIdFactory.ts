@@ -1,5 +1,8 @@
 import * as platformClient from 'purecloud-platform-client-v2';
-import { StructuredMessage, WebMessengerSession } from '@makingchatbots/genesys-cloud-chatbot-tester';
+import {
+  StructuredMessage,
+  WebMessengerSession,
+} from '@makingchatbots/genesys-cloud-chatbot-tester';
 
 type PreflightResult = Record<string, unknown>;
 

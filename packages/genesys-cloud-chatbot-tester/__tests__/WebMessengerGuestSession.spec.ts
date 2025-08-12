@@ -1,3 +1,4 @@
+import { describe, vi, beforeEach, afterEach, test, expect } from 'vitest';
 import { StructuredMessage, WebMessageServerFixture, WebMessengerGuestSession } from '../src';
 import WebSocket from 'ws';
 import getPort from 'get-port';
@@ -17,9 +18,9 @@ describe('WebMessengerGuestSession', () => {
   });
 
   test('WebSocket server request structured correctly', () => {
-    const wsFactory = jest.fn().mockImplementation(() => ({
-      on: jest.fn(),
-      close: jest.fn(),
+    const wsFactory = vi.fn().mockImplementation(() => ({
+      on: vi.fn(),
+      close: vi.fn(),
     }));
     session = new WebMessengerGuestSession(
       {

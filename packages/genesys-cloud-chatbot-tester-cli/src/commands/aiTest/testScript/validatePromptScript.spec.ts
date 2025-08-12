@@ -1,3 +1,4 @@
+import { expect, test } from 'vitest';
 import { validatePromptScript } from './validatePromptScript';
 
 test('Valid', () => {
@@ -103,6 +104,13 @@ test('Invalid', () => {
     config: {
       deploymentId: 'test-deployment-id',
       region: 'test-region',
+      ai: {
+        provider: 'google-vertex-ai',
+        config: {
+          location: 'test-location',
+          project: 'test-project',
+        },
+      },
     },
     scenarios: {
       'test-name-of-test-1': {

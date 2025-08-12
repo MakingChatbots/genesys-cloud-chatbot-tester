@@ -1,4 +1,5 @@
-import { accessSync, readFileSync } from 'fs';
+import { describe, vi, beforeEach, test, expect, MockedFunction, Mocked } from 'vitest';
+import { accessSync, readFileSync } from 'node:fs';
 import { Command } from 'commander';
 import { Conversation, WebMessengerSession } from '@makingchatbots/genesys-cloud-chatbot-tester';
 import stripAnsi from 'strip-ansi';
@@ -10,20 +11,20 @@ describe('Test script YAML loaded', () => {
     stdOut: string[];
   };
 
-  let fsReadFileSync: jest.MockedFunction<typeof readFileSync>;
-  let fsAccessSync: jest.MockedFunction<typeof accessSync>;
+  let fsReadFileSync: MockedFunction<typeof readFileSync>;
+  let fsAccessSync: MockedFunction<typeof accessSync>;
 
-  let webMessengerSession: jest.Mocked<Pick<WebMessengerSession, 'on' | 'close'>>;
-  let conversation: jest.Mocked<Pick<Conversation, 'waitForConversationToStart' | 'sendText'>>;
+  let webMessengerSession: Mocked<Pick<WebMessengerSession, 'on' | 'close'>>;
+  let conversation: Mocked<Pick<Conversation, 'waitForConversationToStart' | 'sendText'>>;
 
   let cli: Command;
 
   beforeEach(() => {
-    fsAccessSync = jest.fn();
-    fsReadFileSync = jest.fn();
+    fsAccessSync = vi.fn();
+    fsReadFileSync = vi.fn();
 
-    webMessengerSession = { on: jest.fn(), close: jest.fn() };
-    conversation = { waitForConversationToStart: jest.fn(), sendText: jest.fn() };
+    webMessengerSession = { on: vi.fn(), close: vi.fn() };
+    conversation = { waitForConversationToStart: vi.fn(), sendText: vi.fn() };
 
     capturedOutput = {
       errOut: [],
@@ -50,10 +51,10 @@ describe('Test script YAML loaded', () => {
 
     cli = createCli(cliCommand, {
       command: scenarioTestCommand,
-      fsReadFileSync,
+      fsReadFileSync: fsReadFileSync as unknown as typeof import('node:fs').readFileSync,
       fsAccessSync,
-      webMessengerSessionFactory: jest.fn().mockReturnValue(webMessengerSession),
-      conversationFactory: jest.fn().mockReturnValue(conversation),
+      webMessengerSessionFactory: vi.fn().mockReturnValue(webMessengerSession),
+      conversationFactory: vi.fn().mockReturnValue(conversation),
     });
   });
 

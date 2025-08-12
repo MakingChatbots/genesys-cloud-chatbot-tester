@@ -11,24 +11,22 @@
     "examples/*"
   ],
   "scripts": {
-    "test": "yarn workspaces foreach --verbose --exclude '@examples/*' run test",
-    "lint": "yarn workspaces foreach --verbose run lint",
-    "build": "yarn workspaces foreach --verbose run build",
-    "build:docs": "yarn build:readme && cp README.md packages/genesys-cloud-chatbot-tester-cli/README.md && typedoc && yarn workspaces foreach --verbose run build:readme",
-    "build:readme": "yarn build-readme ./README.md https://github.com/makingchatbots/genesys-cloud-chatbot-tester/tree/main",
-    "publish": "yarn workspaces foreach --no-private --verbose npm publish --tolerate-republish --access public"
+    "test": "npm test -w packages/genesys-cloud-chatbot-tester -w packages/genesys-cloud-chatbot-tester-cli",
+    "lint": "npm run lint --workspaces --if-present",
+    "lint:fix": "npm run lint:fix --workspaces --if-present",
+    "build": "npm run build --workspaces --if-present",
+    "build:docs": "npm run build:readme && cp README.md packages/genesys-cloud-chatbot-tester-cli/README.md && typedoc && npm run build:readme --workspaces --if-present",
+    "build:readme": "build-readme ./README.md https://github.com/makingchatbots/genesys-cloud-chatbot-tester/tree/main",
+    "publish": "npm publish -w packages/genesys-cloud-chatbot-tester -w packages/genesys-cloud-chatbot-tester-cli --access public"
   },
   "devDependencies": {
     "@ikerin/build-readme": "^1.1.1",
-    "typedoc": "^0.26.5",
-    "typedoc-plugin-markdown": "^4.2.3",
+    "typedoc": "^0.28.10",
+    "typedoc-plugin-markdown": "^4.8.1",
     "typescript": "^5.3.3"
   },
   "engines": {
-    "node": "~16.10.0"
+    "node": ">=18"
   },
-  "jest": {
-    "preset": "./jest.json"
-  },
-  "packageManager": "yarn@3.1.1"
+  "packageManager": "npm@11.4.2"
 }

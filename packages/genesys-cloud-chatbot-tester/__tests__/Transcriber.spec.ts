@@ -1,3 +1,4 @@
+import { describe, beforeEach, afterEach, test, expect } from 'vitest';
 import {
   SessionTranscriber,
   TranscribedMessage,

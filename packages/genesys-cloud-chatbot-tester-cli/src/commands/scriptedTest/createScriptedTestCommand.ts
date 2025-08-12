@@ -2,7 +2,7 @@ import ci from 'ci-info';
 import { Listr } from 'listr2';
 import * as commander from 'commander';
 import { Command } from 'commander';
-import { accessSync, readFileSync } from 'fs';
+import { accessSync, readFileSync } from 'node:fs';
 import { readableFileValidator } from '../../fileSystem/readableFileValidator';
 import { createYamlFileReader } from '../../fileSystem/yamlFileReader';
 import { extractScenarios } from './testScript/parseTestScript';
@@ -140,7 +140,7 @@ GENESYSCLOUD_OAUTHCLIENT_SECRET`,
             );
           } else {
             // Only load when required
-            // Also removes 'You are trying to `import` a file after the Jest environment has been torn down' error due to
+            // Also removes 'You are trying to `import` a file after the Vitest environment has been torn down' error due to
             // file-watcher it starts
             const { configurePlatformClients } = await import(
               '../../genesysPlatform/configurePlatformClients'
@@ -313,9 +313,7 @@ GENESYSCLOUD_OAUTHCLIENT_SECRET`,
           }
         }
 
-        const scenariosThatFailed = results.scenarioResults.filter(
-          (s) => !s.hasPassed,
-        ) as ScenarioSuccess[];
+        const scenariosThatFailed = results.scenarioResults.filter((s) => !s.hasPassed);
 
         for (const s of scenariosThatFailed) {
           outputConfig.writeOut(await ui.scenarioTestResult(s));

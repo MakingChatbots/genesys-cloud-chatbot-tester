@@ -1,34 +1,35 @@
+import { describe, vi, beforeEach, test, expect, MockedFunction, Mocked } from 'vitest';
 import { ScriptedTestCommandDependencies } from '../../../../src/commands/scriptedTest/createScriptedTestCommand';
-import { readFileSync } from 'fs';
+import { readFileSync } from 'node:fs';
 import { Command } from 'commander';
 import { createCli } from '../../../../src/createCli';
 import { ReorderedMessageDelayer } from '@makingchatbots/genesys-cloud-chatbot-tester';
 
 describe('Session Config', () => {
-  let fsReadFileSync: jest.MockedFunction<typeof readFileSync>;
+  let fsReadFileSync: MockedFunction<typeof readFileSync>;
 
-  let reorderedMessageDelayer: jest.Mocked<Pick<ReorderedMessageDelayer, 'delay' | 'add' | 'on'>>;
-  let reorderedMessageDelayerFactory: jest.Mocked<
+  let reorderedMessageDelayer: Mocked<Pick<ReorderedMessageDelayer, 'delay' | 'add' | 'on'>>;
+  let reorderedMessageDelayerFactory: Mocked<
     ScriptedTestCommandDependencies['reorderedMessageDelayerFactory']
   >;
-  let webMessengerSessionFactory: jest.Mocked<
+  let webMessengerSessionFactory: Mocked<
     ScriptedTestCommandDependencies['webMessengerSessionFactory']
   >;
-  let conversationFactory: jest.Mocked<ScriptedTestCommandDependencies['conversationFactory']>;
+  let conversationFactory: Mocked<ScriptedTestCommandDependencies['conversationFactory']>;
 
   let cli: Command;
 
   beforeEach(() => {
-    fsReadFileSync = jest.fn();
+    fsReadFileSync = vi.fn();
 
-    reorderedMessageDelayer = { delay: 0, add: jest.fn(), on: jest.fn() };
-    reorderedMessageDelayerFactory = jest.fn().mockReturnValue(reorderedMessageDelayer);
+    reorderedMessageDelayer = { delay: 0, add: vi.fn(), on: vi.fn() };
+    reorderedMessageDelayerFactory = vi.fn().mockReturnValue(reorderedMessageDelayer);
 
-    const webMessengerSession = { on: jest.fn(), close: jest.fn() };
-    webMessengerSessionFactory = jest.fn().mockReturnValue(webMessengerSession);
+    const webMessengerSession = { on: vi.fn(), close: vi.fn() };
+    webMessengerSessionFactory = vi.fn().mockReturnValue(webMessengerSession);
 
-    const conversation = { waitForConversationToStart: jest.fn(), sendText: jest.fn() };
-    conversationFactory = jest.fn().mockReturnValue(conversation);
+    const conversation = { waitForConversationToStart: vi.fn(), sendText: vi.fn() };
+    conversationFactory = vi.fn().mockReturnValue(conversation);
 
     const cliCommand = new Command().exitOverride(() => {
       throw new Error('CLI Command errored');
@@ -40,8 +41,8 @@ describe('Session Config', () => {
 
     cli = createCli(cliCommand, {
       command: scenarioTestCommand,
-      fsReadFileSync,
-      fsAccessSync: jest.fn(),
+      fsReadFileSync: fsReadFileSync as unknown as typeof import('node:fs').readFileSync,
+      fsAccessSync: vi.fn(),
       reorderedMessageDelayerFactory,
       webMessengerSessionFactory,
       conversationFactory,

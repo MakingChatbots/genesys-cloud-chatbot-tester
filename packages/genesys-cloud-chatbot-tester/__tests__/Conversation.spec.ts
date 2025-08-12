@@ -1,3 +1,4 @@
+import { describe, beforeEach, afterEach, test, expect } from 'vitest';
 import {
   Conversation,
   WebMessageServerConnectionFixture,
@@ -76,12 +77,10 @@ describe('Conversation', () => {
 
     await expect(
       conversation.waitForResponseWithTextContaining('hello', { timeoutInSeconds: 1 }),
-    ).rejects.toEqual(
-      new Error(
-        `Timed-out after 1000ms waiting for a message that contained 'hello'
+    ).rejects.toThrowError(
+      `Timed-out after 1000ms waiting for a message that contained 'hello'
 Received:
    - This is an example question`,
-      ),
     );
   });
 
@@ -96,12 +95,10 @@ Received:
 
     await expect(
       conversation.waitForResponseWithTextContaining('hello', { timeoutInSeconds: 1 }),
-    ).rejects.toEqual(
-      new Error(
-        `Bot disconnected from the conversation whilst waiting a message that contained 'hello'
+    ).rejects.toThrowError(
+      `Bot disconnected from the conversation whilst waiting a message that contained 'hello'
 Received before disconnection:
    - This is an example question`,
-      ),
     );
   });
 
@@ -166,12 +163,10 @@ Received before disconnection:
 
     await expect(
       conversation.waitForResponseWithTextMatchingPattern(/hello/i, { timeoutInSeconds: 1 }),
-    ).rejects.toEqual(
-      new Error(
-        `Bot disconnected from the conversation whilst waiting a message that contained '/hello/i'
+    ).rejects.toThrowError(
+      `Bot disconnected from the conversation whilst waiting a message that contained '/hello/i'
 Received before disconnection:
    - This is an example question`,
-      ),
     );
   });
 });

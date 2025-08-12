@@ -1,4 +1,4 @@
-[**Genesys Web Messaging Tester**](../README.md) • **Docs**
+[**Genesys Web Messaging Tester**](../README.md)
 
 ***
 
@@ -7,6 +7,8 @@
 # Variable: webMessagePayloads
 
 > `const` **webMessagePayloads**: `object`
+
+Defined in: [packages/genesys-cloud-chatbot-tester/src/testFixtures/webMessagePayloads.ts:6](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/testFixtures/webMessagePayloads.ts#L6)
 
 Payloads taken from real interactions
 
@@ -18,9 +20,13 @@ Payloads taken from real interactions
 
 #### Parameters
 
-• **text**: `string`
+##### text
 
-• **date**: `Date`
+`string`
+
+##### date
+
+`Date`
 
 #### Returns
 
@@ -32,7 +38,9 @@ Payloads taken from real interactions
 
 #### Parameters
 
-• **date**: `Date`
+##### date
+
+`Date`
 
 #### Returns
 
@@ -44,9 +52,13 @@ Payloads taken from real interactions
 
 #### Parameters
 
-• **text**: `string`
+##### text
 
-• **date**: `Date`
+`string`
+
+##### date
+
+`Date`
 
 #### Returns
 
@@ -59,7 +71,3 @@ Payloads taken from real interactions
 #### Returns
 
 [`SessionResponse`](../interfaces/SessionResponse.md)
-
-## Defined in
-
-[packages/genesys-cloud-chatbot-tester/src/testFixtures/webMessagePayloads.ts:6](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/testFixtures/webMessagePayloads.ts#L6)

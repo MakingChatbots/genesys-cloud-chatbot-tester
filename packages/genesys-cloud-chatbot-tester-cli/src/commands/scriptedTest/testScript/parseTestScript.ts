@@ -54,7 +54,6 @@ export function parseScenarioStep(
       );
   }
 
-  // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
   throw new Error(`Unsupported step ${step}`);
 }
 

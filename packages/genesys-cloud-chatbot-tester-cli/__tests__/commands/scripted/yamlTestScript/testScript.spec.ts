@@ -1,16 +1,17 @@
-import { accessSync, readFileSync } from 'fs';
+import { describe, vi, beforeEach, test, expect, MockedFunction } from 'vitest';
+import { accessSync, readFileSync } from 'node:fs';
 import { Command } from 'commander';
 import { createCli } from '../../../../src/createCli';
 
 describe('Test-script read from disk', () => {
-  let fsReadFileSync: jest.MockedFunction<typeof readFileSync>;
-  let fsAccessSync: jest.MockedFunction<typeof accessSync>;
+  let fsReadFileSync: MockedFunction<typeof readFileSync>;
+  let fsAccessSync: MockedFunction<typeof accessSync>;
 
   let cli: Command;
 
   beforeEach(() => {
-    fsReadFileSync = jest.fn();
-    fsAccessSync = jest.fn();
+    fsReadFileSync = vi.fn();
+    fsAccessSync = vi.fn();
 
     const cliCommand = new Command().exitOverride(() => {
       throw new Error('CLI Command errored');
@@ -22,7 +23,7 @@ describe('Test-script read from disk', () => {
 
     cli = createCli(cliCommand, {
       command: scenarioTestCommand,
-      fsReadFileSync,
+      fsReadFileSync: fsReadFileSync as unknown as typeof import('node:fs').readFileSync,
       fsAccessSync,
       webMessengerSessionFactory() {
         throw Error('Not implemented');

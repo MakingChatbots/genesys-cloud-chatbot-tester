@@ -1,4 +1,5 @@
-import { readFileSync } from 'fs';
+import { describe, vi, beforeEach, test, expect, MockedFunction, Mocked } from 'vitest';
+import { readFileSync } from 'node:fs';
 import { Command } from 'commander';
 import { createCli } from '../../../src/createCli';
 import { ChatCompletionClient } from '../../../src/commands/aiTest/chatCompletionClients/chatCompletionClient';
@@ -6,12 +7,12 @@ import stripAnsi from 'strip-ansi';
 import * as googleAi from '../../../src/commands/aiTest/chatCompletionClients/googleVertexAi/createChatCompletionClient';
 
 describe('Vertex AI config', () => {
-  let fsReadFileSync: jest.MockedFunction<typeof readFileSync>;
+  let fsReadFileSync: MockedFunction<typeof readFileSync>;
 
-  let mockGoogleAiChatCompletionClientFactory: jest.MockedFn<
+  let mockGoogleAiChatCompletionClientFactory: MockedFunction<
     typeof googleAi.createChatCompletionClient
   >;
-  let mockGoogleAiChatCompletionClient: jest.Mocked<ChatCompletionClient>;
+  let mockGoogleAiChatCompletionClient: Mocked<ChatCompletionClient>;
 
   let processEnv: NodeJS.ProcessEnv;
 
@@ -23,11 +24,11 @@ describe('Vertex AI config', () => {
 
   beforeEach(() => {
     mockGoogleAiChatCompletionClient = {
-      getProviderName: jest.fn().mockReturnValue('mock-google-vertex-ai'),
-      predict: jest.fn().mockResolvedValue({ role: 'customer', content: 'PASS' }),
-      preflightCheck: jest.fn().mockResolvedValue({ ok: true }),
+      getProviderName: vi.fn().mockReturnValue('mock-google-vertex-ai'),
+      predict: vi.fn().mockResolvedValue({ role: 'customer', content: 'PASS' }),
+      preflightCheck: vi.fn().mockResolvedValue({ ok: true }),
     };
-    mockGoogleAiChatCompletionClientFactory = jest
+    mockGoogleAiChatCompletionClientFactory = vi
       .fn()
       .mockReturnValue(mockGoogleAiChatCompletionClient);
 
@@ -35,7 +36,8 @@ describe('Vertex AI config', () => {
       errOut: [],
       stdOut: [],
     };
-    fsReadFileSync = jest.fn();
+    // Using `as any` here to bypass issues with mocking an overloaded function
+    fsReadFileSync = vi.fn();
 
     processEnv = {};
 
@@ -60,16 +62,16 @@ describe('Vertex AI config', () => {
 
     cli = createCli(cliCommand, undefined, {
       command: scenarioTestCommand,
-      fsReadFileSync,
-      fsAccessSync: jest.fn(),
-      webMessengerSessionFactory: jest.fn().mockReturnValue({ on: jest.fn(), close: jest.fn() }),
+      fsReadFileSync: fsReadFileSync as unknown as typeof import('node:fs').readFileSync,
+      fsAccessSync: vi.fn(),
+      webMessengerSessionFactory: vi.fn().mockReturnValue({ on: vi.fn(), close: vi.fn() }),
       openAiCreateChatCompletionClient: () => {
         throw new Error('Not implemented');
       },
       googleAiCreateChatCompletionClient: mockGoogleAiChatCompletionClientFactory,
-      conversationFactory: jest
+      conversationFactory: vi
         .fn()
-        .mockReturnValue({ waitForConversationToStart: jest.fn(), sendText: jest.fn() }),
+        .mockReturnValue({ waitForConversationToStart: vi.fn(), sendText: vi.fn() }),
       processEnv,
     });
   });

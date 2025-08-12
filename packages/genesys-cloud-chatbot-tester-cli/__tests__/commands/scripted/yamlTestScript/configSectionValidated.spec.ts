@@ -1,4 +1,5 @@
-import { readFileSync } from 'fs';
+import { describe, vi, beforeEach, test, expect, MockedFunction } from 'vitest';
+import { readFileSync } from 'node:fs';
 import { Command } from 'commander';
 import stripAnsi from 'strip-ansi';
 import { createCli } from '../../../../src/createCli';
@@ -8,15 +9,15 @@ describe('Session Config Validated', () => {
     errOut: string[];
   };
 
-  let fsReadFileSync: jest.MockedFunction<typeof readFileSync>;
+  let fsReadFileSync: MockedFunction<typeof readFileSync>;
 
   let cli: Command;
 
   beforeEach(() => {
-    fsReadFileSync = jest.fn();
+    fsReadFileSync = vi.fn();
 
-    const webMessengerSession = { on: jest.fn(), close: jest.fn() };
-    const conversation = { waitForConversationToStart: jest.fn(), sendText: jest.fn() };
+    const webMessengerSession = { on: vi.fn(), close: vi.fn() };
+    const conversation = { waitForConversationToStart: vi.fn(), sendText: vi.fn() };
 
     capturedOutput = {
       errOut: [],
@@ -40,10 +41,10 @@ describe('Session Config Validated', () => {
 
     cli = createCli(cliCommand, {
       command: scenarioTestCommand,
-      fsReadFileSync,
-      fsAccessSync: jest.fn(),
-      webMessengerSessionFactory: jest.fn().mockReturnValue(webMessengerSession),
-      conversationFactory: jest.fn().mockReturnValue(conversation),
+      fsReadFileSync: fsReadFileSync as unknown as typeof import('node:fs').readFileSync,
+      fsAccessSync: vi.fn(),
+      webMessengerSessionFactory: vi.fn().mockReturnValue(webMessengerSession),
+      conversationFactory: vi.fn().mockReturnValue(conversation),
     });
   });
 

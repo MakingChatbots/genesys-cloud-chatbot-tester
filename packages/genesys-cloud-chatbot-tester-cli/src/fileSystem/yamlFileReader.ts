@@ -1,4 +1,4 @@
-import { readFileSync } from 'fs';
+import { readFileSync } from 'node:fs';
 import * as yaml from 'js-yaml';
 
 export type YamlFileReader = (path: string) => Record<string, unknown>;

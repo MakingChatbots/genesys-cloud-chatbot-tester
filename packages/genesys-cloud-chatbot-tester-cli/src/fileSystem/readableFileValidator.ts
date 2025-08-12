@@ -1,11 +1,11 @@
-import fs, { accessSync } from 'fs';
+import fs, { accessSync } from 'node:fs';
 import commander from 'commander';
 
 export function readableFileValidator(fsAccessSync: typeof accessSync) {
   return function (filePath: string): string {
     try {
       fsAccessSync(filePath, fs.constants.R_OK);
-    } catch (error) {
+    } catch {
       throw new commander.InvalidOptionArgumentError(`File '${filePath}' is not readable`);
     }
     return filePath;

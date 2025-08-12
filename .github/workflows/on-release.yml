@@ -9,12 +9,12 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '16.x'
+          node-version: '18.x'
           registry-url: 'https://registry.npmjs.org'
           scope: '@makingchatbots'
-      - run: yarn
-      - run: yarn build
-      - run: yarn test
-      - run: yarn publish
+      - run: npm install
+      - run: npm run build
+      - run: npm run test
+      - run: npm run publish
         env:
-          YARN_NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

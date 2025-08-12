@@ -1,4 +1,4 @@
-import { readFileSync } from 'fs';
+import { beforeEach, describe, expect, type Mock, MockedFunction, test, vi } from 'vitest';
 import { Command } from 'commander';
 import { createCli } from '../../../src/createCli';
 import { writeFileSync } from 'node:fs';
@@ -20,8 +20,10 @@ scenarios:
 `;
 
 describe('AI saving output', () => {
-  let fsReadFileSync: jest.MockedFunction<typeof readFileSync>;
-  let fsWriteFileSync: jest.MockedFunction<typeof writeFileSync>;
+  let fsReadFileSync: Mock<
+    (path: string, options: { encoding: BufferEncoding; flag?: string }) => string
+  >;
+  let fsWriteFileSync: MockedFunction<typeof writeFileSync>;
 
   let cli: Command;
   let capturedOutput: {
@@ -35,8 +37,11 @@ describe('AI saving output', () => {
       stdOut: [],
     };
 
-    fsReadFileSync = jest.fn().mockReturnValue(yamlFileContents);
-    fsWriteFileSync = jest.fn();
+    // Assign mock with explicit args/return type
+    fsReadFileSync = vi.fn<
+      (path: string, options: { encoding: BufferEncoding; flag?: string }) => string
+    >(() => yamlFileContents);
+    fsWriteFileSync = vi.fn();
 
     const cliCommand = new Command().exitOverride(() => {
       throw new Error('CLI Command errored');
@@ -59,19 +64,19 @@ describe('AI saving output', () => {
 
     cli = createCli(cliCommand, undefined, {
       command: scenarioTestCommand,
-      fsAccessSync: jest.fn(),
-      fsReadFileSync,
+      fsAccessSync: vi.fn(),
+      fsReadFileSync: fsReadFileSync as unknown as typeof import('node:fs').readFileSync,
       fsWriteFileSync,
-      webMessengerSessionFactory: jest.fn().mockReturnValue({ on: jest.fn(), close: jest.fn() }),
+      webMessengerSessionFactory: vi.fn().mockReturnValue({ on: vi.fn(), close: vi.fn() }),
       openAiCreateChatCompletionClient: () => ({
-        getProviderName: jest.fn().mockReturnValue('mock-chatgpt'),
-        predict: jest.fn().mockResolvedValue({ role: 'customer', content: 'PASS' }),
-        preflightCheck: jest.fn().mockResolvedValue({ ok: true }),
+        getProviderName: vi.fn().mockReturnValue('mock-chatgpt'),
+        predict: vi.fn().mockResolvedValue({ role: 'customer', content: 'PASS' }),
+        preflightCheck: vi.fn().mockResolvedValue({ ok: true }),
       }),
-      googleAiCreateChatCompletionClient: jest.fn(),
-      conversationFactory: jest
+      googleAiCreateChatCompletionClient: vi.fn(),
+      conversationFactory: vi
         .fn()
-        .mockReturnValue({ waitForConversationToStart: jest.fn(), sendText: jest.fn() }),
+        .mockReturnValue({ waitForConversationToStart: vi.fn(), sendText: vi.fn() }),
       processEnv: { OPENAI_API_KEY: 'test' },
     });
   });

@@ -1,5 +1,6 @@
 import { Command } from 'commander';
-import { accessSync, readFileSync } from 'fs';
+import { accessSync, readFileSync, writeFileSync } from 'node:fs';
+
 import {
   Conversation,
   SessionConfig,
@@ -23,7 +24,6 @@ import { validateOpenAiEnvVariables } from './chatCompletionClients/chatGpt/vali
 import { promptGenerator } from './prompt/generation/promptGenerator';
 import { writableDirValidator } from '../../fileSystem/writableDirValidator';
 import { saveOutputJs } from './output/saveOutputJson';
-import { writeFileSync } from 'node:fs';
 import { validateProjectLocationConfig } from './chatCompletionClients/googleVertexAi/validateProjectLocationConfig';
 
 export interface AiTestCommandDependencies {
