@@ -16,7 +16,7 @@
     "lint:fix": "npm run lint:fix --workspaces --if-present",
     "build": "npm run build --workspaces --if-present",
     "build:docs": "npm run build:readme && cp README.md packages/genesys-cloud-chatbot-tester-cli/README.md && typedoc && npm run build:readme --workspaces --if-present",
-    "build:readme": "npm run build-readme ./README.md https://github.com/makingchatbots/genesys-cloud-chatbot-tester/tree/main",
+    "build:readme": "build-readme ./README.md https://github.com/makingchatbots/genesys-cloud-chatbot-tester/tree/main",
     "publish": "npm publish -w packages/genesys-cloud-chatbot-tester -w packages/genesys-cloud-chatbot-tester-cli --access public"
   },
   "devDependencies": {
