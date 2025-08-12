@@ -1,3 +1,4 @@
+import { expect, test } from 'vitest';
 import { replacePlaceholders } from './replacePlaceholders';
 
 test('Placeholders are replaced', () => {

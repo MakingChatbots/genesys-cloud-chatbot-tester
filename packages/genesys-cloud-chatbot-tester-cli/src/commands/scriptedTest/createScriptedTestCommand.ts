@@ -140,7 +140,7 @@ GENESYSCLOUD_OAUTHCLIENT_SECRET`,
             );
           } else {
             // Only load when required
-            // Also removes 'You are trying to `import` a file after the Jest environment has been torn down' error due to
+            // Also removes 'You are trying to `import` a file after the Vitest environment has been torn down' error due to
             // file-watcher it starts
             const { configurePlatformClients } = await import(
               '../../genesysPlatform/configurePlatformClients'

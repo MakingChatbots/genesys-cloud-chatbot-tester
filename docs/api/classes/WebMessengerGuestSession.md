@@ -178,7 +178,7 @@ node\_modules/@types/node/events.d.ts:57
 
 #### Defined in
 
-[packages/genesys-cloud-chatbot-tester/src/genesys/WebMessengerGuestSession.ts:147](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/genesys/WebMessengerGuestSession.ts#L147)
+[packages/genesys-cloud-chatbot-tester/src/genesys/WebMessengerGuestSession.ts:146](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/genesys/WebMessengerGuestSession.ts#L146)
 
 ***
 
@@ -488,7 +488,7 @@ node\_modules/@types/node/events.d.ts:60
 
 #### Defined in
 
-[packages/genesys-cloud-chatbot-tester/src/genesys/WebMessengerGuestSession.ts:124](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/genesys/WebMessengerGuestSession.ts#L124)
+[packages/genesys-cloud-chatbot-tester/src/genesys/WebMessengerGuestSession.ts:123](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/genesys/WebMessengerGuestSession.ts#L123)
 
 ***
 

@@ -1,3 +1,4 @@
+import { expect, test } from 'vitest';
 import { shouldEndConversation } from './shouldEndConversation';
 
 test('conversation ended when ChatGPT says special word', () => {
@@ -25,7 +26,7 @@ test('conversation ended when ChatGPT says special word', () => {
     hasEnded: true,
     reason: {
       type: 'fail',
-      description: 'Terminating phrase found in response: WRONG - This has gone wrong',
+      description: "Terminating phrase found in response: 'WRONG - This has gone wrong'",
     },
   });
 });

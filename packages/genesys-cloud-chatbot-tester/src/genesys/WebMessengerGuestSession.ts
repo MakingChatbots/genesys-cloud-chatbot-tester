@@ -108,7 +108,6 @@ export class WebMessengerGuestSession extends EventEmitter {
 
     const payload = JSON.parse(textPayload);
     if (typeof payload.type !== 'string') {
-      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
       throw new Error(`Unexpected payload: ${payload}`);
     }
 

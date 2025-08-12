@@ -18,16 +18,10 @@
   "author": "Lucas Woodward",
   "scripts": {
     "build": "rm -rf ./lib && tsc -p tsconfig.json",
-    "build:readme": "cd ../.. && yarn build-readme ./packages/genesys-cloud-chatbot-tester/README.md https://github.com/makingchatbots/genesys-cloud-chatbot-tester/tree/main",
-    "test": "vitest __tests__/",
-    "lint": "eslint . {src,__tests__}/**/*.ts",
-    "format": "prettier --write .",
-    "prettier:check": "prettier --check src/**/*.ts *.md tests/**/*.ts --no-error-on-unmatched-pattern",
-    "prettier:fix": "prettier --write src/**/*.ts *.md tests/**/*.ts --ignore-unknown --no-error-on-unmatched-pattern",
-    "lint:check": "eslint --cache --ext .ts ./src",
-    "lint:fix": "eslint --cache --fix --ext .ts ./src",
-    "check": "npm run lint:check && npm run prettier:check",
-    "fix": "npm run lint:fix && npm run prettier:fix"
+    "build:readme": "cd ../.. && npm run build-readme ./packages/genesys-cloud-chatbot-tester/README.md https://github.com/makingchatbots/genesys-cloud-chatbot-tester/tree/main",
+    "test": "vitest run",
+    "lint": "eslint . --ignore-pattern 'lib/*'",
+    "lint:fix": "eslint . --ignore-pattern 'lib/*' --fix"
   },
   "dependencies": {
     "debug": "^4.3.3",
@@ -35,6 +29,7 @@
     "ws": "^8.17.1"
   },
   "devDependencies": {
+    "@eslint/js": "^9.33.0",
     "@ikerin/build-readme": "^1.1.1",
     "@sinonjs/fake-timers": "^11.0.0",
     "@types/debug": "^4.1.8",
@@ -42,12 +37,13 @@
     "@types/sinonjs__fake-timers": "^8.1.2",
     "@types/uuid": "^10.0.0",
     "@types/ws": "^8.5.5",
-    "@typescript-eslint/eslint-plugin": "latest",
-    "@typescript-eslint/parser": "latest",
-    "eslint": "latest",
+    "eslint": "^9.33.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
     "get-port": "^5.1.1",
-    "prettier": "^3.1.1",
+    "prettier": "3.6.2",
     "typescript": "^5.3.3",
+    "typescript-eslint": "^8.39.1",
     "vitest": "^3.2.4"
   }
 }

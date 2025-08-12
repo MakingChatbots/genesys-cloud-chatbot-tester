@@ -1,3 +1,4 @@
+import { expect, test } from 'vitest';
 import { containsTerminatingPhrases } from './containsTerminatingPhrases';
 
 test('failure phrase detected', () => {

@@ -2,16 +2,9 @@
   "name": "@examples/api",
   "description": "Example of interacting with Web Messenger deployment using Vitest, TS and JS",
   "private": true,
-  "packageManager": "yarn@3.1.1",
   "scripts": {
     "lint": "eslint . --ext .ts",
-    "format": "prettier --write .",
-    "prettier:check": "prettier --check src/**/*.ts *.md tests/**/*.ts --no-error-on-unmatched-pattern",
-    "prettier:fix": "prettier --write src/**/*.ts *.md tests/**/*.ts --ignore-unknown --no-error-on-unmatched-pattern",
-    "lint:check": "eslint --cache --ext .ts ./src",
-    "lint:fix": "eslint --cache --fix --ext .ts ./src",
-    "check": "npm run lint:check && npm run prettier:check",
-    "fix": "npm run lint:fix && npm run prettier:fix",
+    "lint:fix": "eslint . --ignore-pattern 'lib/*' --fix",
     "test": "vitest __tests__",
     "test:js": "node ../api/src/js-script.js",
     "test:ts": "node -r ts-node/register ../api/src/ts-script.ts"
@@ -23,9 +16,12 @@
     "@typescript-eslint/parser": "latest",
     "dotenv": "^16.3.1",
     "eslint": "latest",
-    "prettier": "^3.1.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "prettier": "3.6.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3",
     "vitest": "^3.2.4"
-  }
+  },
+  "packageManager": "npm@11.4.2"
 }

@@ -1,11 +1,10 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
   Conversation,
   WebMessengerGuestSession,
   SessionTranscriber,
 } from '@makingchatbots/genesys-cloud-chatbot-tester';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 require('dotenv').config({ path: '../../.env' });
 
 (async () => {

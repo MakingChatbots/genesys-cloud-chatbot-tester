@@ -1,3 +1,4 @@
+import { expect, test } from 'vitest';
 import { promptGenerator } from './promptGenerator';
 import { AiScenarioSetupSection } from '../../testScript/modelTypes';
 
@@ -12,6 +13,7 @@ test('Placeholders are replaced if value present', () => {
 
   expect(promptGenerator(scenario)).toStrictEqual({
     prompt: 'Your first name is John and your second name is Doe',
+    placeholdersFound: true,
     placeholderValues: { FIRST_NAME: 'John', SECOND_NAME: 'Doe' },
   });
 });
@@ -26,6 +28,7 @@ test('Placeholders ignored if no values present', () => {
 
   expect(promptGenerator(scenario)).toStrictEqual({
     prompt: 'Your first name is {FIRST_NAME}',
+    placeholdersFound: false,
     placeholderValues: {},
   });
 });
@@ -37,6 +40,7 @@ test('Original prompt returned if placeholder values not present', () => {
 
   expect(promptGenerator(scenario)).toStrictEqual({
     prompt: 'Your first name is {FIRST_NAME}',
+    placeholdersFound: false,
     placeholderValues: {},
   });
 });
