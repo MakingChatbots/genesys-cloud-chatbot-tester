@@ -1,10 +1,12 @@
-[**Genesys Web Messaging Tester**](../README.md) • **Docs**
+[**Genesys Web Messaging Tester**](../README.md)
 
 ***
 
 [Genesys Web Messaging Tester](../README.md) / StructuredMessage
 
 # Interface: StructuredMessage
+
+Defined in: [packages/genesys-cloud-chatbot-tester/src/genesys/StructuredMessage.ts:60](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/genesys/StructuredMessage.ts#L60)
 
 ## Extends
 
@@ -16,13 +18,11 @@
 
 > **body**: `StructuredMessageTextBody` \| `StructuredMessageStructuredBody` \| `StructuredMessageEventBody`
 
+Defined in: [packages/genesys-cloud-chatbot-tester/src/genesys/Response.ts:5](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/genesys/Response.ts#L5)
+
 #### Inherited from
 
 `SuccessResponse.body`
-
-#### Defined in
-
-[packages/genesys-cloud-chatbot-tester/src/genesys/Response.ts:5](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/genesys/Response.ts#L5)
 
 ***
 
@@ -30,13 +30,11 @@
 
 > **class**: `"StructuredMessage"`
 
+Defined in: [packages/genesys-cloud-chatbot-tester/src/genesys/StructuredMessage.ts:65](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/genesys/StructuredMessage.ts#L65)
+
 #### Overrides
 
 `SuccessResponse.class`
-
-#### Defined in
-
-[packages/genesys-cloud-chatbot-tester/src/genesys/StructuredMessage.ts:65](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/genesys/StructuredMessage.ts#L65)
 
 ***
 
@@ -44,13 +42,11 @@
 
 > **code**: `200`
 
+Defined in: [packages/genesys-cloud-chatbot-tester/src/genesys/Response.ts:9](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/genesys/Response.ts#L9)
+
 #### Inherited from
 
 `SuccessResponse.code`
-
-#### Defined in
-
-[packages/genesys-cloud-chatbot-tester/src/genesys/Response.ts:9](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/genesys/Response.ts#L9)
 
 ***
 
@@ -58,10 +54,8 @@
 
 > **type**: `"message"`
 
+Defined in: [packages/genesys-cloud-chatbot-tester/src/genesys/StructuredMessage.ts:64](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/genesys/StructuredMessage.ts#L64)
+
 #### Overrides
 
 `SuccessResponse.type`
-
-#### Defined in
-
-[packages/genesys-cloud-chatbot-tester/src/genesys/StructuredMessage.ts:64](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/genesys/StructuredMessage.ts#L64)

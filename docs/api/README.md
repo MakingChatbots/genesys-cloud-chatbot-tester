@@ -1,4 +1,4 @@
-**Genesys Web Messaging Tester** • **Docs**
+**Genesys Web Messaging Tester**
 
 ***
 

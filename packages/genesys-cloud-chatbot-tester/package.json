@@ -18,7 +18,7 @@
   "author": "Lucas Woodward",
   "scripts": {
     "build": "rm -rf ./lib && tsc -p tsconfig.json",
-    "build:readme": "cd ../.. && npm run build-readme ./packages/genesys-cloud-chatbot-tester/README.md https://github.com/makingchatbots/genesys-cloud-chatbot-tester/tree/main",
+    "build:readme": "cd ../.. && build-readme ./packages/genesys-cloud-chatbot-tester/README.md https://github.com/makingchatbots/genesys-cloud-chatbot-tester/tree/main",
     "test": "vitest run",
     "lint": "eslint . --ignore-pattern 'lib/*'",
     "lint:fix": "eslint . --ignore-pattern 'lib/*' --fix"
