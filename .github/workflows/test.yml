@@ -1,16 +1,24 @@
-name: On Push
+name: test
 
-on: [push]
+on:
+  push:
+    branches:
+      - "main"
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
 
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18.x
+          node-version-file: ".nvmrc"
       - run: npm install
       - run: npm run lint
         env:
@@ -20,10 +28,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18.x
+          node-version-file: ".nvmrc"
       - run: npm install
       - run: npm run build
       - run: npm run test
@@ -32,10 +39,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18.x
+          node-version-file: ".nvmrc"
       - run: npm install
       - run: npm run build
       - run: npm run build:docs
@@ -44,10 +50,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18.x
+          node-version-file: ".nvmrc"
       - run: npm install
       - run: npm run build
       - run: cd examples/api && npm run test:js

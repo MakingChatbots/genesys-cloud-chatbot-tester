@@ -17,7 +17,8 @@
   ],
   "author": "Lucas Woodward",
   "scripts": {
-    "build": "rm -rf ./lib && tsc -p tsconfig.json",
+    "clean": "rm -rf ./lib",
+    "build": "npm run clean && tsc -p tsconfig.json",
     "test": "vitest run",
     "lint": "eslint . --ignore-pattern 'lib/*'",
     "lint:fix": "eslint . --ignore-pattern 'lib/*' --fix",
