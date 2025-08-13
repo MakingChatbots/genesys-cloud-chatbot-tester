@@ -5,7 +5,7 @@ on:
     branches:
       - "main"
     paths:
-      - package.json
+      - packages/**/package.json
 
 permissions:
   contents: write
@@ -34,36 +34,45 @@ jobs:
           npm run clean
           npm run build
 
-      - id: publish
-        name: Publish to NPM
+      - id: publish_sdk
+        name: Publish genesys-cloud-chatbot-tester
         uses: JS-DevTools/npm-publish@v3
         with:
+          package: packages/genesys-cloud-chatbot-tester
           token: ${{ secrets.NPM_TOKEN }}
           dry-run: false
           provenance: true
           access: public
 
-      - name: Post-publish
-        if: steps.publish.outputs.type != 'none'
-        run: |
-          echo "Published ${{ steps.publish.outputs.type }} version: ${{ steps.publish.outputs.version }}"
+      - id: publish_cli
+        name: Publish genesys-cloud-chatbot-tester-cli
+        uses: JS-DevTools/npm-publish@v3
+        with:
+          package: packages/genesys-cloud-chatbot-tester-cli
+          token: ${{ secrets.NPM_TOKEN }}
+          dry-run: false
+          provenance: true
+          access: public
 
-      - name: Publish skipped
-        if: steps.publish.outputs.type == 'none'
-        run: |
-          echo "Version in package.json has not changed. Skipping."
-          exit 0
+      - name: Post-publish genesys-cloud-chatbot-tester
+        if: steps.publish_sdk.outputs.type != 'none'
+        run: echo "Published genesys-cloud-chatbot-tester ${{ steps.publish_sdk.outputs.version }}"
 
-      - name: Configure changelog
-        if: steps.publish.outputs.type != 'none'
-        run: |
-          echo '{"categories": [], "template": "## Commits:\n\n${{ '${{UNCATEGORIZED}}' }}", "pr_template": ${{ '"- ${{MERGE_SHA}} ${{TITLE}}"' }} }' > changelog_config.json
-          echo "last_tag=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
-          echo "curr_commit=$(git rev-parse HEAD)" >> $GITHUB_ENV
+      - name: Post-publish genesys-cloud-chatbot-tester-cli
+        if: steps.publish_cli.outputs.type != 'none'
+        run: echo "Published genesys-cloud-chatbot-tester-cli ${{ steps.publish_cli.outputs.version }}"
 
-      - name: Generate changelog
-        if: steps.publish.outputs.type != 'none'
-        id: github_release
+      - name: Configure changelog for genesys-cloud-chatbot-tester
+        if: steps.publish_sdk.outputs.type != 'none'
+        run: |
+          cat <<'EOF' > changelog_config.json
+          {"categories": [], "template": "## Commits:\n\n${{UNCATEGORIZED}}", "pr_template": "- ${{MERGE_SHA}} ${{TITLE}}"}
+          EOF
+          echo "last_tag=$(git describe --tags --match \"genesys-cloud-chatbot-tester-v*\" --abbrev=0 || echo)" >> $GITHUB_ENV
+
+      - name: Generate changelog for genesys-cloud-chatbot-tester
+        if: steps.publish_sdk.outputs.type != 'none'
+        id: changelog_tester
         uses: mikepenz/release-changelog-builder-action@v2.9.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -73,30 +82,48 @@ jobs:
           commitMode: true
           configuration: changelog_config.json
 
-      - name: Create release
-        if: steps.publish.outputs.type != 'none'
-        id: create_release
+      - name: Create release for genesys-cloud-chatbot-tester
+        if: steps.publish_sdk.outputs.type != 'none'
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v${{ steps.publish.outputs.version }}
-          release_name: v${{ steps.publish.outputs.version }}
+          tag_name: genesys-cloud-chatbot-tester-v${{ steps.publish_sdk.outputs.version }}
+          release_name: genesys-cloud-chatbot-tester-v${{ steps.publish_sdk.outputs.version }}
           commitish: ${{ github.ref }}
-          body: ${{ steps.github_release.outputs.changelog }}
+          body: ${{ steps.changelog_tester.outputs.changelog }}
           draft: false
           prerelease: false
 
-      - name: Build .dxt file
-        if: steps.publish.outputs.type != 'none'
-        run: npm run package:dxt
+      - name: Configure changelog for genesys-cloud-chatbot-tester-cli
+        if: steps.publish_cli.outputs.type != 'none'
+        run: |
+          cat <<'EOF' > changelog_config.json
+          {"categories": [], "template": "## Commits:\n\n${{UNCATEGORIZED}}", "pr_template": "- ${{MERGE_SHA}} ${{TITLE}}"}
+          EOF
+          echo "last_tag=$(git describe --tags --match \"genesys-cloud-chatbot-tester-cli-v*\" --abbrev=0 || echo)" >> $GITHUB_ENV
 
-      - name: Upload .dxt to GitHub release
-        if: steps.publish.outputs.type != 'none'
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: v${{ steps.publish.outputs.version }}
-          files: |
-            genesys-cloud-mcp-server.dxt
+      - name: Generate changelog for genesys-cloud-chatbot-tester-cli
+        if: steps.publish_cli.outputs.type != 'none'
+        id: changelog_cli
+        uses: mikepenz/release-changelog-builder-action@v2.9.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          fromTag: "${{ env.last_tag }}"
+          toTag: ${{ github.ref }}
+          commitMode: true
+          configuration: changelog_config.json
+
+      - name: Create release for genesys-cloud-chatbot-tester-cli
+        if: steps.publish_cli.outputs.type != 'none'
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: genesys-cloud-chatbot-tester-cli-v${{ steps.publish_cli.outputs.version }}
+          release_name: genesys-cloud-chatbot-tester-cli-v${{ steps.publish_cli.outputs.version }}
+          commitish: ${{ github.ref }}
+          body: ${{ steps.changelog_cli.outputs.changelog }}
+          draft: false
+          prerelease: false
