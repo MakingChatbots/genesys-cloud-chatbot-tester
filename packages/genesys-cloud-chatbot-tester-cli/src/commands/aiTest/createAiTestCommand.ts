@@ -194,7 +194,7 @@ export function createAiTestCommand({
         );
 
         const convo = conversationFactory(session);
-        const messages: Utterance[] = [];
+        const history: Utterance[] = [];
 
         const generatedPrompt = promptGenerator(scenario.setup);
         if (generatedPrompt.placeholdersFound) {
@@ -205,18 +205,23 @@ export function createAiTestCommand({
         let endConversation: ShouldEndConversationResult = {
           hasEnded: false,
         };
+        let botMessage: Utterance | null = null;
         do {
-          const utterance = await chatCompletionClient.predict(generatedPrompt.prompt, messages);
+          const utterance = await chatCompletionClient.predict(
+            generatedPrompt.prompt,
+            history,
+            botMessage,
+          );
 
           if (utterance) {
-            messages.push(utterance);
+            history.push(utterance);
             await convo.sendText(utterance.content);
           } else {
-            messages.push({ role: 'customer', content: '' });
+            history.push({ role: 'customer', content: '' });
           }
 
           endConversation = shouldEndConversation(
-            messages,
+            history,
             scenario.setup.terminatingPhrases.fail,
             scenario.setup.terminatingPhrases.pass,
           );
@@ -224,11 +229,11 @@ export function createAiTestCommand({
           if (!endConversation.hasEnded) {
             // TODO Allow time to wait to be customised
             const chatBotResponses = await convo.waitForResponses(3000);
-            messages.push({ role: 'bot', content: chatBotResponses.join('\n') });
+            botMessage = { role: 'bot', content: chatBotResponses.join('\n') };
           }
 
           endConversation = shouldEndConversation(
-            messages,
+            history,
             scenario.setup.terminatingPhrases.fail,
             scenario.setup.terminatingPhrases.pass,
           );
@@ -241,7 +246,7 @@ export function createAiTestCommand({
         if (options.outDir) {
           const outputResult = saveOutputJs(
             scenarioName,
-            { messages, generatedPrompt, result: endConversation },
+            { messages: history, generatedPrompt, result: endConversation },
             options.outDir,
             fsWriteFileSync,
           );

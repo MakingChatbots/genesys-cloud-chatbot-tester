@@ -1,60 +1,50 @@
-import { helpers, protos, v1 } from '@google-cloud/aiplatform';
+import { GoogleGenAI, mcpToTool } from '@google/genai';
 import { ParameterRequest, PromptRequest } from './ModelRequest';
-import { ChatCompletionClient, PreflightResult, Utterance } from '../chatCompletionClient';
+import {
+  BotUtterance,
+  ChatCompletionClient,
+  CustomerUtterance,
+  PreflightResult,
+  Utterance,
+} from '../chatCompletionClient';
 import { GoogleVertexAiConfig } from '../../testScript/modelTypes';
 
-const { PredictionServiceClient } = v1;
-
-interface GoogleVertexAiClientConfig extends GoogleVertexAiConfig {
-  location: string;
-  project: string;
-}
+// interface GoogleVertexAiConfig {
+// apiKey: string;
+//
+// location: string;
+// project: string;
+// }
 
 export function createChatCompletionClient({
-  location,
-  project,
+  model,
   temperature,
-  topK,
   topP,
+  topK,
   seed,
-  modelVersion,
-  examples,
-}: GoogleVertexAiClientConfig): ChatCompletionClient {
-  const version = modelVersion ? `@${modelVersion}` : '';
-
-  const endpoint = `projects/${project}/locations/${location}/publishers/google/models/chat-bison${version}`;
-
-  const predictionServiceClient = new PredictionServiceClient({
-    apiEndpoint: `${location}-aiplatform.googleapis.com`,
-  });
-
-  const parameters = helpers.toValue({
-    ...(temperature ? { temperature } : {}),
-    ...(topK ? { topK } : {}),
-    ...(topP ? { topP } : {}),
-    ...(seed ? { seed } : {}),
-  } as ParameterRequest);
+}: GoogleVertexAiConfig): ChatCompletionClient {
+  // Use environment vars: https://github.com/googleapis/js-genai/tree/main?tab=readme-ov-file#optional-nodejs-only-using-environment-variables
+  const ai = new GoogleGenAI({});
 
   return {
     getProviderName(): string {
       return 'Google Vertex AI';
     },
     async preflightCheck(): Promise<PreflightResult> {
-      const prompt: PromptRequest = {
-        context: 'You help people with math problems',
-        messages: [{ author: 'student', content: 'What is 1+1?' }],
-      };
-
-      const instanceValue = helpers.toValue(prompt);
-
-      const request: protos.google.cloud.aiplatform.v1.IPredictRequest = {
-        endpoint,
-        instances: [instanceValue!],
-        parameters,
-      };
-
       try {
-        await predictionServiceClient.predict(request);
+        const chat = ai.chats.create({
+          ...(model ? { model } : { model: 'gemini-2.0-flash' }),
+          config: {
+            temperature,
+            topP,
+            topK,
+            seed,
+            maxOutputTokens: 1024,
+          },
+        });
+
+        await chat.sendMessage({ message: 'Single word response. What colour is the sky?' });
+
         return { ok: true };
       } catch (error) {
         return {
@@ -64,49 +54,45 @@ export function createChatCompletionClient({
       }
     },
 
-    async predict(context: string, conversationUtterances: Utterance[]): Promise<Utterance | null> {
-      const prompt: PromptRequest = {
-        context,
-        ...(examples
-          ? {
-              examples: examples.map(({ input, output }) => ({
-                input: { content: input },
-                output: { content: output },
-              })),
-            }
-          : {}),
-        messages: [
-          // Google requires at least one message. This message is hopefully innocuous enough not to lead to an unexpected result.
-          { content: '...', author: 'bot' },
-          ...conversationUtterances.map((u) => ({
-            author: u.role,
+    async predict(
+      context: string,
+      history: Utterance[],
+      botMessage: BotUtterance,
+    ): Promise<CustomerUtterance | null> {
+      // customer = model
+      // bot = user
+
+      const historyToUse = [
+        // First element is bot
+        ...(history[0]?.role === 'customer' ? [{ content: '...', role: 'bot' }] : []),
+        ...history,
+      ];
+
+      const chat = ai.chats.create({
+        ...(model ? { model } : { model: 'gemini-2.0-flash' }),
+        config: {
+          // Example user personas etc https://cloud.google.com/vertex-ai/generative-ai/docs/learn/prompts/system-instruction-introduction
+          systemInstruction: context,
+          temperature,
+          topP,
+          topK,
+          seed,
+          maxOutputTokens: 1024,
+        },
+        history: [
+          ...historyToUse.map((u) => ({
+            role: u.role === 'bot' ? 'user' : 'model',
             content: u.content,
           })),
         ],
-      };
+      });
 
-      const instanceValue = helpers.toValue(prompt);
+      const { text } = await chat.sendMessage(
+        // Google requires at least one message. This message is hopefully innocuous enough not to lead to an unexpected result.
+        { message: botMessage.content === null ? '...' : botMessage.content },
+      );
 
-      const request: protos.google.cloud.aiplatform.v1.IPredictRequest = {
-        endpoint,
-        instances: [instanceValue!],
-        parameters,
-      };
-
-      const [response] = await predictionServiceClient.predict(request);
-
-      for (const prediction of response?.predictions || []) {
-        const candidates = prediction.structValue?.fields?.candidates;
-        for (const candidate of candidates?.listValue?.values || []) {
-          const content = candidate.structValue?.fields?.content?.stringValue;
-          // const author = candidate.structValue?.fields?.author?.stringValue;
-          if (content) {
-            return { content: content.trim(), role: 'customer' };
-          }
-        }
-      }
-
-      return null;
+      return { content: text ?? '', role: 'customer' };
     },
   };
 }
