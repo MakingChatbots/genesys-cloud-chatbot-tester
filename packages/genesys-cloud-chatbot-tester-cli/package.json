@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@google-cloud/aiplatform": "3.10.0",
-    "@ovotech/genesys-web-messaging-tester": "^2.0.7",
+    "@makingchatbots/genesys-cloud-chatbot-tester": "^2.0.8",
     "chalk": "^4.1.2",
     "ci-info": "^3.5.0",
     "commander": "^11.0.0",
