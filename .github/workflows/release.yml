@@ -72,31 +72,18 @@ jobs:
         if: steps.publish.outputs.type != 'none'
         run: echo "Published genesys-cloud-chatbot-tester ${{ steps.publish.outputs.version }}"
 
-      - name: Configure changelog
-        if: steps.publish.outputs.type != 'none'
-        run: |
-          echo '{"categories": [], "template": "## Commits:\n\n${{ '${{UNCATEGORIZED}}' }}", "pr_template": ${{ '"- ${{MERGE_SHA}} ${{TITLE}}"' }} }' > changelog_config.json
-          echo "last_tag=$(git describe --tags --match 'genesys-cloud-chatbot-tester-v*' --abbrev=0)" >> $GITHUB_ENV
-
-      - name: Generate changelog
-        if: steps.publish.outputs.type != 'none'
-        id: changelog
-        uses: mikepenz/release-changelog-builder-action@v2.9.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          fromTag: "${{ env.last_tag }}"
-          toTag: ${{ github.sha }}
-          commitMode: true
-          configuration: changelog_config.json
-
       - name: Create GitHub release
         if: steps.publish.outputs.type != 'none'
         run: |
-          gh release create "genesys-cloud-chatbot-tester-v${{ steps.publish.outputs.version }}" \
-            --title "genesys-cloud-chatbot-tester-v${{ steps.publish.outputs.version }}" \
-            --target "${{ github.sha }}" \
-            --notes "${{ steps.changelog.outputs.changelog }}"
+          TAG="genesys-cloud-chatbot-tester-v${{ steps.publish.outputs.version }}"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists; skipping."
+          else
+            gh release create "$TAG" \
+              --title "$TAG" \
+              --target "${{ github.sha }}" \
+              --generate-notes
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -142,30 +129,17 @@ jobs:
         if: steps.publish.outputs.type != 'none'
         run: echo "Published genesys-cloud-chatbot-tester-cli ${{ steps.publish.outputs.version }}"
 
-      - name: Configure changelog
-        if: steps.publish.outputs.type != 'none'
-        run: |
-          echo '{"categories": [], "template": "## Commits:\n\n${{ '${{UNCATEGORIZED}}' }}", "pr_template": ${{ '"- ${{MERGE_SHA}} ${{TITLE}}"' }} }' > changelog_config.json
-          echo "last_tag=$(git describe --tags --match 'genesys-cloud-chatbot-tester-cli-v*' --abbrev=0)" >> $GITHUB_ENV
-
-      - name: Generate changelog
-        if: steps.publish.outputs.type != 'none'
-        id: changelog
-        uses: mikepenz/release-changelog-builder-action@v2.9.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          fromTag: "${{ env.last_tag }}"
-          toTag: ${{ github.sha }}
-          commitMode: true
-          configuration: changelog_config.json
-
       - name: Create GitHub release
         if: steps.publish.outputs.type != 'none'
         run: |
-          gh release create "genesys-cloud-chatbot-tester-cli-v${{ steps.publish.outputs.version }}" \
-            --title "genesys-cloud-chatbot-tester-cli-v${{ steps.publish.outputs.version }}" \
-            --target "${{ github.sha }}" \
-            --notes "${{ steps.changelog.outputs.changelog }}"
+          TAG="genesys-cloud-chatbot-tester-cli-v${{ steps.publish.outputs.version }}"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists; skipping."
+          else
+            gh release create "$TAG" \
+              --title "$TAG" \
+              --target "${{ github.sha }}" \
+              --generate-notes
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
