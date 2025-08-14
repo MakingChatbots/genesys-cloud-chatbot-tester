@@ -38,6 +38,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -74,7 +77,6 @@ jobs:
         run: |
           echo '{"categories": [], "template": "## Commits:\n\n${{ '${{UNCATEGORIZED}}' }}", "pr_template": ${{ '"- ${{MERGE_SHA}} ${{TITLE}}"' }} }' > changelog_config.json
           echo "last_tag=$(git describe --tags --match 'genesys-cloud-chatbot-tester-v*' --abbrev=0)" >> $GITHUB_ENV
-          echo "curr_commit=$(git rev-parse HEAD)" >> $GITHUB_ENV
 
       - name: Generate changelog
         if: steps.publish.outputs.type != 'none'
@@ -90,16 +92,13 @@ jobs:
 
       - name: Create GitHub release
         if: steps.publish.outputs.type != 'none'
-        uses: actions/create-release@v1
+        run: |
+          gh release create "genesys-cloud-chatbot-tester-v${{ steps.publish.outputs.version }}" \
+            --title "genesys-cloud-chatbot-tester-v${{ steps.publish.outputs.version }}" \
+            --target "${{ github.sha }}" \
+            --notes "${{ steps.changelog.outputs.changelog }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: genesys-cloud-chatbot-tester-v${{ steps.publish.outputs.version }}
-          release_name: genesys-cloud-chatbot-tester-v${{ steps.publish.outputs.version }}
-          commitish: ${{ github.sha }}
-          body: ${{ steps.changelog.outputs.changelog }}
-          draft: false
-          prerelease: false
 
   publish_cli:
     name: Publish genesys-cloud-chatbot-tester-cli
@@ -109,6 +108,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -145,7 +147,6 @@ jobs:
         run: |
           echo '{"categories": [], "template": "## Commits:\n\n${{ '${{UNCATEGORIZED}}' }}", "pr_template": ${{ '"- ${{MERGE_SHA}} ${{TITLE}}"' }} }' > changelog_config.json
           echo "last_tag=$(git describe --tags --match 'genesys-cloud-chatbot-tester-cli-v*' --abbrev=0)" >> $GITHUB_ENV
-          echo "curr_commit=$(git rev-parse HEAD)" >> $GITHUB_ENV
 
       - name: Generate changelog
         if: steps.publish.outputs.type != 'none'
@@ -161,13 +162,10 @@ jobs:
 
       - name: Create GitHub release
         if: steps.publish.outputs.type != 'none'
-        uses: actions/create-release@v1
+        run: |
+          gh release create "genesys-cloud-chatbot-tester-cli-v${{ steps.publish.outputs.version }}" \
+            --title "genesys-cloud-chatbot-tester-cli-v${{ steps.publish.outputs.version }}" \
+            --target "${{ github.sha }}" \
+            --notes "${{ steps.changelog.outputs.changelog }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: genesys-cloud-chatbot-tester-cli-v${{ steps.publish.outputs.version }}
-          release_name: genesys-cloud-chatbot-tester-cli-v${{ steps.publish.outputs.version }}
-          commitish: ${{ github.sha }}
-          body: ${{ steps.changelog.outputs.changelog }}
-          draft: false
-          prerelease: false
