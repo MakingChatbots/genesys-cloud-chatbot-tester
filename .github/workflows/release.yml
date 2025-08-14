@@ -17,7 +17,7 @@ jobs:
     name: Detect changed packages
     runs-on: ubuntu-latest
     outputs:
-      sdk: ${{ steps.filter.outputs.sdk }}
+      lib: ${{ steps.filter.outputs.lib }}
       cli: ${{ steps.filter.outputs.cli }}
     steps:
       - uses: actions/checkout@v4
@@ -25,15 +25,15 @@ jobs:
         uses: dorny/paths-filter@v3
         with:
           filters: |
-            sdk:
+            lib:
               - 'packages/genesys-cloud-chatbot-tester/package.json'
             cli:
               - 'packages/genesys-cloud-chatbot-tester-cli/package.json'
 
-  publish_sdk:
+  publish_lib:
     name: Publish genesys-cloud-chatbot-tester
     needs: changes
-    if: needs.changes.outputs.sdk == 'true'
+    if: needs.changes.outputs.lib == 'true'
     runs-on: ubuntu-latest
 
     steps:
