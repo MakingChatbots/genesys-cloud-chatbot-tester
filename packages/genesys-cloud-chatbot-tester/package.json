@@ -1,6 +1,7 @@
 {
   "name": "@makingchatbots/genesys-cloud-chatbot-tester",
   "version": "2.0.10",
+  "description": "A testing library for Genesys Cloud Web Messenger chatbots.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "license": "Apache-2.0",
