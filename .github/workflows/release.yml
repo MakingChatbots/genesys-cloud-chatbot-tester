@@ -65,10 +65,9 @@ jobs:
       - name: Configure changelog for genesys-cloud-chatbot-tester
         if: steps.publish_sdk.outputs.type != 'none'
         run: |
-          cat <<'EOF' > changelog_config.json
-          {"categories": [], "template": "## Commits:\n\n${{UNCATEGORIZED}}", "pr_template": "- ${{MERGE_SHA}} ${{TITLE}}"}
-          EOF
-          echo "last_tag=$(git describe --tags --match \"genesys-cloud-chatbot-tester-v*\" --abbrev=0 || echo)" >> $GITHUB_ENV
+          echo '{"categories": [], "template": "## Commits:\n\n${{ '${{UNCATEGORIZED}}' }}", "pr_template": ${{ '"- ${{MERGE_SHA}} ${{TITLE}}"' }} }' > changelog_config.json
+          echo "last_tag=$(git describe --tags --match \"genesys-cloud-chatbot-tester-v*\" --abbrev=0)" >> $GITHUB_ENV
+          echo "curr_commit=$(git rev-parse HEAD)" >> $GITHUB_ENV
 
       - name: Generate changelog for genesys-cloud-chatbot-tester
         if: steps.publish_sdk.outputs.type != 'none'
@@ -98,10 +97,9 @@ jobs:
       - name: Configure changelog for genesys-cloud-chatbot-tester-cli
         if: steps.publish_cli.outputs.type != 'none'
         run: |
-          cat <<'EOF' > changelog_config.json
-          {"categories": [], "template": "## Commits:\n\n${{UNCATEGORIZED}}", "pr_template": "- ${{MERGE_SHA}} ${{TITLE}}"}
-          EOF
-          echo "last_tag=$(git describe --tags --match \"genesys-cloud-chatbot-tester-cli-v*\" --abbrev=0 || echo)" >> $GITHUB_ENV
+          echo '{"categories": [], "template": "## Commits:\n\n${{ '${{UNCATEGORIZED}}' }}", "pr_template": ${{ '"- ${{MERGE_SHA}} ${{TITLE}}"' }} }' > changelog_config.json
+          echo "last_tag=$(git describe --tags --match \"genesys-cloud-chatbot-tester-cli-v*\" --abbrev=0)" >> $GITHUB_ENV
+          echo "curr_commit=$(git rev-parse HEAD)" >> $GITHUB_ENV
 
       - name: Generate changelog for genesys-cloud-chatbot-tester-cli
         if: steps.publish_cli.outputs.type != 'none'
