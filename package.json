@@ -12,6 +12,7 @@
   ],
   "scripts": {
     "test": "npm test -w packages/genesys-cloud-chatbot-tester -w packages/genesys-cloud-chatbot-tester-cli",
+    "clean": "npm run clean --workspaces --if-present",
     "lint": "npm run lint --workspaces --if-present",
     "lint:fix": "npm run lint:fix --workspaces --if-present",
     "build": "npm run build --workspaces --if-present",

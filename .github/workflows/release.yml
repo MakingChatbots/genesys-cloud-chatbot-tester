@@ -1,0 +1,145 @@
+name: Release on npm
+
+on:
+  push:
+    branches:
+      - "main"
+    paths:
+      - packages/**/package.json
+
+permissions:
+  contents: write
+  pull-requests: read
+  id-token: write
+
+jobs:
+  changes:
+    name: Detect changed packages
+    runs-on: ubuntu-latest
+    outputs:
+      lib: ${{ steps.filter.outputs.lib }}
+      cli: ${{ steps.filter.outputs.cli }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            lib:
+              - 'packages/genesys-cloud-chatbot-tester/package.json'
+            cli:
+              - 'packages/genesys-cloud-chatbot-tester-cli/package.json'
+
+  publish_lib:
+    name: Publish genesys-cloud-chatbot-tester
+    needs: changes
+    if: needs.changes.outputs.lib == 'true'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          registry-url: 'https://registry.npmjs.org'
+          scope: '@makingchatbots'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: |
+          npm run clean
+          npm run build
+
+      - id: publish
+        name: Publish genesys-cloud-chatbot-tester
+        uses: JS-DevTools/npm-publish@v3
+        with:
+          package: packages/genesys-cloud-chatbot-tester
+          token: ${{ secrets.NPM_TOKEN }}
+          dry-run: false
+          provenance: true
+          access: public
+
+      - name: Post-publish
+        if: steps.publish.outputs.type != 'none'
+        run: echo "Published genesys-cloud-chatbot-tester ${{ steps.publish.outputs.version }}"
+
+      - name: Create GitHub release
+        if: steps.publish.outputs.type != 'none'
+        run: |
+          TAG="genesys-cloud-chatbot-tester-v${{ steps.publish.outputs.version }}"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists; skipping."
+          else
+            gh release create "$TAG" \
+              --title "$TAG" \
+              --target "${{ github.sha }}" \
+              --generate-notes
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish_cli:
+    name: Publish genesys-cloud-chatbot-tester-cli
+    needs: changes
+    if: needs.changes.outputs.cli == 'true'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          registry-url: 'https://registry.npmjs.org'
+          scope: '@makingchatbots'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: |
+          npm run clean
+          npm run build
+
+      - id: publish
+        name: Publish genesys-cloud-chatbot-tester-cli
+        uses: JS-DevTools/npm-publish@v3
+        with:
+          package: packages/genesys-cloud-chatbot-tester-cli
+          token: ${{ secrets.NPM_TOKEN }}
+          dry-run: false
+          provenance: true
+          access: public
+
+      - name: Post-publish
+        if: steps.publish.outputs.type != 'none'
+        run: echo "Published genesys-cloud-chatbot-tester-cli ${{ steps.publish.outputs.version }}"
+
+      - name: Create GitHub release
+        if: steps.publish.outputs.type != 'none'
+        run: |
+          TAG="genesys-cloud-chatbot-tester-cli-v${{ steps.publish.outputs.version }}"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists; skipping."
+          else
+            gh release create "$TAG" \
+              --title "$TAG" \
+              --target "${{ github.sha }}" \
+              --generate-notes
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

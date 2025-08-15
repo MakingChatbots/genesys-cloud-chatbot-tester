@@ -10,7 +10,7 @@
     "test:ts": "node -r ts-node/register ../api/src/ts-script.ts"
   },
   "devDependencies": {
-    "@makingchatbots/genesys-cloud-chatbot-tester": "2.0.7",
+    "@makingchatbots/genesys-cloud-chatbot-tester": "2.0.10",
     "@types/node": "^14.14.2",
     "@typescript-eslint/eslint-plugin": "latest",
     "@typescript-eslint/parser": "latest",
