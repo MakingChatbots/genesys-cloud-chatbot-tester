@@ -168,7 +168,7 @@ For a slightly more detailed guide see: [Let's test a Genesys chatbot with AI](h
 #### Using Google Gemini
 
 1. Set environment variables for [Gemini API key, or Gemini API on Vertex AI](https://github.com/googleapis/js-genai/tree/main?tab=readme-ov-file#optional-nodejs-only-using-environment-variables)
-   2Define a prompt to provide the model with context on how to behave during testing
+2. Define a prompt to provide the model with context on how to behave during testing
   * Learn more in [Google's Introduction to prompt design](https://cloud.google.com/vertex-ai/generative-ai/docs/learn/prompts/introduction-prompt-design)
 
 The `terminatingPhrases` section defines the phrases you instruct the model to return to pass or fail a test.
