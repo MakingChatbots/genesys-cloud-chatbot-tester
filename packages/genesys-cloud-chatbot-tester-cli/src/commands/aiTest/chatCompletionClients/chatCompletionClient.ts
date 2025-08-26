@@ -23,7 +23,7 @@ export type Utterance = CustomerUtterance | BotUtterance;
 
 export interface ChatCompletionClient {
   getProviderName(): string;
-  predict(
+  generateCustomerUtterance(
     context: string,
     history: Utterance[],
     customerMessage: Utterance | null,

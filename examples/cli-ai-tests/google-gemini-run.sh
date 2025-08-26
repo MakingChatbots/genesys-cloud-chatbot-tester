@@ -10,7 +10,7 @@ function cleanup {
 }
 trap cleanup EXIT
 
-web-messaging-tester ai google-vertex-ai-example.yml -id $DEPLOYMENT_ID -r $REGION
+genesys-cloud-chatbot-tester ai google-gemini-example.yml -id $DEPLOYMENT_ID -r $REGION
 if [ $? -ne 0 ]
 then
   echo ""

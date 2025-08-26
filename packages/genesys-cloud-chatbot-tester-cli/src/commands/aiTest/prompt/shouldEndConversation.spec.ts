@@ -4,6 +4,7 @@ import { shouldEndConversation } from './shouldEndConversation';
 test('conversation ended when ChatGPT says special word', () => {
   const wordToIndicateEnd = 'WRONG';
   const shouldEnd = shouldEndConversation(
+    { isDisconnected: false },
     [
       {
         role: 'customer',

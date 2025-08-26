@@ -32,10 +32,10 @@
     "test:execute:help": "ts-node src/index.ts --help"
   },
   "bin": {
-    "web-messaging-tester": "lib/index.js"
+    "genesys-cloud-chatbot-tester": "lib/index.js"
   },
   "dependencies": {
-    "@google-cloud/aiplatform": "3.10.0",
+    "@google/genai": "^1.15.0",
     "@makingchatbots/genesys-cloud-chatbot-tester": "2.0.10",
     "chalk": "^4.1.2",
     "ci-info": "^3.5.0",

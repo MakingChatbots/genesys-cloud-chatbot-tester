@@ -1,5 +1,4 @@
-import { GoogleGenAI, mcpToTool } from '@google/genai';
-import { ParameterRequest, PromptRequest } from './ModelRequest';
+import { GoogleGenAI } from '@google/genai';
 import {
   BotUtterance,
   ChatCompletionClient,
@@ -7,14 +6,7 @@ import {
   PreflightResult,
   Utterance,
 } from '../chatCompletionClient';
-import { GoogleVertexAiConfig } from '../../testScript/modelTypes';
-
-// interface GoogleVertexAiConfig {
-// apiKey: string;
-//
-// location: string;
-// project: string;
-// }
+import { GoogleGeminiConfig } from '../../testScript/modelTypes';
 
 export function createChatCompletionClient({
   model,
@@ -22,13 +14,12 @@ export function createChatCompletionClient({
   topP,
   topK,
   seed,
-}: GoogleVertexAiConfig): ChatCompletionClient {
-  // Use environment vars: https://github.com/googleapis/js-genai/tree/main?tab=readme-ov-file#optional-nodejs-only-using-environment-variables
+}: GoogleGeminiConfig): ChatCompletionClient {
   const ai = new GoogleGenAI({});
 
   return {
     getProviderName(): string {
-      return 'Google Vertex AI';
+      return 'Google Gemini';
     },
     async preflightCheck(): Promise<PreflightResult> {
       try {
@@ -54,17 +45,17 @@ export function createChatCompletionClient({
       }
     },
 
-    async predict(
+    async generateCustomerUtterance(
       context: string,
       history: Utterance[],
-      botMessage: BotUtterance,
+      botMessage: BotUtterance | null,
     ): Promise<CustomerUtterance | null> {
       // customer = model
       // bot = user
 
       const historyToUse = [
-        // First element is bot
-        ...(history[0]?.role === 'customer' ? [{ content: '...', role: 'bot' }] : []),
+        // First element of history must always be a customer
+        ...(history[0]?.role === 'bot' ? [{ content: '...', role: 'customer' }] : []),
         ...history,
       ];
 
@@ -89,7 +80,7 @@ export function createChatCompletionClient({
 
       const { text } = await chat.sendMessage(
         // Google requires at least one message. This message is hopefully innocuous enough not to lead to an unexpected result.
-        { message: botMessage.content === null ? '...' : botMessage.content },
+        { message: !botMessage || botMessage?.content === null ? '...' : botMessage.content },
       );
 
       return { content: text ?? '', role: 'customer' };

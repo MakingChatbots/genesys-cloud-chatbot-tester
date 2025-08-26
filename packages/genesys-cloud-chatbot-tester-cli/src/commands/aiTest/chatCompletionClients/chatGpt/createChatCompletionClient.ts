@@ -42,7 +42,10 @@ export function createChatCompletionClient(
       }
     },
 
-    async predict(context: string, conversationUtterances: Utterance[]): Promise<Utterance | null> {
+    async generateCustomerUtterance(
+      context: string,
+      conversationUtterances: Utterance[],
+    ): Promise<Utterance | null> {
       const messages: ChatCompletionMessage[] = [
         {
           role: 'system',

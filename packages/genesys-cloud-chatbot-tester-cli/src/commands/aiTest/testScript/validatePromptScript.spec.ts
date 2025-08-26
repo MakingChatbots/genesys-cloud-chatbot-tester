@@ -7,7 +7,7 @@ test('Valid', () => {
       deploymentId: 'test-deployment-id',
       region: 'test-region',
       ai: {
-        provider: 'google-vertex-ai',
+        provider: 'google-gemini',
         config: {
           project: 'test-project',
           location: 'test-location',
@@ -52,7 +52,7 @@ test('Valid', () => {
         deploymentId: 'test-deployment-id',
         region: 'test-region',
         ai: {
-          provider: 'google-vertex-ai',
+          provider: 'google-gemini',
           config: {
             location: 'test-location',
             project: 'test-project',
@@ -105,7 +105,7 @@ test('Invalid', () => {
       deploymentId: 'test-deployment-id',
       region: 'test-region',
       ai: {
-        provider: 'google-vertex-ai',
+        provider: 'google-gemini',
         config: {
           location: 'test-location',
           project: 'test-project',

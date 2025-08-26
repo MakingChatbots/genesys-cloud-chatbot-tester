@@ -4,13 +4,13 @@ import { Command } from 'commander';
 import { createCli } from '../../../src/createCli';
 import { ChatCompletionClient } from '../../../src/commands/aiTest/chatCompletionClients/chatCompletionClient';
 import stripAnsi from 'strip-ansi';
-import * as googleAi from '../../../src/commands/aiTest/chatCompletionClients/googleVertexAi/createChatCompletionClient';
+import * as googleGemini from '../../../src/commands/aiTest/chatCompletionClients/googleGemini/createChatCompletionClient';
 
-describe('Vertex AI config', () => {
+describe('Google Gemini config', () => {
   let fsReadFileSync: MockedFunction<typeof readFileSync>;
 
   let mockGoogleAiChatCompletionClientFactory: MockedFunction<
-    typeof googleAi.createChatCompletionClient
+    typeof googleGemini.createChatCompletionClient
   >;
   let mockGoogleAiChatCompletionClient: Mocked<ChatCompletionClient>;
 
@@ -24,8 +24,8 @@ describe('Vertex AI config', () => {
 
   beforeEach(() => {
     mockGoogleAiChatCompletionClient = {
-      getProviderName: vi.fn().mockReturnValue('mock-google-vertex-ai'),
-      predict: vi.fn().mockResolvedValue({ role: 'customer', content: 'PASS' }),
+      getProviderName: vi.fn().mockReturnValue('mock-google-gemini'),
+      generateCustomerUtterance: vi.fn().mockResolvedValue({ role: 'customer', content: 'PASS' }),
       preflightCheck: vi.fn().mockResolvedValue({ ok: true }),
     };
     mockGoogleAiChatCompletionClientFactory = vi
@@ -68,7 +68,7 @@ describe('Vertex AI config', () => {
       openAiCreateChatCompletionClient: () => {
         throw new Error('Not implemented');
       },
-      googleAiCreateChatCompletionClient: mockGoogleAiChatCompletionClientFactory,
+      googleGeminiCreateChatCompletionClient: mockGoogleAiChatCompletionClientFactory,
       conversationFactory: vi
         .fn()
         .mockReturnValue({ waitForConversationToStart: vi.fn(), sendText: vi.fn() }),
@@ -76,17 +76,14 @@ describe('Vertex AI config', () => {
     });
   });
 
-  test('google-vertex-ai provider is loaded', async () => {
+  test('google-gemini provider is loaded', async () => {
     fsReadFileSync.mockReturnValue(`
 config:
   deploymentId: test-deployment-id
   region: test-region
   origin: test-origin
   ai:
-    provider: google-vertex-ai
-    config:
-      project: test-project-from-config
-      location: test-location-from-config
+    provider: google-gemini
 scenarios:
   Test:
     setup:
@@ -104,7 +101,7 @@ scenarios:
     });
 
     expect(mockGoogleAiChatCompletionClient.preflightCheck).toHaveBeenCalled();
-    expect(mockGoogleAiChatCompletionClient.predict).toHaveBeenCalled();
+    expect(mockGoogleAiChatCompletionClient.generateCustomerUtterance).toHaveBeenCalled();
     expect(capturedOutput.stdOut.map(stripAnsi).join('')).toContain(
       "Terminating phrase found in response: 'PASS'",
     );
@@ -120,7 +117,7 @@ scenarios:
     region: test-region
     origin: test-origin
     ai:
-      provider: google-vertex-ai
+      provider: google-gemini
   scenarios:
     Test:
       setup:
@@ -138,7 +135,7 @@ scenarios:
     });
 
     expect(mockGoogleAiChatCompletionClient.preflightCheck).toHaveBeenCalled();
-    expect(mockGoogleAiChatCompletionClient.predict).toHaveBeenCalled();
+    expect(mockGoogleAiChatCompletionClient.generateCustomerUtterance).toHaveBeenCalled();
     expect(capturedOutput.stdOut.map(stripAnsi).join('')).toContain(
       "Terminating phrase found in response: 'PASS'",
     );
@@ -151,7 +148,7 @@ scenarios:
     region: test-region
     origin: test-origin
     ai:
-      provider: google-vertex-ai
+      provider: google-gemini
       config:
         temperature: 123
   scenarios:
@@ -184,7 +181,7 @@ scenarios:
     region: test-region
     origin: test-origin
     ai:
-      provider: google-vertex-ai
+      provider: google-gemini
       config:
         temperature: 123
   scenarios:

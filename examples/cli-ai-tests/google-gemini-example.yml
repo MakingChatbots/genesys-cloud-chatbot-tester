@@ -1,13 +1,8 @@
 config:
-  deploymentId: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-  region: xxxx.pure.cloud
   ai:
-    provider: google-vertex-ai
+    provider: google-gemini
     config:
-      modelVersion: "002"
-      examples:
-        - input: "What would you like to do today?"
-          output: "I would like to leave feedback, please"
+      model: "gemini-2.0-flash"
 scenarios:
   "Accept survey":
     setup:

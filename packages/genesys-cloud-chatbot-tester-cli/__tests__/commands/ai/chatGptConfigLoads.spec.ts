@@ -49,7 +49,7 @@ describe('ChatGPT config', () => {
       fsWriteFileSync: vi.fn(),
       webMessengerSessionFactory: vi.fn().mockReturnValue({ on: vi.fn(), close: vi.fn() }),
       openAiCreateChatCompletionClient: () => mockOpenAiChatCompletionClient,
-      googleAiCreateChatCompletionClient: () => {
+      googleGeminiCreateChatCompletionClient: () => {
         throw new Error('Not implemented');
       },
       conversationFactory: vi
@@ -78,13 +78,13 @@ scenarios:
 
     mockOpenAiChatCompletionClient = {
       getProviderName: vi.fn().mockReturnValue('mock-chatgpt'),
-      predict: vi.fn().mockResolvedValue({ role: 'customer', content: 'PASS' }),
+      generateCustomerUtterance: vi.fn().mockResolvedValue({ role: 'customer', content: 'PASS' }),
       preflightCheck: vi.fn().mockResolvedValue({ ok: true }),
     };
 
     await cli.parseAsync(['node', '/path/to/cli', 'ai', '/test/path']);
 
     expect(mockOpenAiChatCompletionClient.preflightCheck).toHaveBeenCalled();
-    expect(mockOpenAiChatCompletionClient.predict).toHaveBeenCalled();
+    expect(mockOpenAiChatCompletionClient.generateCustomerUtterance).toHaveBeenCalled();
   });
 });

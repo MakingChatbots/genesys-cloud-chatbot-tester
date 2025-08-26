@@ -6,7 +6,7 @@
 
 # Class: Conversation
 
-Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:130](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L130)
+Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:138](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L138)
 
 Provides an API to simplify sending and receiving messages in a Web Messenger
 session.
@@ -36,7 +36,7 @@ console.log(reply);
 
 > **new Conversation**(`messengerSession`, `timeoutSet`, `timeoutClear`): `Conversation`
 
-Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:142](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L142)
+Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:150](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L150)
 
 #### Parameters
 
@@ -64,7 +64,7 @@ Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:142](http
 
 > **get** **isDisconnected**(): `boolean`
 
-Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:203](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L203)
+Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:211](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L211)
 
 Returns whether the conversation has been disconnected
 
@@ -78,7 +78,7 @@ Returns whether the conversation has been disconnected
 
 > **sendText**(`text`, `delayInMs`): `Promise`\<`void`\>
 
-Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:234](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L234)
+Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:242](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L242)
 
 Sends text to the conversation
 
@@ -109,7 +109,7 @@ Delay in milliseconds between calling this method and the text being sent.
 
 > **waitForConversationToClose**(`timeoutInMs`): `Promise`\<`void`\>
 
-Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:168](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L168)
+Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:176](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L176)
 
 #### Parameters
 
@@ -127,7 +127,7 @@ Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:168](http
 
 > **waitForConversationToStart**(): `Promise`\<`Conversation`\>
 
-Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:213](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L213)
+Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:221](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L221)
 
 Resolves when the conversation has started.
 
@@ -144,7 +144,7 @@ background. This method allows you to wait for this process to finish.
 
 > **waitForResponses**(`timeToWaitAfterLastMessageInMs`): `Promise`\<`string`[]\>
 
-Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:276](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L276)
+Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:286](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L286)
 
 Wait for all responses until there is a predefined amount of 'silence'.
 
@@ -164,7 +164,7 @@ Wait for all responses until there is a predefined amount of 'silence'.
 
 > **waitForResponseText**(): `Promise`\<`string`\>
 
-Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:260](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L260)
+Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:270](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L270)
 
 Resolves on the next response from the other participant in the conversation that contains text.
 
@@ -180,7 +180,7 @@ If you want to wait for a specific message use [waitForResponseWithTextContainin
 
 > **waitForResponseWithTextContaining**(`text`, `__namedParameters`): `Promise`\<`string`\>
 
-Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:318](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L318)
+Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:328](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L328)
 
 Resolves when a response is received that contains a specific piece of text.
 If no response is received that contains the text within the timeout period
@@ -217,7 +217,7 @@ use [waitForResponseText](#waitforresponsetext).
 
 > **waitForResponseWithTextMatchingPattern**(`pattern`, `__namedParameters`): `Promise`\<`string`\>
 
-Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:349](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L349)
+Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:359](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L359)
 
 Resolves when a response is received that matches a regular expression.
 If no response is received that matches the pattern within the timeout period
