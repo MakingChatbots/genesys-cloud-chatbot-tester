@@ -84,6 +84,8 @@ config:
   origin: test-origin
   ai:
     provider: google-gemini
+    config:
+      temperature: 123
 scenarios:
   Test:
     setup:
@@ -96,111 +98,11 @@ scenarios:
     await cli.parseAsync([...['node', '/path/to/cli'], 'ai', ...['/test/path']]);
 
     expect(mockGoogleAiChatCompletionClientFactory).toHaveBeenCalledWith({
-      location: 'test-location-from-config',
-      project: 'test-project-from-config',
-    });
-
-    expect(mockGoogleAiChatCompletionClient.preflightCheck).toHaveBeenCalled();
-    expect(mockGoogleAiChatCompletionClient.generateCustomerUtterance).toHaveBeenCalled();
-    expect(capturedOutput.stdOut.map(stripAnsi).join('')).toContain(
-      "Terminating phrase found in response: 'PASS'",
-    );
-  });
-
-  test('project can be defined as an environment variable', async () => {
-    processEnv['VERTEX_AI_PROJECT'] = 'test-project-from-env';
-    processEnv['VERTEX_AI_LOCATION'] = 'test-location-from-env';
-
-    fsReadFileSync.mockReturnValue(`
-  config:
-    deploymentId: test-deployment-id
-    region: test-region
-    origin: test-origin
-    ai:
-      provider: google-gemini
-  scenarios:
-    Test:
-      setup:
-        prompt: Test prompt
-        terminatingPhrases:
-          pass: ["PASS"]
-          fail: ["FAIL"]
-    `);
-
-    await cli.parseAsync([...['node', '/path/to/cli'], 'ai', ...['/test/path']]);
-
-    expect(mockGoogleAiChatCompletionClientFactory).toHaveBeenCalledWith({
-      location: 'test-location-from-env',
-      project: 'test-project-from-env',
-    });
-
-    expect(mockGoogleAiChatCompletionClient.preflightCheck).toHaveBeenCalled();
-    expect(mockGoogleAiChatCompletionClient.generateCustomerUtterance).toHaveBeenCalled();
-    expect(capturedOutput.stdOut.map(stripAnsi).join('')).toContain(
-      "Terminating phrase found in response: 'PASS'",
-    );
-  });
-
-  test('loading fails if project and location not defined in either', async () => {
-    fsReadFileSync.mockReturnValue(`
-  config:
-    deploymentId: test-deployment-id
-    region: test-region
-    origin: test-origin
-    ai:
-      provider: google-gemini
-      config:
-        temperature: 123
-  scenarios:
-    Test:
-      setup:
-        prompt: Test prompt
-        terminatingPhrases:
-          pass: ["PASS"]
-          fail: ["FAIL"]
-    `);
-
-    try {
-      await cli.parseAsync([...['node', '/path/to/cli'], 'ai', ...['/test/path']]);
-    } catch {
-      /* Intentionally ignored */
-    }
-
-    expect(capturedOutput.errOut.map(stripAnsi).join('')).toContain(
-      'Failed to validate Google Vertex AI Location and Project config. Provide these in the config file or via environment variables.',
-    );
-  });
-
-  test('config loaded even if project and location defined in env variable', async () => {
-    processEnv['VERTEX_AI_PROJECT'] = 'test-project-from-env';
-    processEnv['VERTEX_AI_LOCATION'] = 'test-location-from-env';
-
-    fsReadFileSync.mockReturnValue(`
-  config:
-    deploymentId: test-deployment-id
-    region: test-region
-    origin: test-origin
-    ai:
-      provider: google-gemini
-      config:
-        temperature: 123
-  scenarios:
-    Test:
-      setup:
-        prompt: Test prompt
-        terminatingPhrases:
-          pass: ["PASS"]
-          fail: ["FAIL"]
-    `);
-
-    await cli.parseAsync([...['node', '/path/to/cli'], 'ai', ...['/test/path']]);
-
-    expect(mockGoogleAiChatCompletionClientFactory).toHaveBeenCalledWith({
-      location: 'test-location-from-env',
-      project: 'test-project-from-env',
       temperature: 123,
     });
 
+    expect(mockGoogleAiChatCompletionClient.preflightCheck).toHaveBeenCalled();
+    expect(mockGoogleAiChatCompletionClient.generateCustomerUtterance).toHaveBeenCalled();
     expect(capturedOutput.stdOut.map(stripAnsi).join('')).toContain(
       "Terminating phrase found in response: 'PASS'",
     );

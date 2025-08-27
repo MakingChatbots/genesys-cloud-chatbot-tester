@@ -8,11 +8,6 @@ test('Valid', () => {
       region: 'test-region',
       ai: {
         provider: 'google-gemini',
-        config: {
-          project: 'test-project',
-          location: 'test-location',
-          examples: [{ input: 'Hi', output: 'Hello' }],
-        },
       },
     },
     scenarios: {
@@ -53,16 +48,6 @@ test('Valid', () => {
         region: 'test-region',
         ai: {
           provider: 'google-gemini',
-          config: {
-            location: 'test-location',
-            project: 'test-project',
-            examples: [
-              {
-                input: 'Hi',
-                output: 'Hello',
-              },
-            ],
-          },
         },
       },
       scenarios: {
@@ -106,10 +91,6 @@ test('Invalid', () => {
       region: 'test-region',
       ai: {
         provider: 'google-gemini',
-        config: {
-          location: 'test-location',
-          project: 'test-project',
-        },
       },
     },
     scenarios: {
