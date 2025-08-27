@@ -99,14 +99,14 @@ scenarios:
 Then run the test by pointing to the dialogue script file in the terminal:
 
 ```shell
-web-messaging-tester scripted tests/example.yml
+genesys-cloud-chatbot-tester scripted tests/example.yml
 ```
 
 ### Testing with AI
 
 This tool supports two GenAI providers:
-* ChatGPT (`gpt-3.5-turbo` model by default)
-* Google Vertex AI ([PaLM 2 Chat Bison model](https://console.cloud.google.com/vertex-ai/publishers/google/model-garden/chat-bison))
+* ChatGPT (`gpt-3.5-turbo` by default)
+* Google Gemini (`gemini-2.0-flash` by default)
 
 #### Using ChatGPT
 Start by setting up an API key for ChatGPT:
@@ -160,34 +160,27 @@ scenarios:
 Then run the AI test by pointing to the scenario file in the terminal:
 
 ```shell
-web-messaging-tester ai tests/example.yml
+genesys-cloud-chatbot-tester ai tests/example.yml
 ```
 
-For a slightly more detailed guide see: [Let's test a Genesys chatbot with AI](https://www.linkedin.com/pulse/lets-test-genesys-chatbot-ai-lucas-woodward-dvrpc).
+For a slightly more detailed guide see: [Let's test a Genesys chatbot with AI](https://makingchatbots.com/p/lets-test-a-genesys-chatbot-with-aihtml).
 
-#### Using Google Vertex AI
+#### Using Google Gemini
 
-1. Create a Google Cloud Platform (GCP) account and enabled AI access to Vertex AI
-2. Authenticate the machine running this testing tool, with GCP
-   * The easiest way is [setting up Application Default Credentials](https://cloud.google.com/docs/authentication/provide-credentials-adc#local-dev)
-3. Define a prompt to provide the model with context on how to behave during testing
-   * Learn more in [Google's Introduction to prompt design](https://cloud.google.com/vertex-ai/docs/generative-ai/learn/introduction-prompt-design)
+1. Set environment variables for [Gemini API key, or Gemini API on Vertex AI](https://github.com/googleapis/js-genai/tree/main?tab=readme-ov-file#optional-nodejs-only-using-environment-variables)
+2. Define a prompt to provide the model with context on how to behave during testing
+  * Learn more in [Google's Introduction to prompt design](https://cloud.google.com/vertex-ai/generative-ai/docs/learn/prompts/introduction-prompt-design)
 
-The `terminatingPhrases` section defines the phrases you instruct PaLM 2 to say to pass or fail a test.
+The `terminatingPhrases` section defines the phrases you instruct the model to return to pass or fail a test.
 
-> [examples/cli-ai-tests/google-vertex-ai-example.yml](https://github.com/makingchatbots/genesys-cloud-chatbot-tester/tree/main/examples/cli-ai-tests/google-vertex-ai-example.yml)
+> [examples/cli-ai-tests/google-gemini-example.yml](https://github.com/makingchatbots/genesys-cloud-chatbot-tester/tree/main/examples/cli-ai-tests/google-gemini-example.yml)
 
 ```yaml
 config:
-  deploymentId: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-  region: xxxx.pure.cloud
   ai:
-    provider: google-vertex-ai
+    provider: google-gemini
     config:
-      modelVersion: "002"
-      examples:
-        - input: "What would you like to do today?"
-          output: "I would like to leave feedback, please"
+      model: "gemini-2.0-flash"
 scenarios:
   "Accept survey":
     setup:
@@ -214,14 +207,14 @@ scenarios:
 Then run the AI test by pointing to the scenario file in the terminal:
 
 ```shell
-web-messaging-tester ai tests/example.yml
+genesys-cloud-chatbot-tester ai tests/example.yml
 ```
 
 ## Example commands
 
 ```
-$ web-messaging-tester scripted --help
-Usage: web-messaging-tester scripted [options] <filePath>
+$ genesys-cloud-chatbot-tester scripted --help
+Usage: genesys-cloud-chatbot-tester scripted [options] <filePath>
 
 Arguments:
   filePath                             Path of the YAML test-script file
@@ -246,13 +239,13 @@ Options:
 Override Deployment ID and Region in test-script file:
 
 ```shell
-web-messaging-tester scripted test-script.yaml -id 00000000-0000-0000-0000-000000000000 -r xxxx.pure.cloud
+genesys-cloud-chatbot-tester scripted test-script.yaml -id 00000000-0000-0000-0000-000000000000 -r xxxx.pure.cloud
 ```
 
 Run 10 scenarios in parallel:
 
 ```shell
-web-messaging-tester scripted test-script.yaml --parallel 10
+genesys-cloud-chatbot-tester scripted test-script.yaml --parallel 10
 ```
 
 ## Support

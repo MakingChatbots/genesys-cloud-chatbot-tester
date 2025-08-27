@@ -7,12 +7,7 @@ test('Valid', () => {
       deploymentId: 'test-deployment-id',
       region: 'test-region',
       ai: {
-        provider: 'google-vertex-ai',
-        config: {
-          project: 'test-project',
-          location: 'test-location',
-          examples: [{ input: 'Hi', output: 'Hello' }],
-        },
+        provider: 'google-gemini',
       },
     },
     scenarios: {
@@ -52,17 +47,7 @@ test('Valid', () => {
         deploymentId: 'test-deployment-id',
         region: 'test-region',
         ai: {
-          provider: 'google-vertex-ai',
-          config: {
-            location: 'test-location',
-            project: 'test-project',
-            examples: [
-              {
-                input: 'Hi',
-                output: 'Hello',
-              },
-            ],
-          },
+          provider: 'google-gemini',
         },
       },
       scenarios: {
@@ -105,11 +90,7 @@ test('Invalid', () => {
       deploymentId: 'test-deployment-id',
       region: 'test-region',
       ai: {
-        provider: 'google-vertex-ai',
-        config: {
-          location: 'test-location',
-          project: 'test-project',
-        },
+        provider: 'google-gemini',
       },
     },
     scenarios: {

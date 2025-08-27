@@ -8,24 +8,16 @@ export const schema = Joi.object<TestPromptFile>({
     origin: Joi.string(),
     ai: Joi.object({
       provider: Joi.string()
-        .valid(SupportedAiProviders.GoogleVertexAi, SupportedAiProviders.ChatGpt)
+        .valid(SupportedAiProviders.GoogleGemini, SupportedAiProviders.ChatGpt)
         .required(),
       config: Joi.when('provider', {
-        is: SupportedAiProviders.GoogleVertexAi,
+        is: SupportedAiProviders.GoogleGemini,
         then: Joi.object({
-          location: Joi.string(),
-          project: Joi.string(),
           temperature: Joi.number(),
           topK: Joi.number(),
           topP: Joi.number(),
           seed: Joi.number(),
-          modelVersion: Joi.string().regex(/\d{3}/),
-          examples: Joi.array().items(
-            Joi.object({
-              input: Joi.string().required(),
-              output: Joi.string().required(),
-            }).required(),
-          ),
+          model: Joi.string().regex(/\d{3}/),
         }),
       }).when('provider', {
         is: SupportedAiProviders.ChatGpt,

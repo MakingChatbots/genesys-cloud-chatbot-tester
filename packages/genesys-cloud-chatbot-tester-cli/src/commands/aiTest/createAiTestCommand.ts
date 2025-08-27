@@ -17,20 +17,20 @@ import { createYamlFileReader } from '../../fileSystem/yamlFileReader';
 import { validatePromptScript } from './testScript/validatePromptScript';
 import { CommandExpectedlyFailedError } from '../CommandExpectedlyFailedError';
 import { SupportedAiProviders } from './testScript/modelTypes';
-import * as googleAi from './chatCompletionClients/googleVertexAi/createChatCompletionClient';
+import * as googleGemini from './chatCompletionClients/googleGemini/createChatCompletionClient';
 import * as openAi from './chatCompletionClients/chatGpt/createChatCompletionClient';
 import { ChatCompletionClient, Utterance } from './chatCompletionClients/chatCompletionClient';
 import { validateOpenAiEnvVariables } from './chatCompletionClients/chatGpt/validateOpenAiEnvVariables';
 import { promptGenerator } from './prompt/generation/promptGenerator';
 import { writableDirValidator } from '../../fileSystem/writableDirValidator';
 import { saveOutputJs } from './output/saveOutputJson';
-import { validateProjectLocationConfig } from './chatCompletionClients/googleVertexAi/validateProjectLocationConfig';
+import { DisconnectError } from '@makingchatbots/genesys-cloud-chatbot-tester/lib/Conversation';
 
 export interface AiTestCommandDependencies {
   command?: Command;
   ui?: Ui;
   openAiCreateChatCompletionClient?: typeof openAi.createChatCompletionClient;
-  googleAiCreateChatCompletionClient?: typeof googleAi.createChatCompletionClient;
+  googleGeminiCreateChatCompletionClient?: typeof googleGemini.createChatCompletionClient;
   webMessengerSessionFactory?: (sessionConfig: SessionConfig) => WebMessengerSession;
   conversationFactory?: (session: WebMessengerSession) => Conversation;
   processEnv?: NodeJS.ProcessEnv;
@@ -43,7 +43,7 @@ export function createAiTestCommand({
   command = new Command(),
   ui = new Ui(),
   openAiCreateChatCompletionClient = openAi.createChatCompletionClient,
-  googleAiCreateChatCompletionClient = googleAi.createChatCompletionClient,
+  googleGeminiCreateChatCompletionClient = googleGemini.createChatCompletionClient,
   webMessengerSessionFactory = (config) =>
     new WebMessengerGuestSession(config, { IsAutomatedTest: 'true' }),
   conversationFactory = (session) => new Conversation(session),
@@ -138,24 +138,11 @@ export function createAiTestCommand({
             );
             break;
           }
-          case SupportedAiProviders.GoogleVertexAi: {
-            const googleAiConfig = validPromptScript.config.ai.config;
+          case SupportedAiProviders.GoogleGemini: {
+            const googleGeminiConfig = validPromptScript.config.ai.config;
 
-            // Override location and project with environment variables
-            const projectLocationValidationResult = validateProjectLocationConfig({
-              project: processEnv['VERTEX_AI_PROJECT'] ?? googleAiConfig?.project,
-              location: processEnv['VERTEX_AI_LOCATION'] ?? googleAiConfig?.location,
-            });
-            if (!projectLocationValidationResult.value) {
-              outputConfig.writeErr(
-                ui.validatingGcpProjectLocationConfigFailed(sessionConfigValidationResults.error),
-              );
-              throw new CommandExpectedlyFailedError();
-            }
-
-            chatCompletionClient = googleAiCreateChatCompletionClient({
-              ...googleAiConfig,
-              ...projectLocationValidationResult.value,
+            chatCompletionClient = googleGeminiCreateChatCompletionClient({
+              ...googleGeminiConfig,
             });
             break;
           }
@@ -194,7 +181,7 @@ export function createAiTestCommand({
         );
 
         const convo = conversationFactory(session);
-        const messages: Utterance[] = [];
+        const history: Utterance[] = [];
 
         const generatedPrompt = promptGenerator(scenario.setup);
         if (generatedPrompt.placeholdersFound) {
@@ -205,18 +192,30 @@ export function createAiTestCommand({
         let endConversation: ShouldEndConversationResult = {
           hasEnded: false,
         };
+        let botMessage: Utterance | null = null;
         do {
-          const utterance = await chatCompletionClient.predict(generatedPrompt.prompt, messages);
+          const utterance = await chatCompletionClient.generateCustomerUtterance(
+            generatedPrompt.prompt,
+            history,
+            botMessage,
+          );
 
           if (utterance) {
-            messages.push(utterance);
-            await convo.sendText(utterance.content);
+            history.push(utterance);
+            try {
+              await convo.sendText(utterance.content);
+            } catch (e: unknown) {
+              if (!(e instanceof DisconnectError)) {
+                throw e;
+              }
+            }
           } else {
-            messages.push({ role: 'customer', content: '' });
+            history.push({ role: 'customer', content: '' });
           }
 
           endConversation = shouldEndConversation(
-            messages,
+            convo,
+            history,
             scenario.setup.terminatingPhrases.fail,
             scenario.setup.terminatingPhrases.pass,
           );
@@ -224,14 +223,16 @@ export function createAiTestCommand({
           if (!endConversation.hasEnded) {
             // TODO Allow time to wait to be customised
             const chatBotResponses = await convo.waitForResponses(3000);
-            messages.push({ role: 'bot', content: chatBotResponses.join('\n') });
+            botMessage = { role: 'bot', content: chatBotResponses.join('\n') };
+
+            endConversation = shouldEndConversation(
+              convo,
+              history,
+              scenario.setup.terminatingPhrases.fail,
+              scenario.setup.terminatingPhrases.pass,
+            );
           }
 
-          endConversation = shouldEndConversation(
-            messages,
-            scenario.setup.terminatingPhrases.fail,
-            scenario.setup.terminatingPhrases.pass,
-          );
           // TODO Handle bot ending conversation
         } while (!endConversation.hasEnded);
 
@@ -241,7 +242,7 @@ export function createAiTestCommand({
         if (options.outDir) {
           const outputResult = saveOutputJs(
             scenarioName,
-            { messages, generatedPrompt, result: endConversation },
+            { messages: history, generatedPrompt, result: endConversation },
             options.outDir,
             fsWriteFileSync,
           );

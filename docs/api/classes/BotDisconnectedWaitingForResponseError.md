@@ -6,7 +6,7 @@
 
 # Class: BotDisconnectedWaitingForResponseError
 
-Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:58](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L58)
+Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:66](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L66)
 
 ## Extends
 
@@ -18,7 +18,7 @@ Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:58](https
 
 > **new BotDisconnectedWaitingForResponseError**(`_expectedResponse`, `_responsesReceived`): `BotDisconnectedWaitingForResponseError`
 
-Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:59](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L59)
+Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:67](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L67)
 
 #### Parameters
 
@@ -104,7 +104,7 @@ not capture any frames.
 
 > **get** **expectedResponse**(): `string`
 
-Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:89](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L89)
+Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:97](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L97)
 
 ##### Returns
 
@@ -118,7 +118,7 @@ Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:89](https
 
 > **get** **responsesReceived**(): readonly (`StructuredMessageTextBody` \| `StructuredMessageStructuredBody`)[]
 
-Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:93](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L93)
+Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:101](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L101)
 
 ##### Returns
 

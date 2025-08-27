@@ -6,7 +6,7 @@
 
 # Class: TimeoutWaitingForResponseError
 
-Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:9](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L9)
+Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:17](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L17)
 
 ## Extends
 
@@ -18,7 +18,7 @@ Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:9](https:
 
 > **new TimeoutWaitingForResponseError**(`_timeoutInMs`, `_expectedResponse`, `_responsesReceived`): `TimeoutWaitingForResponseError`
 
-Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:10](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L10)
+Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:18](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L18)
 
 #### Parameters
 
@@ -108,7 +108,7 @@ not capture any frames.
 
 > **get** **expectedResponse**(): `string`
 
-Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:43](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L43)
+Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:51](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L51)
 
 ##### Returns
 
@@ -122,7 +122,7 @@ Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:43](https
 
 > **get** **responsesReceived**(): readonly (`StructuredMessageTextBody` \| `StructuredMessageStructuredBody`)[]
 
-Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:47](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L47)
+Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:55](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L55)
 
 ##### Returns
 
@@ -136,7 +136,7 @@ readonly (`StructuredMessageTextBody` \| `StructuredMessageStructuredBody`)[]
 
 > **get** **timeoutInMs**(): `number`
 
-Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:53](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L53)
+Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:61](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L61)
 
 ##### Returns
 

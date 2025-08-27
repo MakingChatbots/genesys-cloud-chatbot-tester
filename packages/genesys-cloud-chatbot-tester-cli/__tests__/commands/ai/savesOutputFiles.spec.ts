@@ -70,10 +70,10 @@ describe('AI saving output', () => {
       webMessengerSessionFactory: vi.fn().mockReturnValue({ on: vi.fn(), close: vi.fn() }),
       openAiCreateChatCompletionClient: () => ({
         getProviderName: vi.fn().mockReturnValue('mock-chatgpt'),
-        predict: vi.fn().mockResolvedValue({ role: 'customer', content: 'PASS' }),
+        generateCustomerUtterance: vi.fn().mockResolvedValue({ role: 'customer', content: 'PASS' }),
         preflightCheck: vi.fn().mockResolvedValue({ ok: true }),
       }),
-      googleAiCreateChatCompletionClient: vi.fn(),
+      googleGeminiCreateChatCompletionClient: vi.fn(),
       conversationFactory: vi
         .fn()
         .mockReturnValue({ waitForConversationToStart: vi.fn(), sendText: vi.fn() }),

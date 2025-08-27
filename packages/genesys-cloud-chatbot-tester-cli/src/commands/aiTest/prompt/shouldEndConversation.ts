@@ -1,5 +1,6 @@
 import { containsTerminatingPhrases } from './containsTerminatingPhrases';
 import { Utterance } from '../chatCompletionClients/chatCompletionClient';
+import { Conversation } from '@makingchatbots/genesys-cloud-chatbot-tester';
 
 interface Reason {
   type: 'fail' | 'pass';
@@ -20,10 +21,18 @@ export type ShouldEndConversationResult =
   | ShouldEndConversationNotEndedResult;
 
 export function shouldEndConversation(
+  conversation: Pick<Conversation, 'isDisconnected'>,
   utterances: Utterance[],
   failPhrases: string[],
   passPhrases: string[],
 ): ShouldEndConversationResult {
+  if (failPhrases.length > 0 && passPhrases.length > 0 && conversation.isDisconnected) {
+    return {
+      hasEnded: true,
+      reason: { type: 'fail', description: `Chatbot disconnected unexpectedly` },
+    };
+  }
+
   if (utterances.length === 0) {
     return { hasEnded: false };
   }

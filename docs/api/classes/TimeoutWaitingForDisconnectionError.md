@@ -6,7 +6,7 @@
 
 # Class: TimeoutWaitingForDisconnectionError
 
-Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:100](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L100)
+Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:108](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L108)
 
 ## Extends
 
@@ -18,7 +18,7 @@ Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:100](http
 
 > **new TimeoutWaitingForDisconnectionError**(): `TimeoutWaitingForDisconnectionError`
 
-Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:101](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L101)
+Defined in: [packages/genesys-cloud-chatbot-tester/src/Conversation.ts:109](https://github.com/MakingChatbots/genesys-cloud-chatbot-tester-cli/blob/main/packages/genesys-cloud-chatbot-tester/src/Conversation.ts#L109)
 
 #### Returns
 

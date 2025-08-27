@@ -13,12 +13,11 @@ export interface AiScenarioSection {
 
 export enum SupportedAiProviders {
   ChatGpt = 'chatgpt',
-  GoogleVertexAi = 'google-vertex-ai',
+  GoogleGemini = 'google-gemini',
 }
 
-export interface GoogleVertexAiConfig {
-  location?: string;
-  project?: string;
+export interface GoogleGeminiConfig {
+  model?: string;
   /**
    * The temperature is used for sampling during response generation, which occurs when topP and topK are applied. Temperature controls the degree of randomness in token selection. Lower temperatures are good for prompts that require a less open-ended or creative response, while higher temperatures can lead to more diverse or creative results. A temperature of 0 means that the highest probability tokens are always selected. In this case, responses for a given prompt are mostly deterministic, but a small amount of variation is still possible.
    * If the model returns a response that's too generic, too short, or the model gives a fallback response, try increasing the temperature.
@@ -49,14 +48,6 @@ export interface GoogleVertexAiConfig {
    * @see https://cloud.google.com/vertex-ai/docs/generative-ai/model-reference/text-chat#generative-ai-text-chat-nodejs:~:text=Maximum%20value%3A%20100-,seed,-Decoder%20generates%20random
    */
   seed?: number;
-  modelVersion?: string;
-
-  /**
-   * Examples for chat prompts are a list of input-output pairs that demonstrate exemplary model output for a given input. Use examples to customize how the model responds to certain questions.
-   *
-   * @see https://cloud.google.com/vertex-ai/docs/generative-ai/chat/chat-prompts#examples
-   */
-  examples?: { input: string; output: string }[];
 }
 
 export interface ChatGptConfig {
@@ -86,8 +77,8 @@ export interface TestPromptFileBase<AiProviderConfig> {
 }
 
 export interface GoogleVertexAiConfigSection {
-  readonly provider: SupportedAiProviders.GoogleVertexAi;
-  readonly config?: GoogleVertexAiConfig;
+  readonly provider: SupportedAiProviders.GoogleGemini;
+  readonly config?: GoogleGeminiConfig;
 }
 
 export interface ChatGptConfigSection {

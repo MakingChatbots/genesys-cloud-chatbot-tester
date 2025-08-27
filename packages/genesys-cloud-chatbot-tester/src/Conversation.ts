@@ -6,6 +6,14 @@ import {
   StructuredMessageTextBody,
 } from './genesys/StructuredMessage';
 
+export class DisconnectError extends Error {
+  constructor(message: string) {
+    super(message);
+
+    Object.setPrototypeOf(this, DisconnectError.prototype);
+  }
+}
+
 export class TimeoutWaitingForResponseError extends Error {
   constructor(
     private readonly _timeoutInMs: number,
@@ -237,7 +245,9 @@ export class Conversation {
     }
 
     if (this.disconnectedByGenesys) {
-      throw new Error('Cannot send text as conversation was disconnected by Genesys');
+      throw new DisconnectError(
+        'Cannot send text as conversation was disconnected by Genesys Cloud',
+      );
     }
 
     if (delayInMs > 0) {
