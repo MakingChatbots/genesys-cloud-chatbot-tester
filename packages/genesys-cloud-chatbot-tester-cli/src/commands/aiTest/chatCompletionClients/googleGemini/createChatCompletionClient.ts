@@ -1,4 +1,4 @@
-import { GoogleGenAI } from '@google/genai';
+import { ContentListUnion, GoogleGenAI } from '@google/genai';
 import {
   BotUtterance,
   ChatCompletionClient,
@@ -23,7 +23,7 @@ export function createChatCompletionClient({
     },
     async preflightCheck(): Promise<PreflightResult> {
       try {
-        const chat = ai.chats.create({
+        await ai.models.generateContent({
           ...(model ? { model } : { model: 'gemini-2.0-flash' }),
           config: {
             temperature,
@@ -32,9 +32,8 @@ export function createChatCompletionClient({
             seed,
             maxOutputTokens: 1024,
           },
+          contents: 'Say "hello world"',
         });
-
-        await chat.sendMessage({ message: 'Single word response. What colour is the sky?' });
 
         return { ok: true };
       } catch (error) {
@@ -53,13 +52,25 @@ export function createChatCompletionClient({
       // customer = model
       // bot = user
 
+      // TODO Better understand this constraint
       const historyToUse = [
         // First element of history must always be a customer
         ...(history[0]?.role === 'bot' ? [{ content: '...', role: 'customer' }] : []),
         ...history,
       ];
 
-      const chat = ai.chats.create({
+      const contents: ContentListUnion = [
+        ...historyToUse.map((u) => ({
+          role: u.role === 'bot' ? 'user' : 'model',
+          parts: [{ text: u.content, type: 'text' }],
+        })),
+        {
+          role: 'user',
+          parts: [{ text: botMessage?.content ?? '...', type: 'text' }],
+        },
+      ];
+
+      const response = await ai.models.generateContent({
         ...(model ? { model } : { model: 'gemini-2.0-flash' }),
         config: {
           // Example user personas etc https://cloud.google.com/vertex-ai/generative-ai/docs/learn/prompts/system-instruction-introduction
@@ -70,20 +81,10 @@ export function createChatCompletionClient({
           seed,
           maxOutputTokens: 1024,
         },
-        history: [
-          ...historyToUse.map((u) => ({
-            role: u.role === 'bot' ? 'user' : 'model',
-            content: u.content,
-          })),
-        ],
+        contents,
       });
 
-      const { text } = await chat.sendMessage(
-        // Google requires at least one message. This message is hopefully innocuous enough not to lead to an unexpected result.
-        { message: !botMessage || botMessage?.content === null ? '...' : botMessage.content },
-      );
-
-      return { content: text ?? '', role: 'customer' };
+      return { content: response.text ?? '', role: 'customer' };
     },
   };
 }
