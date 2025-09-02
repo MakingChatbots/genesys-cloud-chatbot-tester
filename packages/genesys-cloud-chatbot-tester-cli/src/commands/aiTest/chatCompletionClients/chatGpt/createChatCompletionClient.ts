@@ -6,7 +6,6 @@ import {
 } from '../chatCompletionClient';
 import OpenAI from 'openai';
 import { ChatGptConfig } from '../../testScript/modelTypes';
-import { ResponseInput } from 'openai/src/resources/responses/responses';
 
 export function createChatCompletionClient(
   { model = 'gpt-5' }: ChatGptConfig,
@@ -45,12 +44,12 @@ export function createChatCompletionClient(
       history: Utterance[],
       botMessage: BotUtterance | null,
     ): Promise<Utterance | null> {
-      const openAiHistory: ResponseInput = history.map((u) => ({
+      const openAiHistory: OpenAI.Responses.ResponseInput = history.map((u) => ({
         role: u.role === 'bot' ? 'user' : 'assistant',
         content: u.content,
       }));
 
-      const messages: ResponseInput = [
+      const messages: OpenAI.Responses.ResponseInput = [
         {
           role: 'system',
           content: context,
