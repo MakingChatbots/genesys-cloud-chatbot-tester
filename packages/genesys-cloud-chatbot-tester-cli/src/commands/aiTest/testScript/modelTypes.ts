@@ -52,16 +52,6 @@ export interface GoogleGeminiConfig {
 
 export interface ChatGptConfig {
   model?: string;
-  /**
-   * This value can be between 0 and 1 and controls the randomness of ChatGPT's completions.
-   * 0 = Responses will be deterministic and repetitive
-   *     ChatGPT will favour words (tokens) that have the highest probability of coming next in the text it is constructing
-   * 1 = Responses will include more variety and creativity
-   *     ChatGPT will consider using words (tokens) that are less likely to come next in the text it is constructing
-   *
-   * @see https://platform.openai.com/docs/quickstart/adjust-your-settings
-   */
-  temperature?: number;
 }
 
 export interface TestPromptFileBase<AiProviderConfig> {

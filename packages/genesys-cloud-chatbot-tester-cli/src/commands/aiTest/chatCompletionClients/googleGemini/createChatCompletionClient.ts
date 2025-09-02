@@ -15,7 +15,7 @@ export function createChatCompletionClient({
   topK,
   seed,
 }: GoogleGeminiConfig): ChatCompletionClient {
-  const ai = new GoogleGenAI({});
+  const client = new GoogleGenAI({});
 
   return {
     getProviderName(): string {
@@ -23,7 +23,7 @@ export function createChatCompletionClient({
     },
     async preflightCheck(): Promise<PreflightResult> {
       try {
-        await ai.models.generateContent({
+        await client.models.generateContent({
           ...(model ? { model } : { model: 'gemini-2.0-flash' }),
           config: {
             temperature,
@@ -70,7 +70,7 @@ export function createChatCompletionClient({
         },
       ];
 
-      const response = await ai.models.generateContent({
+      const response = await client.models.generateContent({
         ...(model ? { model } : { model: 'gemini-2.0-flash' }),
         config: {
           // Example user personas etc https://cloud.google.com/vertex-ai/generative-ai/docs/learn/prompts/system-instruction-introduction
