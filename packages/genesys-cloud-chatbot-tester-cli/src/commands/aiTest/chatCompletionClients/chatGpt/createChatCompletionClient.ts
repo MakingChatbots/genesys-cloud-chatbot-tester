@@ -61,13 +61,13 @@ export function createChatCompletionClient(
         },
       ];
 
-      const { choices } = await client.responses.create({
+      const response = await client.responses.create({
         model,
         input: messages,
       });
 
-      if (choices[0]?.message?.content) {
-        return { role: 'customer', content: choices[0].message.content };
+      if (response.output_text) {
+        return { role: 'customer', content: response.output_text };
       } else {
         return null;
       }
