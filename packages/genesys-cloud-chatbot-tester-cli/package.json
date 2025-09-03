@@ -1,6 +1,6 @@
 {
   "name": "@makingchatbots/genesys-cloud-chatbot-tester-cli",
-  "version": "3.0.5",
+  "version": "3.0.6",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "license": "Apache-2.0",
@@ -44,7 +44,7 @@
     "joi": "^17.12.2",
     "js-yaml": "^4.1.0",
     "listr2": "^5.0.5",
-    "openai": "4.0.0-beta.12",
+    "openai": "5.16.0",
     "purecloud-platform-client-v2": "^188.1.0"
   },
   "devDependencies": {

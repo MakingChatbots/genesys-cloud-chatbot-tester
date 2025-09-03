@@ -1,15 +1,18 @@
-import { ChatCompletionClient, PreflightResult, Utterance } from '../chatCompletionClient';
-import { OpenAI } from 'openai';
+import {
+  BotUtterance,
+  ChatCompletionClient,
+  PreflightResult,
+  Utterance,
+} from '../chatCompletionClient';
+import OpenAI from 'openai';
 import { ChatGptConfig } from '../../testScript/modelTypes';
 
-type ChatCompletionMessage = OpenAI.Chat.Completions.CreateChatCompletionRequestMessage;
-
 export function createChatCompletionClient(
-  { model = 'gpt-3.5-turbo', temperature }: ChatGptConfig,
+  { model = 'gpt-5' }: ChatGptConfig,
   apiKey: string,
   maxRetries = 5,
 ): ChatCompletionClient {
-  const chatCompletion = new OpenAI({ apiKey, maxRetries }).chat.completions;
+  const client = new OpenAI({ apiKey, maxRetries });
 
   return {
     getProviderName(): string {
@@ -17,18 +20,12 @@ export function createChatCompletionClient(
     },
     async preflightCheck(): Promise<PreflightResult> {
       try {
-        await chatCompletion.create({
+        await client.responses.create({
           model,
-          n: 1, // Number of choices
-          temperature: 0,
-          messages: [
-            {
-              role: 'system',
-              content: 'You help people with math problems',
-            },
+          input: [
             {
               role: 'user',
-              content: 'What is 1+1?',
+              content: 'Say "hello world"',
             },
           ],
         });
@@ -44,28 +41,33 @@ export function createChatCompletionClient(
 
     async generateCustomerUtterance(
       context: string,
-      conversationUtterances: Utterance[],
+      history: Utterance[],
+      botMessage: BotUtterance | null,
     ): Promise<Utterance | null> {
-      const messages: ChatCompletionMessage[] = [
+      const openAiHistory: OpenAI.Responses.ResponseInput = history.map((u) => ({
+        role: u.role === 'bot' ? 'user' : 'assistant',
+        content: u.content,
+      }));
+
+      const messages: OpenAI.Responses.ResponseInput = [
         {
           role: 'system',
           content: context,
         },
-        ...conversationUtterances.map<ChatCompletionMessage>((u) => ({
-          role: u.role === 'bot' ? 'user' : 'assistant',
-          content: u.content,
-        })),
+        ...openAiHistory,
+        {
+          role: 'user',
+          content: botMessage?.content ?? '...',
+        },
       ];
 
-      const { choices } = await chatCompletion.create({
+      const response = await client.responses.create({
         model,
-        n: 1, // Number of choices
-        temperature,
-        messages,
+        input: messages,
       });
 
-      if (choices[0]?.message?.content) {
-        return { role: 'customer', content: choices[0].message.content };
+      if (response.output_text) {
+        return { role: 'customer', content: response.output_text };
       } else {
         return null;
       }

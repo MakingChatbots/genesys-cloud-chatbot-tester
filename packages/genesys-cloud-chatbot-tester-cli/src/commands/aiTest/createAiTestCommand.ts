@@ -192,6 +192,7 @@ export function createAiTestCommand({
         let endConversation: ShouldEndConversationResult = {
           hasEnded: false,
         };
+
         let botMessage: Utterance | null = null;
         do {
           const utterance = await chatCompletionClient.generateCustomerUtterance(
@@ -199,6 +200,10 @@ export function createAiTestCommand({
             history,
             botMessage,
           );
+
+          if (botMessage) {
+            history.push(botMessage);
+          }
 
           if (utterance) {
             history.push(utterance);

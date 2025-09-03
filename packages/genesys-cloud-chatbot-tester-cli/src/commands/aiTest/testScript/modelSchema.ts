@@ -23,7 +23,6 @@ export const schema = Joi.object<TestPromptFile>({
         is: SupportedAiProviders.ChatGpt,
         then: Joi.object({
           model: Joi.string(),
-          temperature: Joi.number(),
         }),
       }),
     }).required(),
